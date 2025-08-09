@@ -17,6 +17,7 @@
 #include <chrono>
 #include <iostream>
 #include <thread>
+#include <csignal>
 
 #include <folly/Conv.h>
 #include <folly/File.h>
@@ -91,6 +92,11 @@ DEFINE_int32(
     "4 = Introspection, 8 = GueEncap, 16 = DirectHealthchecking, "
     "32 = LocalDeliveryOptimization. "
     "e.g. 13 means SrcRouting + Introspection + GueEncap");
+
+DEFINE_bool(
+    wait_phases,
+    false,
+    "whether to wait until SIGUSR1 after load, and SIGUSR2 after bench");
 
 void testKatranMonitor(katran::KatranLb& lb) {
   lb.stopKatranMonitor();
@@ -298,6 +304,25 @@ int main(int argc, char** argv) {
       kconfig, std::make_unique<katran::BpfAdapter>(kconfig.memlockUnlimited));
   lb->loadBpfProgs();
   listFeatures(*lb);
+  
+  // perform waiting after load until SIGUSR1
+  if (FLAGS_wait_phases) {
+    sigset_t wait_mask;
+    sigemptyset(&wait_mask);
+    sigaddset(&wait_mask, SIGUSR1);
+    pthread_sigmask(SIG_BLOCK, &wait_mask, NULL);
+
+    LOG(INFO) << "waiting for SIGUSR1...";
+    int sigres = sigwaitinfo(&wait_mask, NULL);
+    if (sigres == -1) {
+      LOG(ERROR) << "waiting for SIGUSR1 failed";
+      return 1;
+    }
+
+    pthread_sigmask(SIG_UNBLOCK, &wait_mask, NULL);  
+    LOG(INFO) << "SIGUSR1 received! Resuming program...";
+  }
+  
   auto balancer_prog_fd = lb->getKatranProgFd();
   if (FLAGS_optional_counter_tests) {
     preTestOptionalLbCounters(*lb, FLAGS_healthchecking_prog);
@@ -329,6 +354,24 @@ int main(int argc, char** argv) {
     // for perf tests to work katran must be compiled w -DINLINE_DECAP
     preparePerfTestingLbData(*lb);
     tester.testPerfFromFixture(FLAGS_repeat, FLAGS_position);
+  }
+
+  // perform waiting after bench until SIGUSR2
+  if (FLAGS_wait_phases) {
+    sigset_t wait_mask;
+    sigemptyset(&wait_mask);
+    sigaddset(&wait_mask, SIGUSR2);
+    pthread_sigmask(SIG_BLOCK, &wait_mask, NULL);
+
+    LOG(INFO) << "waiting for SIGUSR2...";
+    int sigres = sigwaitinfo(&wait_mask, NULL);
+    if (sigres == -1) {
+      LOG(ERROR) << "waiting for SIGUSR2 failed";
+      return 1;
+    }
+
+    pthread_sigmask(SIG_UNBLOCK, &wait_mask, NULL);  
+    LOG(INFO) << "SIGUSR2 received! Ending program...";
   }
   return 0;
 }

@@ -6,11 +6,13 @@ DEBUGBPF = -DDEBUG
 DEBUGFLAGS = -O0 -g -Wall
 PFLAGS = $(DEBUGFLAGS)
 
+VMLINUX := $(obj)/vmlinux/vmlinux.h
+VMLINUX_SRC := /sys/kernel/btf/vmlinux
+
 INCLUDEFLAGS = -I$(obj)/usr/include \
 	       -I$(obj)/include \
-	       -I$(obj)
-
-
+	       -I$(obj) \
+	       -I$(dir $(VMLINUX))
 
 always = bpf/balancer.bpf.o
 always += bpf/healthchecking_ipip.o
@@ -35,14 +37,21 @@ clean:
 	$(MAKE) -C .. M=$$PWD clean
 	@rm -f *~
 
-$(obj)/bpf/%.o: $(src)/katran/lib/bpf/%.c
+$(VMLINUX): $(VMLINUX_SRC)
+	mkdir -p vmlinux
+	# bpftool btf dump file $(VMLINUX_SRC) format c > $(VMLINUX)
+	bpftool btf dump file $(VMLINUX_SRC) format c | awk '/^struct bpf_prog \{/,/^\};/ {print} /^struct bpf_array \{/,/^\};/ {print}' > $(VMLINUX)
+
+$(obj)/bpf/%.o: $(src)/katran/lib/bpf/%.c $(VMLINUX)
 	$(CLANG) $(INCLUDEFLAGS) $(EXTRA_CFLAGS) \
 	$(DEBUGBPF) -D__KERNEL__ -Wno-unused-value -Wno-pointer-sign \
 		-Wno-compare-distinct-pointer-types \
 		-O2 -emit-llvm -c -g $< -o -| $(LLC) -march=bpf -filetype=obj -o $@
 
 # -----------------------------------------------------------------------------------
-# Compiling to x86
+# Compiling to native
+
+NATIVE_DIR := native
 
 PROG_TYPE ?=
 HEADER_OVERRIDE := $(obj)/.header_override
@@ -55,10 +64,7 @@ ARCH ?= $(shell uname -m | sed 's/x86_64/x86/' \
 			 | sed 's/riscv64/riscv/' \
 			 | sed 's/loongarch64/loongarch/')
 
-VMLINUX := $(obj)/vmlinux/vmlinux.h
-VMLINUX_SRC := /sys/kernel/btf/vmlinux
-
-CFLAGS_BPF := -Wno-unknown-attributes -Wno-unused_variable -Wno-pointer-sign		\
+CFLAGS_BPF := -Wno-unknown-attributes -Wno-unused-variable -Wno-pointer-sign		\
 	      -Wno-compare-distinct-pointer-types -mcmodel=medium			\
 	      -fno-pic -fno-pie -no-pie -nostartfiles -fno-omit-frame-pointer		\
 	      -fcf-protection -mskip-rax-setup -fno-jump-tables -mno-red-zone		\
@@ -68,12 +74,9 @@ CFLAGS_BPF := -Wno-unknown-attributes -Wno-unused_variable -Wno-pointer-sign		\
 LINKER_SCRIPTS := $(obj)/.linker_scripts
 LINKING_COMMAND := -Wl,-T,
 
-$(VMLINUX): $(VMLINUX_SRC)
-	mkdir -p vmlinux
-	bpftool btf dump file $(VMLINUX_SRC) format c > $(VMLINUX)
-
-$(obj)/bpf/x86/%: $(src)/katran/lib/bpf/%.c $(VMLINUX) # $(HEADER_OVERRIDE)/$(PROG_TYPE) $(LINKER_SCRIPTS)/%.ld
+$(obj)/bpf/$(NATIVE_DIR)/%: $(src)/katran/lib/bpf/%.c $(VMLINUX)
+	mkdir -p $(obj)/bpf/$(NATIVE_DIR)/
 	$(CLANG) -O3 -flto -D__TARGET_ARCH_$(ARCH) -D__KERNEL__ $(CFLAGS_BPF)	\
-		-I$(HEADER_OVERRIDE)/$(PROG_TYPE)/ $(INCLUDEFLAGS)		\	
+		-I$(HEADER_OVERRIDE)/$(PROG_TYPE)/ $(INCLUDEFLAGS)		\
 		$(LINKING_COMMAND)$(LINKER_SCRIPTS)/$*.ld			\
 		$< -o $@

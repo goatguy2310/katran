@@ -1,0 +1,212 @@
+id 0: {}
+id 1: {'bpf_map_lookup_elem': 22}
+id 2: {'bpf_map_update_elem': 22}
+id 3: {'bpf_map_delete_elem': 22}
+id 4: {'bpf_probe_read_compat': 7}
+id 5: {'bpf_ktime_get_ns': 22}
+id 6: {'bpf_trace_printk': 22}
+id 7: {'bpf_user_rnd_u32': 22}
+id 8: {'bpf_get_raw_cpu_id': 8, 'bpf_get_smp_processor_id': 14}
+id 9: {'bpf_skb_store_bytes': 4}
+id 10: {'bpf_l3_csum_replace': 3}
+id 11: {'bpf_l4_csum_replace': 3}
+id 12: {}
+id 13: {'bpf_clone_redirect': 3}
+id 14: {'bpf_get_current_pid_tgid': 22}
+id 15: {'bpf_get_current_uid_gid': 22}
+id 16: {'bpf_get_current_comm': 22}
+id 17: {'bpf_get_cgroup_classid_curr': 16, 'bpf_get_cgroup_classid': 6}
+id 18: {'bpf_skb_vlan_push': 2}
+id 19: {'bpf_skb_vlan_pop': 2}
+id 20: {'bpf_skb_get_tunnel_key': 3}
+id 21: {'bpf_skb_set_tunnel_key': 3}
+id 22: {'bpf_perf_event_read': 22}
+id 23: {'bpf_redirect': 3, 'bpf_xdp_redirect': 1}
+id 24: {'bpf_get_route_realm': 6}
+id 25: {'bpf_skb_event_output': 8, 'bpf_perf_event_output': 1, 'bpf_perf_event_output_tp': 2, 'bpf_xdp_event_output': 1, 'bpf_event_output_data': 3, 'bpf_perf_event_output_raw_tp': 4}
+id 26: {'bpf_skb_load_bytes': 8, 'sk_reuseport_load_bytes': 1, 'bpf_flow_dissector_load_bytes': 1}
+id 27: {'bpf_get_stackid': 1, 'bpf_get_stackid_tp': 1, 'bpf_get_stackid_pe': 1, 'bpf_get_stackid_raw_tp': 4}
+id 28: {'bpf_csum_diff': 7}
+id 29: {'bpf_skb_get_tunnel_opt': 3}
+id 30: {'bpf_skb_set_tunnel_opt': 3}
+id 31: {'bpf_skb_change_proto': 2}
+id 32: {'bpf_skb_change_type': 2}
+id 33: {'bpf_skb_under_cgroup': 6}
+id 34: {'bpf_get_hash_recalc': 6}
+id 35: {'bpf_get_current_task': 22}
+id 36: {'bpf_probe_write_user': 7}
+id 37: {'bpf_current_task_under_cgroup': 22}
+id 38: {'bpf_skb_change_tail': 3, 'sk_skb_change_tail': 1}
+id 39: {'bpf_skb_pull_data': 6, 'sk_skb_pull_data': 1}
+id 40: {'bpf_csum_update': 3}
+id 41: {'bpf_set_hash_invalid': 3}
+id 42: {'bpf_get_numa_node_id': 22}
+id 43: {'bpf_skb_change_head': 3, 'sk_skb_change_head': 1}
+id 44: {'bpf_xdp_adjust_head': 1}
+id 45: {'bpf_probe_read_compat_str': 7}
+id 46: {'bpf_get_socket_cookie': 4, 'bpf_get_socket_cookie_sock_ops': 1, 'bpf_get_socket_ptr_cookie': 3}
+id 47: {'bpf_get_socket_uid': 4}
+id 48: {'bpf_set_hash': 2}
+id 49: {'bpf_sock_ops_setsockopt': 1}
+id 50: {'bpf_skb_adjust_room': 2, 'sk_skb_adjust_room': 1}
+id 51: {'bpf_xdp_redirect_map': 1}
+id 52: {'bpf_sk_redirect_map': 1}
+id 53: {'bpf_sock_map_update': 1}
+id 54: {'bpf_xdp_adjust_meta': 1}
+id 55: {'bpf_perf_event_read_value': 22}
+id 56: {'bpf_perf_prog_read_value': 1}
+id 57: {'bpf_sock_ops_getsockopt': 1}
+id 58: {}
+id 59: {'bpf_sock_ops_cb_flags_set': 1}
+id 60: {'bpf_msg_redirect_map': 1}
+id 61: {'bpf_msg_apply_bytes': 1}
+id 62: {'bpf_msg_cork_bytes': 1}
+id 63: {'bpf_msg_pull_data': 1}
+id 64: {}
+id 65: {'bpf_xdp_adjust_tail': 1}
+id 66: {'bpf_skb_get_xfrm_state': 2}
+id 67: {'bpf_get_stack': 1, 'bpf_get_stack_tp': 1, 'bpf_get_stack_pe': 1, 'bpf_get_stack_raw_tp': 4}
+id 68: {'bpf_skb_load_bytes_relative': 3, 'sk_reuseport_load_bytes_relative': 1}
+id 69: {'bpf_skb_fib_lookup': 2, 'bpf_xdp_fib_lookup': 1}
+id 70: {'bpf_sock_hash_update': 1}
+id 71: {'bpf_msg_redirect_hash': 1}
+id 72: {'bpf_sk_redirect_hash': 1}
+id 73: {'bpf_lwt_in_push_encap': 1, 'bpf_lwt_xmit_push_encap': 1}
+id 74: {}
+id 75: {}
+id 76: {}
+id 77: {}
+id 78: {}
+id 79: {'bpf_skb_cgroup_id': 2}
+id 80: {'bpf_get_current_cgroup_id': 22}
+id 81: {}
+id 82: {'sk_select_reuseport': 1}
+id 83: {'bpf_skb_ancestor_cgroup_id': 2}
+id 84: {'bpf_tc_sk_lookup_tcp': 2, 'bpf_xdp_sk_lookup_tcp': 1, 'bpf_sk_lookup_tcp': 1}
+id 85: {'bpf_tc_sk_lookup_udp': 2, 'bpf_xdp_sk_lookup_udp': 1, 'bpf_sk_lookup_udp': 1}
+id 86: {'bpf_sk_release': 5}
+id 87: {'bpf_map_push_elem': 22}
+id 88: {'bpf_map_pop_elem': 22}
+id 89: {'bpf_map_peek_elem': 22}
+id 90: {'bpf_msg_push_data': 1}
+id 91: {'bpf_msg_pop_data': 1}
+id 92: {}
+id 93: {'bpf_spin_lock': 22}
+id 94: {'bpf_spin_unlock': 22}
+id 95: {'bpf_sk_fullsock': 2}
+id 96: {'bpf_tcp_sock': 3}
+id 97: {'bpf_skb_ecn_set_ce': 2}
+id 98: {'bpf_get_listener_sock': 2}
+id 99: {'bpf_tc_skc_lookup_tcp': 2, 'bpf_xdp_skc_lookup_tcp': 1, 'bpf_skc_lookup_tcp': 1}
+id 100: {'bpf_tcp_check_syncookie': 3}
+id 101: {}
+id 102: {}
+id 103: {}
+id 104: {}
+id 105: {'bpf_strtol': 22}
+id 106: {'bpf_strtoul': 22}
+id 107: {'bpf_sk_storage_get': 4, 'bpf_sk_storage_get_tracing': 2}
+id 108: {'bpf_sk_storage_delete': 4, 'bpf_sk_storage_delete_tracing': 2}
+id 109: {'bpf_send_signal': 22}
+id 110: {'bpf_tcp_gen_syncookie': 3}
+id 111: {'bpf_skb_event_output': 2}
+id 112: {'bpf_probe_read_user': 22}
+id 113: {'bpf_probe_read_kernel': 22}
+id 114: {'bpf_probe_read_user_str': 22}
+id 115: {'bpf_probe_read_kernel_str': 22}
+id 116: {}
+id 117: {'bpf_send_signal_thread': 22}
+id 118: {'bpf_jiffies64': 22}
+id 119: {'bpf_read_branch_records': 1}
+id 120: {'bpf_get_ns_current_pid_tgid': 22}
+id 121: {'bpf_xdp_event_output': 2}
+id 122: {'bpf_get_netns_cookie': 3, 'bpf_get_netns_cookie_sock_ops': 1, 'bpf_get_netns_cookie_sk_msg': 1}
+id 123: {'bpf_get_current_ancestor_cgroup_id': 22}
+id 124: {'bpf_sk_assign': 2, 'bpf_sk_lookup_assign': 1}
+id 125: {'bpf_ktime_get_boot_ns': 22}
+id 126: {}
+id 127: {}
+id 128: {}
+id 129: {}
+id 130: {'bpf_ringbuf_output': 22}
+id 131: {'bpf_ringbuf_reserve': 22}
+id 132: {'bpf_ringbuf_submit': 22}
+id 133: {'bpf_ringbuf_discard': 22}
+id 134: {'bpf_ringbuf_query': 22}
+id 135: {'bpf_csum_level': 3}
+id 136: {'bpf_skc_to_tcp6_sock': 15}
+id 137: {'bpf_skc_to_tcp_sock': 15}
+id 138: {'bpf_skc_to_tcp_timewait_sock': 15}
+id 139: {'bpf_skc_to_tcp_request_sock': 15}
+id 140: {'bpf_skc_to_udp6_sock': 15}
+id 141: {'bpf_get_task_stack': 22}
+id 142: {'bpf_sock_ops_load_hdr_opt': 1}
+id 143: {'bpf_sock_ops_store_hdr_opt': 1}
+id 144: {'bpf_sock_ops_reserve_hdr_opt': 1}
+id 145: {}
+id 146: {}
+id 147: {'bpf_d_path': 2}
+id 148: {'bpf_copy_from_user': 22}
+id 149: {'bpf_snprintf_btf': 22}
+id 150: {}
+id 151: {'bpf_skb_cgroup_classid': 2}
+id 152: {'bpf_redirect_neigh': 2}
+id 153: {'bpf_per_cpu_ptr': 22}
+id 154: {'bpf_this_cpu_ptr': 22}
+id 155: {'bpf_redirect_peer': 2}
+id 156: {'bpf_task_storage_get_recur': 22}
+id 157: {'bpf_task_storage_delete_recur': 22}
+id 158: {'bpf_get_current_task_btf': 22}
+id 159: {}
+id 160: {'bpf_ktime_get_coarse_ns': 14}
+id 161: {}
+id 162: {'bpf_sock_from_file': 2}
+id 163: {'bpf_skb_check_mtu': 2, 'bpf_xdp_check_mtu': 1}
+id 164: {'bpf_for_each_map_elem': 22}
+id 165: {'bpf_snprintf': 22}
+id 166: {'bpf_sys_bpf': 1}
+id 167: {'bpf_btf_find_by_name_kind': 1}
+id 168: {'bpf_sys_close': 1}
+id 169: {'bpf_timer_init': 22}
+id 170: {'bpf_timer_set_callback': 22}
+id 171: {'bpf_timer_start': 22}
+id 172: {'bpf_timer_cancel': 22}
+id 173: {'bpf_get_func_ip_kprobe': 1, 'bpf_get_func_ip_tracing': 6}
+id 174: {'bpf_get_attach_cookie_trace': 2, 'bpf_get_attach_cookie_pe': 1, 'bpf_get_attach_cookie_tracing': 2}
+id 175: {'bpf_task_pt_regs': 22}
+id 176: {'bpf_get_branch_snapshot': 22}
+id 177: {'bpf_trace_vprintk': 22}
+id 178: {'bpf_skc_to_unix_sock': 15}
+id 179: {'bpf_kallsyms_lookup_name': 1}
+id 180: {'bpf_find_vma': 22}
+id 181: {'bpf_loop': 22}
+id 182: {'bpf_strncmp': 22}
+id 183: {}
+id 184: {}
+id 185: {}
+id 186: {}
+id 187: {}
+id 188: {'bpf_xdp_get_buff_len': 3}
+id 189: {'bpf_xdp_load_bytes': 1}
+id 190: {'bpf_xdp_store_bytes': 1}
+id 191: {'bpf_copy_from_user_task': 22}
+id 192: {'bpf_skb_set_tstamp': 2}
+id 193: {}
+id 194: {'bpf_kptr_xchg': 22}
+id 195: {'bpf_map_lookup_percpu_elem': 22}
+id 196: {'bpf_skc_to_mptcp_sock': 15}
+id 197: {'bpf_dynptr_from_mem': 22}
+id 198: {'bpf_ringbuf_reserve_dynptr': 22}
+id 199: {'bpf_ringbuf_submit_dynptr': 22}
+id 200: {'bpf_ringbuf_discard_dynptr': 22}
+id 201: {'bpf_dynptr_read': 22}
+id 202: {'bpf_dynptr_write': 22}
+id 203: {'bpf_dynptr_data': 22}
+id 204: {'bpf_tcp_raw_gen_syncookie_ipv4': 3}
+id 205: {'bpf_tcp_raw_gen_syncookie_ipv6': 3}
+id 206: {'bpf_tcp_raw_check_syncookie_ipv4': 3}
+id 207: {'bpf_tcp_raw_check_syncookie_ipv6': 3}
+id 208: {'bpf_ktime_get_tai_ns': 22}
+id 209: {'bpf_user_ringbuf_drain': 22}
+id 210: {'bpf_cgrp_storage_get': 22}
+id 211: {'bpf_cgrp_storage_delete': 22}

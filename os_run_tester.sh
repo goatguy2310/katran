@@ -28,5 +28,4 @@ then
     DEPS_DIR=$(pwd)/_build/deps
 fi
 
-# sudo sh -c "${KATRAN_BUILD_DIR}/katran/lib/testing/katran_tester -balancer_prog ${DEPS_DIR}/bpfprog/bpf/balancer.bpf.o -test_from_fixtures=true $1"
 sudo sh -c "${KATRAN_BUILD_DIR}/katran/lib/testing/katran_tester -balancer_prog ${DEPS_DIR}/bpfprog/bpf/balancer.bpf.o -perf_testing=true $1"
