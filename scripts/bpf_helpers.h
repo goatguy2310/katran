@@ -1,6 +1,8 @@
 #ifndef __BPF_HELPERS_H
 #define __BPF_HELPERS_H
 
+#include "offset_vmlinux.h"
+
 // clang-format off
 /* helper macro to place programs, maps, license in
  * different sections in elf_bpf file. Section names
@@ -8,7 +10,7 @@
  */
 #define SEC(NAME) __attribute__((section(NAME), used))
 
-#define __uint(name, val) int(*name)[val]
+#define __uint(name, val) int(*name)[val] 
 #define __type(name, val) typeof(val) *name
 #define __array(name, val) typeof(val) *name[]
 
@@ -20,7 +22,8 @@
   })
 
 /* helper functions called from eBPF programs written in C */
-static void* (*bpf_map_lookup_elem)(void* map, void* key) = (void*)
+// JB: only using lookup func as a fallback
+static void* (*real_bpf_map_lookup_elem)(void* map, void* key) = (void*)
     BPF_FUNC_map_lookup_elem;
 static int (*bpf_map_update_elem)(
     void* map,
@@ -378,25 +381,71 @@ static int (*bpf_skb_adjust_room)(
     unsigned long long flags) = (void*)BPF_FUNC_skb_adjust_room;
 
 // JB: As a workaround, redefine tail call
-#define prog_map_value_offset		(offsetof(struct bpf_array, value))
-#define indexed_elem_offset(index)	(prog_map_value_offset + sizeof(u64) * index)
+/*
+#define map_offset(arg) 		(offsetof(struct bpf_map, arg))
+#define array_offset(arg)		(offsetof(struct bpf_array, arg))
 #define bpf_prog_fn_offset		offsetof(struct bpf_prog, bpf_func)
+*/
 
-#define access_ptr_at(ptr, offset) *(u64*)((char *)ptr + offset)
+#define indexed_elem_offset(index, elem_size)	(BPF_ARR_VAL_OFF + (__u64)index * elem_size)
+
+#define access_ptr_void(ptr, offset) (void *)((char *)ptr + offset)
+#define access_ptr_at_u32(ptr, offset) *(u32*)((char *)ptr + offset)
+#define access_ptr_at_u64(ptr, offset) *(u64*)((char *)ptr + offset)
 
 #define bpf_tail_call(ctx, prog_array_map, index) \
 	do {	\
 		int (*func)(void *);	\
 		void *bpf_prog;	\
 		\
-		bpf_prog = (void *) access_ptr_at(prog_array_map, indexed_elem_offset(index));	\
-		if (bpf_prog)	{\
-			func = (int (*)(void *)) access_ptr_at(bpf_prog, bpf_prog_fn_offset);	\
+		bpf_prog = (void *) access_ptr_at_u64(prog_array_map, indexed_elem_offset(index, sizeof(u64)));	\
+		if (bpf_prog) {	\
+			func = (int (*)(void *)) access_ptr_at_u64(bpf_prog, BPF_PROG_FUNC_OFF);	\
 			return func(ctx);	\
 		}	\
 	} while (0)
 
+#define bpf_map_lookup_elem(map, key) ({	\
+	void *__elem = NULL;	\
+	do {	\
+		const int type = sizeof(map.type) / sizeof(int); \
+		if (type == BPF_MAP_TYPE_ARRAY) {	\
+			int idx = *(int *) key;	\
+			int max_entries = access_ptr_at_u32(map, BPF_MAP_MAX_OFF);	\
+			int elem_size = access_ptr_at_u32(map, BPF_ARR_ESZ_OFF);	\
+			\
+			if (idx < max_entries) __elem = access_ptr_void(map, indexed_elem_offset(idx, elem_size));	\
+		} else {	\
+			__elem = real_bpf_map_lookup_elem(map, key);	\
+		}	\
+	} while (0);	\
+	__elem;	\
+})
 
+/*
+#define bpf_map_lookup_elem(map, key) ({	\
+	void *__elem = NULL;	\
+	do {	\
+		const int type = sizeof(map.type) / sizeof(int); \
+		if (type == BPF_MAP_TYPE_ARRAY) {	\
+			int idx = *(int *) key;	\
+			int max_entries = access_ptr_at_u32(map, BPF_MAP_MAX_OFF);	\
+			int elem_size = access_ptr_at_u32(map, BPF_ARR_ESZ_OFF);	\
+			\
+			if (idx < max_entries) __elem = access_ptr_void(map, indexed_elem_offset(idx, elem_size));	\
+		} else if (type == BPF_MAP_TYPE_ARRAY_OF_MAPS) {	\
+			int idx = *(int *) key;	\
+			int max_entries = access_ptr_at_u32(map, BPF_MAP_MAX_OFF);	\
+			int elem_size = access_ptr_at_u32(map, BPF_ARR_ESZ_OFF);	\
+			\
+			if (idx < max_entries) __elem = (typeof(*map.values)) access_ptr_void(map, indexed_elem_offset(idx, elem_size));	\
+		} else {	\
+			__elem = real_bpf_map_lookup_elem(map, key);	\
+		}	\
+	} while (0);	\
+	__elem;	\
+})
+*/
 
 /* Scan the ARCH passed in from ARCH env variable (see Makefile) */
 #if defined(__TARGET_ARCH_x86)

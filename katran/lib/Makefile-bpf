@@ -40,7 +40,7 @@ clean:
 $(VMLINUX): $(VMLINUX_SRC)
 	mkdir -p vmlinux
 	# bpftool btf dump file $(VMLINUX_SRC) format c > $(VMLINUX)
-	bpftool btf dump file $(VMLINUX_SRC) format c | awk '/^struct bpf_prog \{/,/^\};/ {print} /^struct bpf_array \{/,/^\};/ {print}' > $(VMLINUX)
+	bpftool btf dump file $(VMLINUX_SRC) format c | awk '/^struct bpf_prog \{/,/^\};/ {print} /^struct bpf_map \{/,/^\};/ {print} /^struct bpf_array \{/,/^\};/ {print}' > $(VMLINUX)
 
 $(obj)/bpf/%.o: $(src)/katran/lib/bpf/%.c $(VMLINUX)
 	$(CLANG) $(INCLUDEFLAGS) $(EXTRA_CFLAGS) \
@@ -74,9 +74,9 @@ CFLAGS_BPF := -Wno-unknown-attributes -Wno-unused-variable -Wno-pointer-sign		\
 LINKER_SCRIPTS := $(obj)/.linker_scripts
 LINKING_COMMAND := -Wl,-T,
 
-$(obj)/bpf/$(NATIVE_DIR)/%: $(src)/katran/lib/bpf/%.c $(VMLINUX)
+$(obj)/bpf/$(NATIVE_DIR)/%: $(src)/katran/lib/bpf/%.c $(HEADER_OVERRIDE)/$(PROG_TYPE) $(LINKER_SCRIPTS)/%.ld $(VMLINUX)
 	mkdir -p $(obj)/bpf/$(NATIVE_DIR)/
-	$(CLANG) -O3 -flto -D__TARGET_ARCH_$(ARCH) -D__KERNEL__ $(CFLAGS_BPF)	\
-		-I$(HEADER_OVERRIDE)/$(PROG_TYPE)/ $(INCLUDEFLAGS)		\
-		$(LINKING_COMMAND)$(LINKER_SCRIPTS)/$*.ld			\
+	$(CLANG) -O3 -flto -D__TARGET_ARCH_$(ARCH) -D__KERNEL__ -D__JB			\
+		$(CFLAGS_BPF) -I$(HEADER_OVERRIDE)/$(PROG_TYPE)/ $(INCLUDEFLAGS)	\
+		$(LINKING_COMMAND)$(LINKER_SCRIPTS)/$*.ld				\
 		$< -o $@

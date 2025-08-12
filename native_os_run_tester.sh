@@ -61,7 +61,6 @@ process_linker_script_and_progs() {
 	mkdir -p $DEPS_DIR/bpfprog/.linker_scripts
 	python3 scripts/process_dmesg.py $KAT_PID $DMESG_LOG $DEPS_DIR/bpfprog/bpf/balancer.bpf.o $DEPS_DIR/bpfprog/.linker_scripts/balancer.bpf.ld
 	PROG_TYPE=$(cat logs/progs_list.txt)
-	log "ello $PROG_TYPE $KAT_PID"
 	log "Linker script saved at .linker_scripts/balancer.bpf.ld"
 }
 
@@ -69,13 +68,28 @@ process_header_override() {
 	python3 scripts/fn_name_to_hex.py
 
 	# generate header override
-	HDR_DIR=$DEPS_DIR/bpfprog/.header_override/$PROG_TYPE/katran/lib/linux_includes/
+	HDR_DIR=$DEPS_DIR/bpfprog/.header_override/$PROG_TYPE/katran/lib/linux_includes
+	OFFGEN_DIR=$DEPS_DIR/bpfprog/offgen
+	VMLINUX=$DEPS_DIR/bpfprog/vmlinux/vmlinux.h
+	VMLINUX_SRC=/sys/kernel/btf/vmlinux
 
 	log "Generating header overrides for BPF helpers..."
 	rm -rf $HDR_DIR
 	mkdir -p $HDR_DIR
 
 	cp scripts/bpf.h $HDR_DIR/bpf.h
+	# cp vmlinux/vmlinux_light.h $HDR_DIR/vmlinux_light.h
+	# appending vmlinux at the end (before #endif) of bpf.h
+	mkdir -p $DEPS_DIR/bpfprog/vmlinux
+	bpftool btf dump file $VMLINUX_SRC format c > $VMLINUX
+	# bpftool btf dump file $VMLINUX_SRC format c | awk '/^struct bpf_prog \{/,/^\};/ {print} /^struct bpf_map \{/,/^\};/ {print} /^struct bpf_array \{/,/^\};/ {print}' > $VMLINUX
+	# sed -i -e "\$e cat $VMLINUX" $HDR_DIR/bpf.h
+
+	mkdir -p $DEPS_DIR/bpfprog/offgen
+	cp scripts/offset_gen.c $OFFGEN_DIR/offset_gen.c
+	clang -Wno-unknown-attributes -I$(dirname "$VMLINUX") $OFFGEN_DIR/offset_gen.c -o $OFFGEN_DIR/offset_gen
+	$OFFGEN_DIR/offset_gen $HDR_DIR/offset_vmlinux.h
+
 	python3 scripts/modify_header.py scripts/bpf_helpers.h $HDR_DIR/bpf_helpers.h $PROG_TYPE scripts/prog_helper_addr.csv
 	log "Header overrides written at $HDR_DIR/bpf_helpers.h"
 }
