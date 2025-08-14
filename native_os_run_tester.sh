@@ -47,7 +47,7 @@ capture_dmesg_logs() {
 
 	log "Starting katran tester..."
 
-	# sudo sh -c "${KATRAN_BUILD_DIR}/katran/lib/testing/katran_tester -balancer_prog ${DEPS_DIR}/bpfprog/bpf/balancer.bpf.o -test_from_fixtures=true $1"
+	# ${KATRAN_BUILD_DIR}/katran/lib/testing/katran_tester -balancer_prog $DEPS_DIR/bpfprog/bpf/balancer.bpf.o -test_from_fixtures=true -wait-phases=true $1 &
 	$KATRAN_BUILD_DIR/katran/lib/testing/katran_tester -balancer_prog $DEPS_DIR/bpfprog/bpf/balancer.bpf.o -perf_testing=true -wait_phases=true $1 &
 	KAT_PID=$!
 
@@ -131,4 +131,5 @@ read -n 1 -s -r
 
 log "Stopping..."
 rmmod $MODULE_NAME
+sleep 0.5
 kill -SIGUSR2 $KAT_PID

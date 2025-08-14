@@ -65,7 +65,7 @@ static ssize_t bpf_replace_write(struct file *fp, const char *buf, size_t count,
 	if (rprog_idx >= MAX_PROG_REPLACEMENT) {
 		pr_warn("bpf_replace: reached maximum prog replacement (%u)\n", MAX_PROG_REPLACEMENT);
 		ret = -ENOSPC;
-		goto out;	
+		goto out;
 	}
 	
 	size_t total = 0; /* total accumulated bytes */
@@ -83,7 +83,8 @@ static ssize_t bpf_replace_write(struct file *fp, const char *buf, size_t count,
 	struct bpf_prog *prog;
 
 	/* copying header */
-	if (copy_from_user(&fheader, buf, fheader_size)) {
+	ret = copy_from_user(&fheader, buf, fheader_size);
+	if (ret) {
 		pr_err("bpf_replace: failed to copy file header\n");
 		ret = -EFAULT;
 		goto out;
@@ -92,43 +93,45 @@ static ssize_t bpf_replace_write(struct file *fp, const char *buf, size_t count,
 
 	/* copying code */
 	code_size_aligned = round_up(fheader.code_size, PAGE_SIZE);
+	pr_info("bpf_replace: (f=%u) trying to allocate %u (%u)\n", rfile_idx, fheader.code_size, code_size_aligned);
+
 	kmem = bpf_jit_alloc_exec(code_size_aligned);	
 	if (!kmem) {
 		pr_err("bpf_replace: cannot allocate memory for new file\n");
 		ret = -ENOMEM;
 		goto out;
-	}	
+	}
 
-	if (copy_from_user(kmem, buf + total, fheader.code_size)) {
+	ret = copy_from_user(kmem, buf + total, fheader.code_size);
+	if (ret) {
 		pr_err("bpf_replace: failed to copy program to new memory\n");
-		ret = -EFAULT;
 		goto out_free;
 	}
 	total += fheader.code_size;
 
 	/* setting code memory perm to RO+X */
 	set_vm_flush_reset_perms(kmem);
-	if (set_memory_rox((unsigned long) kmem, code_size_aligned >> PAGE_SHIFT)) {
+	ret = set_memory_rox((unsigned long) kmem, code_size_aligned >> PAGE_SHIFT);
+	if (ret) {
 		pr_err("bpf_replace: failed to set file to ROX\n");
-		ret = -EFAULT;
 		goto out_free;
 	}
 	rfile_infos[rfile_idx].kmem = kmem;
-	pr_info("bpf_replace: (f=%u)code memory finalized at %px and size %u (%u)\n", rfile_idx, kmem, fheader.code_size, code_size_aligned);
+	pr_info("bpf_replace: (f=%u) code memory finalized at %px and size %u (%u)\n", rfile_idx, kmem, fheader.code_size, code_size_aligned);
 
 	/* copying prog headers */
-	if (copy_from_user(&progs_to_replace, buf + total, sizeof(progs_to_replace))) {
+	ret = copy_from_user(&progs_to_replace, buf + total, sizeof(progs_to_replace));
+	if (ret) {
 		pr_err("bpf_replace: failed to copy prog number\n");
-		ret = -EFAULT;
 		goto out_free;
 	}
 	total += sizeof(progs_to_replace);
 
 	rfile_infos[rfile_idx].start_prog_idx = rprog_idx;
 	for (; rprog_idx < rfile_infos[rfile_idx].start_prog_idx + progs_to_replace; rprog_idx++) {
-		if (copy_from_user(&pheader, buf + total, pheader_size)) {
+		ret = copy_from_user(&pheader, buf + total, pheader_size);
+		if (ret) {
 			pr_err("bpf_replace: failed to copy prog header\n");
-			ret = -EFAULT;
 			goto out_free;
 		}
 
@@ -169,6 +172,9 @@ out_free:
 	}
 	bpf_jit_free_exec(kmem);
 out:
+	if (ret) {
+		pr_err("bpf_replace: error code %d\n", ret);
+	}
 	mutex_unlock(&replace_mutex);
 	return ret;
 }

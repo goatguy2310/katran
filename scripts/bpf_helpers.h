@@ -393,6 +393,8 @@ static int (*bpf_skb_adjust_room)(
 #define access_ptr_at_u32(ptr, offset) *(u32*)((char *)ptr + offset)
 #define access_ptr_at_u64(ptr, offset) *(u64*)((char *)ptr + offset)
 
+#define is_void_ptr(ptr) __builtin_types_compatible_p(__typeof__(ptr), void*)
+
 #define bpf_tail_call(ctx, prog_array_map, index) \
 	do {	\
 		int (*func)(void *);	\
@@ -405,14 +407,15 @@ static int (*bpf_skb_adjust_room)(
 		}	\
 	} while (0)
 
+// JB: redefine lookup elem as well to inline for easy cases
 #define bpf_map_lookup_elem(map, key) ({	\
 	void *__elem = NULL;	\
 	do {	\
-		const int type = sizeof(map.type) / sizeof(int); \
+		const int type = sizeof(**map.type) / sizeof(int); \
 		if (type == BPF_MAP_TYPE_ARRAY) {	\
-			int idx = *(int *) key;	\
-			int max_entries = access_ptr_at_u32(map, BPF_MAP_MAX_OFF);	\
-			int elem_size = access_ptr_at_u32(map, BPF_ARR_ESZ_OFF);	\
+			__u32 idx = *(__u32 *) key;	\
+			const __u32 max_entries = sizeof(**map.max_entries) / sizeof(int);	\
+			const __u32 elem_size = __builtin_align_up(sizeof(**map.value), 8);	\
 			\
 			if (idx < max_entries) __elem = access_ptr_void(map, indexed_elem_offset(idx, elem_size));	\
 		} else {	\
@@ -423,28 +426,10 @@ static int (*bpf_skb_adjust_room)(
 })
 
 /*
-#define bpf_map_lookup_elem(map, key) ({	\
-	void *__elem = NULL;	\
-	do {	\
-		const int type = sizeof(map.type) / sizeof(int); \
-		if (type == BPF_MAP_TYPE_ARRAY) {	\
-			int idx = *(int *) key;	\
-			int max_entries = access_ptr_at_u32(map, BPF_MAP_MAX_OFF);	\
-			int elem_size = access_ptr_at_u32(map, BPF_ARR_ESZ_OFF);	\
-			\
-			if (idx < max_entries) __elem = access_ptr_void(map, indexed_elem_offset(idx, elem_size));	\
-		} else if (type == BPF_MAP_TYPE_ARRAY_OF_MAPS) {	\
-			int idx = *(int *) key;	\
-			int max_entries = access_ptr_at_u32(map, BPF_MAP_MAX_OFF);	\
-			int elem_size = access_ptr_at_u32(map, BPF_ARR_ESZ_OFF);	\
-			\
-			if (idx < max_entries) __elem = (typeof(*map.values)) access_ptr_void(map, indexed_elem_offset(idx, elem_size));	\
-		} else {	\
-			__elem = real_bpf_map_lookup_elem(map, key);	\
-		}	\
-	} while (0);	\
-	__elem;	\
-})
+int max_entries = access_ptr_at_u32(map, BPF_MAP_MAX_OFF);	\
+int elem_size = access_ptr_at_u32(map, BPF_ARR_ESZ_OFF);	\
+
+if (idx < max_entries) __elem = access_ptr_void(map, indexed_elem_offset(idx, elem_size))
 */
 
 /* Scan the ARCH passed in from ARCH env variable (see Makefile) */
