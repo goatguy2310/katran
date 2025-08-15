@@ -27,6 +27,7 @@
 
 /* helper functions called from eBPF programs written in C */
 // JB: only using lookup func as a fallback
+// #define real_bpf_map_lookup_elem bpf_map_lookup_elem
 static void* (*real_bpf_map_lookup_elem)(void* map, void* key) = (void*)
     BPF_FUNC_map_lookup_elem;
 static int (*bpf_map_update_elem)(
@@ -50,7 +51,7 @@ static unsigned long long (*bpf_ktime_get_ns)(void) = (void*)
     BPF_FUNC_ktime_get_ns;
 static int (*bpf_trace_printk)(const char* fmt, int fmt_size, ...) = (void*)
     BPF_FUNC_trace_printk;
-/* JB: Disable usual tail call for x86 compilation
+/* JB: Disable usual tail call for userspace implementation
 static void (*bpf_tail_call)(void* ctx, void* map, int index) = (void*)
     BPF_FUNC_tail_call; */
 /* JB: Disable usual get smp id as well for inlining optimization
@@ -386,12 +387,6 @@ static int (*bpf_skb_adjust_room)(
     unsigned long long flags) = (void*)BPF_FUNC_skb_adjust_room;
 
 // JB: As a workaround, redefine tail call
-/*
-#define map_offset(arg) 		(offsetof(struct bpf_map, arg))
-#define array_offset(arg)		(offsetof(struct bpf_array, arg))
-#define bpf_prog_fn_offset		offsetof(struct bpf_prog, bpf_func)
-*/
-
 #define indexed_elem_offset(index, elem_size)	(BPF_ARR_VAL_OFF + (__u64)index * elem_size)
 
 #define access_ptr_void(ptr, offset) (void *)((char *)ptr + offset)
@@ -444,7 +439,7 @@ static int (*bpf_skb_adjust_room)(
 		\
 		if (idx < max_entries) {	\
 			__elem = (void *) access_ptr_at_u64(map, indexed_elem_offset(idx, elem_size));	\
-			/* adjust the offset to the correct percpu memory area*/	\
+			/* adjust the offset to the correct percpu memory area */	\
 			add_percpu_off(__elem);	\
 		}	\
 	} else {	\
