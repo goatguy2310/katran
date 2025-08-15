@@ -14,6 +14,10 @@
 #define __type(name, val) typeof(val) *name
 #define __array(name, val) typeof(val) *name[]
 
+// JB: Macro for percpu operations
+#define _KS_CPU_NUMBER <cpu_number>
+#define _KS_THIS_CPU_OFF <this_cpu_off>
+
 /* helper macro to print out debug messages */
 #define bpf_printk(fmt, ...)                                   \
   ({                                                           \
@@ -46,11 +50,12 @@ static unsigned long long (*bpf_ktime_get_ns)(void) = (void*)
     BPF_FUNC_ktime_get_ns;
 static int (*bpf_trace_printk)(const char* fmt, int fmt_size, ...) = (void*)
     BPF_FUNC_trace_printk;
-/*JB: Disable usual tail call for x86 compilation
+/* JB: Disable usual tail call for x86 compilation
 static void (*bpf_tail_call)(void* ctx, void* map, int index) = (void*)
     BPF_FUNC_tail_call; */
+/* JB: Disable usual get smp id as well for inlining optimization
 static unsigned long long (*bpf_get_smp_processor_id)(void) = (void*)
-    BPF_FUNC_get_smp_processor_id;
+    BPF_FUNC_get_smp_processor_id; */
 static unsigned long long (*bpf_get_current_pid_tgid)(void) = (void*)
     BPF_FUNC_get_current_pid_tgid;
 static unsigned long long (*bpf_get_current_uid_gid)(void) = (void*)
@@ -390,8 +395,8 @@ static int (*bpf_skb_adjust_room)(
 #define indexed_elem_offset(index, elem_size)	(BPF_ARR_VAL_OFF + (__u64)index * elem_size)
 
 #define access_ptr_void(ptr, offset) (void *)((char *)ptr + offset)
-#define access_ptr_at_u32(ptr, offset) *(u32*)((char *)ptr + offset)
-#define access_ptr_at_u64(ptr, offset) *(u64*)((char *)ptr + offset)
+#define access_ptr_at_u32(ptr, offset) *(__u32*)((char *)ptr + offset)
+#define access_ptr_at_u64(ptr, offset) *(__u64*)((char *)ptr + offset)
 
 #define is_void_ptr(ptr) __builtin_types_compatible_p(__typeof__(ptr), void*)
 
@@ -408,29 +413,52 @@ static int (*bpf_skb_adjust_room)(
 	} while (0)
 
 // JB: redefine lookup elem as well to inline for easy cases
+#define add_percpu_off(var) \
+	asm volatile (	\
+		"add %%gs:%1, %0"	\
+		: "+r"(var)	\
+		: "m"(*(__u64*) _KS_THIS_CPU_OFF)	\
+		: "cc", "memory"	\
+	)
+
 #define bpf_map_lookup_elem(map, key) ({	\
 	void *__elem = NULL;	\
-	do {	\
-		const int type = sizeof(**map.type) / sizeof(int); \
-		if (type == BPF_MAP_TYPE_ARRAY) {	\
-			__u32 idx = *(__u32 *) key;	\
-			const __u32 max_entries = sizeof(**map.max_entries) / sizeof(int);	\
-			const __u32 elem_size = __builtin_align_up(sizeof(**map.value), 8);	\
-			\
-			if (idx < max_entries) __elem = access_ptr_void(map, indexed_elem_offset(idx, elem_size));	\
-		} else {	\
-			__elem = real_bpf_map_lookup_elem(map, key);	\
+	\
+	const int type = sizeof(**map.type) / sizeof(int); \
+	if (type == BPF_MAP_TYPE_ARRAY) {	\
+		__u32 idx = *(__u32 *) key;	\
+		const __u32 max_entries = sizeof(**map.max_entries) / sizeof(int);	\
+		const __u32 elem_size = __builtin_align_up(sizeof(**map.value), 8);	\
+		\
+		if (idx < max_entries) __elem = access_ptr_void(map, indexed_elem_offset(idx, elem_size));	\
+	} else if (type == BPF_MAP_TYPE_ARRAY_OF_MAPS) {	\
+		__u32 idx = *(__u32 *) key;	\
+		const __u32 max_entries = sizeof(**map.max_entries) / sizeof(int);	\
+		const __u32 elem_size = sizeof(__u64);	\
+		\
+		if (idx < max_entries) __elem = (void *) access_ptr_at_u64(map, indexed_elem_offset(idx, elem_size));	\
+	} else if (type == BPF_MAP_TYPE_PERCPU_ARRAY) {	\
+		__u32 idx = *(__u32 *) key;	\
+		const __u32 max_entries = sizeof(**map.max_entries) / sizeof(int);	\
+		const __u32 elem_size = sizeof(__u64);	\
+		\
+		if (idx < max_entries) {	\
+			__elem = (void *) access_ptr_at_u64(map, indexed_elem_offset(idx, elem_size));	\
+			/* adjust the offset to the correct percpu memory area*/	\
+			add_percpu_off(__elem);	\
 		}	\
-	} while (0);	\
+	} else {	\
+		__elem = real_bpf_map_lookup_elem(map, key);	\
+	}	\
 	__elem;	\
 })
 
-/*
-int max_entries = access_ptr_at_u32(map, BPF_MAP_MAX_OFF);	\
-int elem_size = access_ptr_at_u32(map, BPF_ARR_ESZ_OFF);	\
-
-if (idx < max_entries) __elem = access_ptr_void(map, indexed_elem_offset(idx, elem_size))
-*/
+// JB: Finally, redefine get_smp_processor_id
+#define bpf_get_smp_processor_id() ({	\
+	__u64 __percpu_id = _KS_CPU_NUMBER;	\
+	add_percpu_off(__percpu_id);	\
+	*(__u64*) __percpu_id;	\
+})
 
 /* Scan the ARCH passed in from ARCH env variable (see Makefile) */
 #if defined(__TARGET_ARCH_x86)

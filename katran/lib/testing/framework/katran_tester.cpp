@@ -344,16 +344,15 @@ int main(int argc, char** argv) {
       listFeatures(*lb);
       runTestsFromFixture(*lb, tester, testParam);
     }
-    return 0;
-  }
-  prepareLbData(*lb);
-  if (!FLAGS_pcap_input.empty()) {
-    tester.testPcktsFromPcap();
-    return 0;
-  } else if (FLAGS_perf_testing) {
-    // for perf tests to work katran must be compiled w -DINLINE_DECAP
-    preparePerfTestingLbData(*lb);
-    tester.testPerfFromFixture(FLAGS_repeat, FLAGS_position);
+  } else {
+    prepareLbData(*lb);
+    if (!FLAGS_pcap_input.empty()) {
+      tester.testPcktsFromPcap();
+    } else if (FLAGS_perf_testing) {
+      // for perf tests to work katran must be compiled w -DINLINE_DECAP
+      preparePerfTestingLbData(*lb);
+      tester.testPerfFromFixture(FLAGS_repeat, FLAGS_position);
+    }
   }
 
   // perform waiting after bench until SIGUSR2

@@ -65,8 +65,6 @@ process_linker_script_and_progs() {
 }
 
 process_header_override() {
-	python3 scripts/fn_name_to_hex.py
-
 	# generate header override
 	HDR_DIR=$DEPS_DIR/bpfprog/.header_override/$PROG_TYPE/katran/lib/linux_includes
 	OFFGEN_DIR=$DEPS_DIR/bpfprog/offgen
@@ -90,7 +88,7 @@ process_header_override() {
 	clang -Wno-unknown-attributes -I$(dirname "$VMLINUX") $OFFGEN_DIR/offset_gen.c -o $OFFGEN_DIR/offset_gen
 	$OFFGEN_DIR/offset_gen $HDR_DIR/offset_vmlinux.h
 
-	python3 scripts/modify_header.py scripts/bpf_helpers.h $HDR_DIR/bpf_helpers.h $PROG_TYPE scripts/prog_helper_addr.csv
+	python3 scripts/modify_header.py scripts/bpf_helpers.h $HDR_DIR/bpf_helpers.h $PROG_TYPE bpf_helper_inspect/helper_addr_fn.csv
 	log "Header overrides written at $HDR_DIR/bpf_helpers.h"
 }
 
