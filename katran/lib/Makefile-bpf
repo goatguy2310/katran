@@ -44,7 +44,7 @@ $(VMLINUX): $(VMLINUX_SRC)
 
 $(obj)/bpf/%.o: $(src)/katran/lib/bpf/%.c $(VMLINUX)
 	$(CLANG) $(INCLUDEFLAGS) $(EXTRA_CFLAGS) \
-	$(DEBUGBPF) -D__KERNEL__ -Wno-unused-value -Wno-pointer-sign \
+	$(DEBUGBPF) -DINLINE_DECAP -D__KERNEL__ -Wno-unused-value -Wno-pointer-sign \
 		-Wno-compare-distinct-pointer-types \
 		-O2 -emit-llvm -c -g $< -o -| $(LLC) -march=bpf -filetype=obj -o $@
 
@@ -66,8 +66,8 @@ ARCH ?= $(shell uname -m | sed 's/x86_64/x86/' \
 
 CFLAGS_BPF := -Wno-unknown-attributes -Wno-unused-variable -Wno-pointer-sign		\
 	      -Wno-compare-distinct-pointer-types -mcmodel=medium			\
-	      -fno-pic -fno-pie -no-pie -nostartfiles -fno-omit-frame-pointer		\
-	      -fcf-protection -mskip-rax-setup -fno-jump-tables -mno-red-zone		\
+	      -fno-pic -fno-pie -no-pie -nostartfiles -fcf-protection=branch		\
+	      -mskip-rax-setup -fno-jump-tables -mno-red-zone				\
 	      -mno-sse -mno-sse2 -mno-avx -mno-mmx -mno-80387 -mno-fp-ret-in-387	\
 	      -fno-delete-null-pointer-checks -Wframe-larger-than=512
 
@@ -76,7 +76,7 @@ LINKING_COMMAND := -Wl,-T,
 
 $(obj)/bpf/$(NATIVE_DIR)/%: $(src)/katran/lib/bpf/%.c $(HEADER_OVERRIDE)/$(PROG_TYPE) $(LINKER_SCRIPTS)/%.ld $(VMLINUX)
 	mkdir -p $(obj)/bpf/$(NATIVE_DIR)/
-	$(CLANG) -g -O3 -flto -D__TARGET_ARCH_$(ARCH) -D__KERNEL__ -D__JB			\
-		$(CFLAGS_BPF) -I$(HEADER_OVERRIDE)/$(PROG_TYPE)/ $(INCLUDEFLAGS)	\
-		$(LINKING_COMMAND)$(LINKER_SCRIPTS)/$*.ld				\
+	$(CLANG) -g -O3 -flto -DINLINE_DECAP -D__TARGET_ARCH_$(ARCH) -D__KERNEL__ -D__JB	\
+		$(CFLAGS_BPF) -I$(HEADER_OVERRIDE)/$(PROG_TYPE)/ $(INCLUDEFLAGS)		\
+		$(LINKING_COMMAND)$(LINKER_SCRIPTS)/$*.ld					\
 		$< -o $@

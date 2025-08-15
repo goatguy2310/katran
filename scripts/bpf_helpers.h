@@ -405,7 +405,7 @@ static int (*bpf_skb_adjust_room)(
 		int (*func)(void *);	\
 		void *bpf_prog;	\
 		\
-		bpf_prog = (void *) access_ptr_at_u64(prog_array_map, indexed_elem_offset(index, sizeof(u64)));	\
+		bpf_prog = (void *) access_ptr_at_u64(prog_array_map, indexed_elem_offset(index, sizeof(__u64)));	\
 		if (bpf_prog) {	\
 			func = (int (*)(void *)) access_ptr_at_u64(bpf_prog, BPF_PROG_FUNC_OFF);	\
 			return func(ctx);	\

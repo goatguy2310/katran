@@ -1,1834 +1,2093 @@
 int balancer_ingress(struct xdp_md * ctx):
-0xffffffffc0239000:
+0xffffffffc0541000:
    0:	endbr64
    4:	push   %rbp
-   5:	mov    %rsp,%rbp
-   8:	push   %r15
-   a:	push   %r14
-   c:	push   %r13
-   e:	push   %r12
-  10:	push   %rbx
-  11:	sub    $0x88,%rsp
-  18:	mov    (%rdi),%r14
-  1b:	mov    0x8(%rdi),%r15
-  1f:	lea    0xe(%r14),%rax
-  23:	mov    $0x1,%ebx
-  28:	cmp    %r15,%rax
-  2b:	ja     0xffffffffc023aa4e
-  31:	mov    %rdi,%r12
-  34:	movzwl 0xc(%r14),%ecx
-  39:	cmp    $0xdd86,%ecx
-  3f:	je     0xffffffffc0239187
-  45:	mov    $0x2,%ebx
-  4a:	cmp    $0x8,%cx
-  4e:	jne    0xffffffffc023aa4e
-  54:	movq   $0x0,-0x38(%rbp)
-  5c:	movq   $0x0,-0x40(%rbp)
-  64:	movq   $0x0,-0x48(%rbp)
-  6c:	movq   $0x0,-0x50(%rbp)
-  74:	movq   $0x0,-0x58(%rbp)
-  7c:	movq   $0x0,-0x60(%rbp)
-  84:	movl   $0x0,-0x90(%rbp)
-  8e:	movq   $0x0,-0x98(%rbp)
-  99:	movq   $0x0,-0xa0(%rbp)
-  a4:	lea    0x22(%r14),%r13
-  a8:	cmp    %r15,%r13
-  ab:	ja     0xffffffffc023aa49
-  b1:	mov    (%rax),%al
-  b3:	and    $0xf,%al
-  b5:	cmp    $0x5,%al
-  b7:	jne    0xffffffffc023aa49
-  bd:	mov    0xf(%r14),%al
-  c1:	mov    %al,-0x33(%rbp)
-  c4:	mov    0x17(%r14),%cl
-  c8:	mov    %cl,-0x3c(%rbp)
-  cb:	movzwl 0x14(%r14),%eax
-  d0:	test   $0xff3f,%eax
-  d5:	jne    0xffffffffc023aa49
-  db:	movzwl 0x10(%r14),%edi
-  e0:	cmp    $0x1,%cl
-  e3:	jne    0xffffffffc0239461
-  e9:	lea    0x2a(%r14),%rcx
-  ed:	cmp    %r15,%rcx
-  f0:	ja     0xffffffffc023aa49
-  f6:	mov    0x0(%r13),%dl
-  fa:	cmp    $0x3,%dl
-  fd:	je     0xffffffffc0239766
- 103:	mov    $0x2,%ebx
- 108:	cmp    $0x8,%dl
- 10b:	jne    0xffffffffc023aa4e
- 111:	movzwl %di,%r8d
- 115:	movb   $0x0,0x22(%r14)
- 11a:	addw   $0x8,0x24(%r14)
- 120:	movb   $0x40,0x16(%r14)
- 125:	mov    0x1a(%r14),%ecx
- 129:	mov    0x1e(%r14),%esi
- 12d:	mov    %ecx,0x1e(%r14)
- 131:	mov    %esi,0x1a(%r14)
- 135:	movzwl 0xe(%r14),%edi
- 13a:	movzwl 0x12(%r14),%ebx
- 13f:	movzwl 0x16(%r14),%r9d
- 144:	movzwl %si,%edx
- 147:	shr    $0x10,%rsi
- 14b:	add    %rdx,%rsi
- 14e:	movzwl %cx,%edx
- 151:	add    %rsi,%rdx
- 154:	shr    $0x10,%rcx
- 158:	add    %rdx,%rcx
- 15b:	add    %rdi,%rcx
- 15e:	add    %r8,%rcx
- 161:	add    %rbx,%rcx
- 164:	add    %rax,%rcx
- 167:	add    %r9,%rcx
- 16a:	mov    %rcx,%rax
- 16d:	shr    $0x10,%rax
- 171:	movzwl %cx,%edx
- 174:	add    %rax,%rdx
- 177:	cmp    $0x10000,%rcx
- 17e:	cmovb  %rcx,%rdx
- 182:	jmp    0xffffffffc0239398
- 187:	movq   $0x0,-0x38(%rbp)
- 18f:	movq   $0x0,-0x40(%rbp)
- 197:	movq   $0x0,-0x48(%rbp)
- 19f:	movq   $0x0,-0x50(%rbp)
- 1a7:	movq   $0x0,-0x58(%rbp)
- 1af:	movq   $0x0,-0x60(%rbp)
- 1b7:	movl   $0x0,-0x90(%rbp)
- 1c1:	movq   $0x0,-0x98(%rbp)
- 1cc:	movq   $0x0,-0xa0(%rbp)
- 1d7:	lea    0x36(%r14),%r13
- 1db:	cmp    %r15,%r13
- 1de:	ja     0xffffffffc023aa49
- 1e4:	mov    0x14(%r14),%al
- 1e8:	mov    %al,-0x3c(%rbp)
- 1eb:	mov    0xe(%r14),%cl
- 1ef:	shl    $0x4,%cl
- 1f2:	mov    %cl,-0x33(%rbp)
- 1f5:	mov    0xf(%r14),%dl
- 1f9:	shr    $0x4,%dl
- 1fc:	or     %cl,%dl
- 1fe:	mov    %dl,-0x33(%rbp)
- 201:	cmp    $0x2c,%al
- 203:	je     0xffffffffc023aa49
- 209:	movzwl 0x12(%r14),%edi
- 20e:	cmp    $0x3a,%al
- 210:	jne    0xffffffffc02392c0
- 216:	lea    0x3e(%r14),%rax
- 21a:	cmp    %r15,%rax
- 21d:	ja     0xffffffffc023aa49
- 223:	mov    0x0(%r13),%al
- 227:	cmp    $0x2,%al
- 229:	je     0xffffffffc02394ff
- 22f:	cmp    $0x1,%al
- 231:	je     0xffffffffc0239539
- 237:	mov    $0x2,%ebx
- 23c:	cmp    $0x80,%al
- 23e:	jne    0xffffffffc023aa4e
- 244:	movb   $0x81,0x36(%r14)
- 249:	addw   $0xffff,0x38(%r14)
- 24f:	movb   $0x40,0x15(%r14)
- 254:	mov    0x16(%r14),%rax
- 258:	mov    0x1e(%r14),%rcx
- 25c:	mov    %rcx,-0x68(%rbp)
- 260:	mov    %rax,-0x70(%rbp)
- 264:	mov    0x26(%r14),%rax
- 268:	mov    0x2e(%r14),%rcx
- 26c:	mov    %rax,0x16(%r14)
- 270:	mov    %rcx,0x1e(%r14)
- 274:	mov    -0x70(%rbp),%rax
- 278:	mov    -0x68(%rbp),%rcx
- 27c:	mov    %rax,0x26(%r14)
- 280:	mov    %rcx,0x2e(%r14)
- 284:	movzwl 0xa(%r14),%eax
- 289:	mov    %ax,-0xa4(%rbp)
- 290:	mov    0x6(%r14),%eax
- 294:	mov    %eax,-0xa8(%rbp)
- 29a:	mov    (%r14),%eax
- 29d:	mov    %eax,0x6(%r14)
- 2a1:	movzwl 0x4(%r14),%eax
- 2a6:	mov    %ax,0xa(%r14)
- 2ab:	mov    -0xa8(%rbp),%eax
- 2b1:	mov    %eax,(%r14)
- 2b4:	movzwl -0xa4(%rbp),%eax
- 2bb:	jmp    0xffffffffc0239410
- 2c0:	mov    0x16(%r14),%rcx
- 2c4:	mov    0x1e(%r14),%rdx
- 2c8:	mov    %rdx,-0x58(%rbp)
- 2cc:	mov    %rcx,-0x60(%rbp)
- 2d0:	mov    0x26(%r14),%rcx
- 2d4:	mov    0x2e(%r14),%rdx
- 2d8:	mov    %rcx,-0x50(%rbp)
- 2dc:	mov    %rdx,-0x48(%rbp)
- 2e0:	cmp    $0x1,%al
- 2e2:	jne    0xffffffffc023941f
- 2e8:	lea    0x3e(%r14),%rax
- 2ec:	cmp    %r15,%rax
- 2ef:	ja     0xffffffffc023aa49
- 2f5:	mov    0x0(%r13),%cl
- 2f9:	cmp    $0x3,%cl
- 2fc:	je     0xffffffffc02396b5
- 302:	mov    $0x2,%ebx
- 307:	cmp    $0x8,%cl
- 30a:	jne    0xffffffffc023aa4e
- 310:	lea    0x2a(%r14),%rax
- 314:	mov    $0x1,%ebx
- 319:	cmp    %r15,%rax
- 31c:	ja     0xffffffffc023aa4e
- 322:	movb   $0x0,0x22(%r14)
- 327:	addw   $0x8,0x24(%r14)
- 32d:	movb   $0x40,0x16(%r14)
- 332:	mov    0x1a(%r14),%eax
- 336:	mov    0x1e(%r14),%ecx
- 33a:	mov    %eax,0x1e(%r14)
- 33e:	mov    %ecx,0x1a(%r14)
- 342:	movzwl 0xe(%r14),%r9d
- 347:	movzwl 0x10(%r14),%esi
- 34c:	movzwl 0x12(%r14),%edi
- 351:	movzwl 0x14(%r14),%ebx
- 356:	movzwl 0x16(%r14),%r8d
- 35b:	movzwl %cx,%edx
- 35e:	shr    $0x10,%rcx
- 362:	add    %rdx,%rcx
- 365:	movzwl %ax,%edx
- 368:	add    %rcx,%rdx
- 36b:	shr    $0x10,%rax
- 36f:	add    %rdx,%rax
- 372:	add    %r9,%rax
- 375:	add    %rsi,%rax
- 378:	add    %rdi,%rax
- 37b:	add    %rbx,%rax
- 37e:	add    %r8,%rax
- 381:	mov    %rax,%rcx
- 384:	shr    $0x10,%rcx
- 388:	movzwl %ax,%edx
- 38b:	add    %rcx,%rdx
- 38e:	cmp    $0x10000,%rax
- 394:	cmovb  %rax,%rdx
- 398:	mov    %rdx,%rax
- 39b:	shr    $0x10,%rax
- 39f:	movzwl %dx,%ecx
- 3a2:	add    %rax,%rcx
- 3a5:	cmp    $0x10000,%rdx
- 3ac:	cmovb  %rdx,%rcx
- 3b0:	mov    %rcx,%rax
- 3b3:	shr    $0x10,%rax
- 3b7:	movzwl %cx,%edx
- 3ba:	add    %rax,%rdx
- 3bd:	cmp    $0x10000,%rcx
- 3c4:	cmovb  %rcx,%rdx
- 3c8:	mov    %edx,%eax
- 3ca:	shr    $0x10,%eax
- 3cd:	cmp    $0x10000,%rdx
- 3d4:	mov    $0x10000,%ecx
- 3d9:	cmovae %eax,%ecx
- 3dc:	add    %edx,%ecx
- 3de:	not    %ecx
- 3e0:	mov    %cx,0x18(%r14)
- 3e5:	movzwl 0xa(%r14),%eax
- 3ea:	mov    %ax,-0x6c(%rbp)
- 3ee:	mov    0x6(%r14),%eax
- 3f2:	mov    %eax,-0x70(%rbp)
- 3f5:	mov    (%r14),%eax
- 3f8:	mov    %eax,0x6(%r14)
- 3fc:	movzwl 0x4(%r14),%eax
- 401:	mov    %ax,0xa(%r14)
- 406:	mov    -0x70(%rbp),%eax
- 409:	mov    %eax,(%r14)
- 40c:	movzwl -0x6c(%rbp),%eax
- 410:	mov    %ax,0x4(%r14)
- 415:	mov    $0x3,%ebx
- 41a:	jmp    0xffffffffc023aa4e
- 41f:	mov    $0x2,%dl
- 421:	mov    $0x1,%cl
- 423:	mov    $0x2,%ebx
- 428:	cmp    $0x11,%al
- 42a:	je     0xffffffffc0239582
- 430:	cmp    $0x6,%al
- 432:	jne    0xffffffffc023aa4e
- 438:	lea    0x66(%r14),%rax
- 43c:	test   %cl,%cl
- 43e:	cmovne %r13,%rax
- 442:	lea    0x14(%rax),%rsi
- 446:	cmp    %r15,%rsi
- 449:	ja     0xffffffffc023aa49
- 44f:	testb  $0x2,0xd(%rax)
- 453:	je     0xffffffffc0239599
- 459:	mov    %dl,-0x34(%rbp)
- 45c:	jmp    0xffffffffc0239599
- 461:	mov    0x1a(%r14),%eax
- 465:	mov    %eax,-0x60(%rbp)
- 468:	mov    0x1e(%r14),%eax
- 46c:	mov    %eax,-0x50(%rbp)
- 46f:	cmp    $0x3a,%cl
- 472:	jne    0xffffffffc02394b9
- 474:	lea    0x2a(%r14),%rax
- 478:	cmp    %r15,%rax
- 47b:	ja     0xffffffffc023aa49
- 481:	mov    0x0(%r13),%al
- 485:	cmp    $0x2,%al
- 487:	je     0xffffffffc0239871
- 48d:	cmp    $0x1,%al
- 48f:	je     0xffffffffc02398ab
- 495:	mov    $0x2,%ebx
- 49a:	cmp    $0x80,%al
- 49c:	jne    0xffffffffc023aa4e
- 4a2:	lea    0x3e(%r14),%rax
- 4a6:	mov    $0x1,%ebx
- 4ab:	cmp    %r15,%rax
- 4ae:	ja     0xffffffffc023aa4e
- 4b4:	jmp    0xffffffffc0239244
- 4b9:	mov    $0x2,%sil
- 4bc:	mov    $0x1,%dl
- 4be:	mov    $0x2,%ebx
- 4c3:	cmp    $0x11,%cl
- 4c6:	je     0xffffffffc02398f9
- 4cc:	cmp    $0x6,%cl
- 4cf:	jne    0xffffffffc023aa4e
- 4d5:	lea    0x3e(%r14),%rax
- 4d9:	test   %dl,%dl
- 4db:	cmovne %r13,%rax
- 4df:	lea    0x14(%rax),%rcx
- 4e3:	cmp    %r15,%rcx
- 4e6:	ja     0xffffffffc023aa49
- 4ec:	testb  $0x2,0xd(%rax)
- 4f0:	je     0xffffffffc0239910
- 4f6:	mov    %sil,-0x34(%rbp)
- 4fa:	jmp    0xffffffffc0239910
- 4ff:	movabs $0xffff88816ff34000,%rax
- 509:	mov    0x1160(%rax),%rax
- 510:	add    %gs:0xffffffff8d195028,%rax
- 519:	test   %rax,%rax
- 51c:	je     0xffffffffc023aa49
- 522:	addq   $0x1,(%rax)
- 526:	mov    0x3a(%r14),%ecx
- 52a:	bswap  %ecx
- 52c:	cmp    $0x4ff,%ecx
- 532:	ja     0xffffffffc0239539
- 534:	addq   $0x1,0x8(%rax)
- 539:	lea    0x66(%r14),%rax
- 53d:	cmp    %r15,%rax
- 540:	ja     0xffffffffc023aa49
- 546:	mov    0x44(%r14),%al
- 54a:	mov    %al,-0x3c(%rbp)
- 54d:	movb   $0x1,-0x34(%rbp)
- 551:	mov    0x56(%r14),%rcx
- 555:	mov    0x5e(%r14),%rdx
- 559:	mov    %rcx,-0x60(%rbp)
- 55d:	mov    %rdx,-0x58(%rbp)
- 561:	mov    0x46(%r14),%rcx
- 565:	mov    0x4e(%r14),%rdx
- 569:	mov    %rcx,-0x50(%rbp)
- 56d:	mov    %rdx,-0x48(%rbp)
- 571:	mov    $0x3,%dl
- 573:	xor    %ecx,%ecx
- 575:	mov    $0x2,%ebx
- 57a:	cmp    $0x11,%al
- 57c:	jne    0xffffffffc0239430
- 582:	lea    0x66(%r14),%rax
- 586:	test   %cl,%cl
- 588:	cmovne %r13,%rax
- 58c:	lea    0x8(%rax),%rdx
- 590:	cmp    %r15,%rdx
- 593:	ja     0xffffffffc023aa49
- 599:	test   %cl,%cl
- 59b:	mov    %edi,-0x88(%rbp)
- 5a1:	je     0xffffffffc02395b4
- 5a3:	movzwl (%rax),%edx
- 5a6:	lea    -0x40(%rbp),%rcx
- 5aa:	mov    %dx,-0x40(%rbp)
- 5ae:	add    $0x2,%rax
- 5b2:	jmp    0xffffffffc02395c0
- 5b4:	movzwl 0x2(%rax),%edx
- 5b8:	lea    -0x40(%rbp),%rcx
- 5bc:	mov    %dx,-0x40(%rbp)
- 5c0:	movzwl (%rax),%eax
- 5c3:	mov    %ax,0x2(%rcx)
- 5c7:	mov    -0x50(%rbp),%rax
- 5cb:	mov    -0x48(%rbp),%rcx
- 5cf:	mov    %rcx,-0x98(%rbp)
- 5d6:	mov    %rax,-0xa0(%rbp)
- 5dd:	movzwl -0x3e(%rbp),%eax
- 5e1:	mov    %ax,-0x90(%rbp)
- 5e8:	mov    -0x3c(%rbp),%al
- 5eb:	mov    %al,-0x8e(%rbp)
- 5f1:	movabs $0xffff88816f5b2800,%rdi
- 5fb:	lea    -0xa0(%rbp),%rsi
- 602:	mov    $0xffffffff8749c930,%rax
- 609:	call   *%rax
- 60b:	test   %rax,%rax
- 60e:	je     0xffffffffc0239726
- 614:	mov    %r15,%rcx
- 617:	sub    %r14,%rcx
- 61a:	cmp    $0x5ea,%rcx
- 621:	jg     0xffffffffc023aa49
- 627:	movabs $0xffff88816ff34000,%rbx
- 631:	mov    0x1100(%rbx),%rcx
- 638:	add    %gs:0xffffffff8d195028,%rcx
- 641:	test   %rcx,%rcx
- 644:	je     0xffffffffc023aa49
- 64a:	mov    %rcx,-0xb0(%rbp)
- 651:	addq   $0x1,(%rcx)
- 655:	testb  $0x1,(%rax)
- 658:	je     0xffffffffc0239660
- 65a:	movw   $0x0,-0x40(%rbp)
- 660:	mov    %rax,-0x30(%rbp)
- 664:	mov    0x4(%rax),%eax
- 667:	mov    %rax,-0x78(%rbp)
- 66b:	mov    $0xffffffff8749d590,%rax
- 672:	call   *%rax
- 674:	test   $0xffffff80,%eax
- 679:	mov    -0x88(%rbp),%edx
- 67f:	je     0xffffffffc02397d7
- 685:	mov    0x1118(%rbx),%rax
- 68c:	add    %gs:0xffffffff8d195028,%rax
- 695:	test   %rax,%rax
- 698:	je     0xffffffffc023aa49
- 69e:	addq   $0x1,(%rax)
- 6a2:	movabs $0xffff88816f5b3000,%rax
- 6ac:	mov    %rax,-0x80(%rbp)
- 6b0:	jmp    0xffffffffc02397f8
- 6b5:	cmpb   $0x4,0x37(%r14)
- 6ba:	jne    0xffffffffc02396ef
- 6bc:	movabs $0xffff88816ff34000,%rcx
- 6c6:	mov    0x1168(%rcx),%rcx
- 6cd:	add    %gs:0xffffffff8d195028,%rcx
- 6d6:	test   %rcx,%rcx
- 6d9:	je     0xffffffffc023aa49
- 6df:	addq   $0x1,(%rcx)
- 6e3:	cmpb   $0x4,0x3c(%r14)
- 6e8:	ja     0xffffffffc02396ef
- 6ea:	addq   $0x1,0x8(%rcx)
- 6ef:	lea    0x52(%r14),%rcx
- 6f3:	cmp    %r15,%rcx
- 6f6:	ja     0xffffffffc023aa49
- 6fc:	mov    (%rax),%al
- 6fe:	and    $0xf,%al
- 700:	cmp    $0x5,%al
- 702:	jne    0xffffffffc023aa49
- 708:	mov    0x47(%r14),%al
- 70c:	mov    %al,-0x3c(%rbp)
- 70f:	movb   $0x1,-0x34(%rbp)
- 713:	mov    0x4e(%r14),%ecx
- 717:	mov    %ecx,-0x60(%rbp)
- 71a:	mov    0x4a(%r14),%ecx
- 71e:	mov    %ecx,-0x50(%rbp)
- 721:	jmp    0xffffffffc0239571
- 726:	movw   $0x0,-0x90(%rbp)
- 72f:	movabs $0xffff88816f5b2800,%rdi
- 739:	lea    -0xa0(%rbp),%rsi
- 740:	mov    $0xffffffff8749c930,%rax
- 747:	call   *%rax
- 749:	test   %rax,%rax
- 74c:	je     0xffffffffc023aa4e
- 752:	testb  $0x88,(%rax)
- 755:	jne    0xffffffffc0239614
- 75b:	movw   $0x0,-0x3e(%rbp)
- 761:	jmp    0xffffffffc0239614
- 766:	cmpb   $0x4,0x23(%r14)
- 76b:	jne    0xffffffffc02397a0
- 76d:	movabs $0xffff88816ff34000,%rax
- 777:	mov    0x1168(%rax),%rax
- 77e:	add    %gs:0xffffffff8d195028,%rax
- 787:	test   %rax,%rax
- 78a:	je     0xffffffffc023aa49
- 790:	addq   $0x1,(%rax)
- 794:	cmpb   $0x4,0x28(%r14)
- 799:	ja     0xffffffffc02397a0
- 79b:	addq   $0x1,0x8(%rax)
- 7a0:	lea    0x3e(%r14),%rax
- 7a4:	cmp    %r15,%rax
- 7a7:	ja     0xffffffffc023aa49
- 7ad:	mov    (%rcx),%al
- 7af:	and    $0xf,%al
- 7b1:	cmp    $0x5,%al
- 7b3:	jne    0xffffffffc023aa49
- 7b9:	mov    0x33(%r14),%cl
- 7bd:	mov    %cl,-0x3c(%rbp)
- 7c0:	movb   $0x1,-0x34(%rbp)
- 7c4:	mov    0x3a(%r14),%eax
- 7c8:	mov    %eax,-0x60(%rbp)
- 7cb:	mov    0x36(%r14),%eax
- 7cf:	mov    %eax,-0x50(%rbp)
- 7d2:	jmp    0xffffffffc02398e6
- 7d7:	mov    %eax,%eax
- 7d9:	movabs $0xffff888177aca000,%rcx
- 7e3:	mov    0x100(%rcx,%rax,8),%rax
- 7eb:	mov    %rax,-0x80(%rbp)
- 7ef:	test   %rax,%rax
- 7f2:	je     0xffffffffc0239685
- 7f8:	mov    -0x30(%rbp),%rdi
- 7fc:	testb  $0x4,(%rdi)
- 7ff:	je     0xffffffffc023a459
- 805:	testb  $0x1,-0x34(%rbp)
- 809:	jne    0xffffffffc0239a5a
- 80f:	movabs $0xffff8881977f3400,%rax
- 819:	mov    0x100(%rax),%rbx
- 820:	add    %gs:0xffffffff8d195028,%rbx
- 829:	test   %rbx,%rbx
- 82c:	je     0xffffffffc023aa49
- 832:	add    $0x66,%r14
- 836:	testb  $0x1,-0x34(%rbp)
- 83a:	cmove  %r13,%r14
- 83e:	lea    0x9(%r14),%rax
- 842:	cmp    %r15,%rax
- 845:	ja     0xffffffffc023a455
- 84b:	mov    %edx,%r13d
- 84e:	add    $0x8,%r14
- 852:	movzbl (%r14),%ecx
- 856:	test   $0x80,%cl
- 859:	jne    0xffffffffc0239bad
- 85f:	add    $0x9,%r14
- 863:	cmp    %r15,%r14
- 866:	jbe    0xffffffffc0239cd6
- 86c:	jmp    0xffffffffc023a44e
- 871:	movabs $0xffff88816ff34000,%rax
- 87b:	mov    0x1160(%rax),%rax
- 882:	add    %gs:0xffffffff8d195028,%rax
- 88b:	test   %rax,%rax
- 88e:	je     0xffffffffc023aa49
- 894:	addq   $0x1,(%rax)
- 898:	mov    0x26(%r14),%ecx
- 89c:	bswap  %ecx
- 89e:	cmp    $0x4ff,%ecx
- 8a4:	ja     0xffffffffc02398ab
- 8a6:	addq   $0x1,0x8(%rax)
- 8ab:	lea    0x52(%r14),%rax
- 8af:	cmp    %r15,%rax
- 8b2:	ja     0xffffffffc023aa49
- 8b8:	lea    -0x50(%rbp),%rax
- 8bc:	mov    0x30(%r14),%cl
- 8c0:	mov    %cl,-0x3c(%rbp)
- 8c3:	movb   $0x1,-0x34(%rbp)
- 8c7:	mov    0x42(%r14),%rdx
- 8cb:	mov    0x4a(%r14),%rsi
- 8cf:	mov    %rsi,-0x58(%rbp)
- 8d3:	mov    %rdx,-0x60(%rbp)
- 8d7:	mov    0x32(%r14),%rdx
- 8db:	mov    0x3a(%r14),%rsi
- 8df:	mov    %rdx,(%rax)
- 8e2:	mov    %rsi,0x8(%rax)
- 8e6:	mov    $0x3,%sil
- 8e9:	xor    %edx,%edx
- 8eb:	mov    $0x2,%ebx
- 8f0:	cmp    $0x11,%cl
- 8f3:	jne    0xffffffffc02394cc
- 8f9:	lea    0x3e(%r14),%rax
- 8fd:	test   %dl,%dl
- 8ff:	cmovne %r13,%rax
- 903:	lea    0x8(%rax),%rcx
- 907:	cmp    %r15,%rcx
- 90a:	ja     0xffffffffc023aa49
- 910:	test   %dl,%dl
- 912:	mov    %di,-0x88(%rbp)
- 919:	je     0xffffffffc023992c
- 91b:	movzwl (%rax),%edx
- 91e:	lea    -0x40(%rbp),%rcx
- 922:	mov    %dx,-0x40(%rbp)
- 926:	add    $0x2,%rax
- 92a:	jmp    0xffffffffc0239938
- 92c:	movzwl 0x2(%rax),%edx
- 930:	lea    -0x40(%rbp),%rcx
- 934:	mov    %dx,-0x40(%rbp)
- 938:	movzwl (%rax),%eax
- 93b:	mov    %ax,0x2(%rcx)
- 93f:	mov    -0x50(%rbp),%eax
- 942:	mov    %eax,-0xa0(%rbp)
- 948:	movzwl -0x3e(%rbp),%eax
- 94c:	mov    %ax,-0x90(%rbp)
- 953:	mov    -0x3c(%rbp),%al
- 956:	mov    %al,-0x8e(%rbp)
- 95c:	movabs $0xffff88816f5b2800,%rdi
- 966:	lea    -0xa0(%rbp),%rsi
- 96d:	mov    $0xffffffff8749c930,%rax
- 974:	call   *%rax
- 976:	test   %rax,%rax
- 979:	je     0xffffffffc0239a1a
- 97f:	mov    %r15,%rcx
- 982:	sub    %r14,%rcx
- 985:	cmp    $0x5ea,%rcx
- 98c:	jg     0xffffffffc023aa49
- 992:	movabs $0xffff88816ff34000,%rbx
- 99c:	mov    0x1100(%rbx),%rcx
- 9a3:	add    %gs:0xffffffff8d195028,%rcx
- 9ac:	test   %rcx,%rcx
- 9af:	je     0xffffffffc023aa49
- 9b5:	mov    %rcx,-0xb0(%rbp)
- 9bc:	addq   $0x1,(%rcx)
- 9c0:	testb  $0x1,(%rax)
- 9c3:	je     0xffffffffc02399cb
- 9c5:	movw   $0x0,-0x40(%rbp)
- 9cb:	mov    %rax,-0x30(%rbp)
- 9cf:	mov    0x4(%rax),%eax
- 9d2:	mov    %rax,-0x78(%rbp)
- 9d6:	mov    $0xffffffff8749d590,%rax
- 9dd:	call   *%rax
- 9df:	test   $0xffffff80,%eax
- 9e4:	je     0xffffffffc0239a98
- 9ea:	mov    0x1118(%rbx),%rax
- 9f1:	add    %gs:0xffffffff8d195028,%rax
- 9fa:	test   %rax,%rax
- 9fd:	je     0xffffffffc023aa49
- a03:	addq   $0x1,(%rax)
- a07:	movabs $0xffff88816f5b3000,%rax
- a11:	mov    %rax,-0x80(%rbp)
- a15:	jmp    0xffffffffc0239ab9
- a1a:	movw   $0x0,-0x90(%rbp)
- a23:	movabs $0xffff88816f5b2800,%rdi
- a2d:	lea    -0xa0(%rbp),%rsi
- a34:	mov    $0xffffffff8749c930,%rax
- a3b:	call   *%rax
- a3d:	test   %rax,%rax
- a40:	je     0xffffffffc023aa4e
- a46:	testb  $0x88,(%rax)
- a49:	jne    0xffffffffc023997f
- a4f:	movw   $0x0,-0x3e(%rbp)
- a55:	jmp    0xffffffffc023997f
- a5a:	movabs $0xffff88816ff34000,%rax
- a64:	mov    0x1158(%rax),%rbx
- a6b:	add    %gs:0xffffffff8d195028,%rbx
- a74:	test   %rbx,%rbx
- a77:	je     0xffffffffc023aa49
- a7d:	addq   $0x1,(%rbx)
- a81:	mov    0x37(%r14),%al
- a85:	add    $0xfd,%al
- a87:	cmp    $0x1,%al
- a89:	ja     0xffffffffc023a459
- a8f:	add    $0x8,%rbx
- a93:	jmp    0xffffffffc023a455
- a98:	mov    %eax,%eax
- a9a:	movabs $0xffff888177aca000,%rcx
- aa4:	mov    0x100(%rcx,%rax,8),%rax
- aac:	mov    %rax,-0x80(%rbp)
- ab0:	test   %rax,%rax
- ab3:	je     0xffffffffc02399ea
- ab9:	mov    -0x30(%rbp),%rdx
- abd:	testb  $0x4,(%rdx)
- ac0:	je     0xffffffffc0239b47
- ac6:	testb  $0x1,-0x34(%rbp)
- aca:	jne    0xffffffffc0239b11
- acc:	movabs $0xffff8881977f3400,%rax
- ad6:	mov    0x100(%rax),%rax
- add:	add    %gs:0xffffffff8d195028,%rax
- ae6:	test   %rax,%rax
- ae9:	je     0xffffffffc023aa49
- aef:	mov    %rax,%rbx
- af2:	add    $0x3e,%r14
- af6:	testb  $0x1,-0x34(%rbp)
- afa:	cmove  %r13,%r14
- afe:	lea    0x9(%r14),%rax
- b02:	cmp    %r15,%rax
- b05:	jbe    0xffffffffc0239c09
- b0b:	mov    -0x30(%rbp),%rdx
- b0f:	jmp    0xffffffffc0239b43
- b11:	mov    0x1158(%rbx),%rax
- b18:	add    %gs:0xffffffff8d195028,%rax
- b21:	test   %rax,%rax
- b24:	je     0xffffffffc023aa49
- b2a:	mov    %rax,%rbx
- b2d:	addq   $0x1,(%rax)
- b31:	mov    0x23(%r14),%al
- b35:	and    $0xfd,%al
- b37:	cmp    $0x1,%al
- b39:	mov    -0x30(%rbp),%rdx
- b3d:	jne    0xffffffffc0239b47
- b3f:	add    $0x8,%rbx
- b43:	addq   $0x1,(%rbx)
- b47:	movzwl -0x40(%rbp),%r15d
- b4c:	testb  $0x2,-0x34(%rbp)
- b50:	jne    0xffffffffc0239ba5
- b52:	testb  $0x2,(%rdx)
- b55:	jne    0xffffffffc0239b9d
- b57:	lea    -0x60(%rbp),%rsi
- b5b:	mov    $0xffffffff8749c930,%rax
- b62:	mov    -0x80(%rbp),%rdi
- b66:	call   *%rax
- b68:	test   %rax,%rax
- b6b:	je     0xffffffffc0239b9d
- b6d:	mov    %rax,%r14
- b70:	cmpb   $0x11,-0x3c(%rbp)
- b74:	jne    0xffffffffc0239d22
- b7a:	mov    $0xffffffff8749d630,%rax
- b81:	call   *%rax
- b83:	mov    %rax,%rcx
- b86:	sub    0x8(%r14),%rcx
- b8a:	movabs $0x6fc23ac00,%rdx
- b94:	cmp    %rdx,%rcx
- b97:	jbe    0xffffffffc0239d1e
- b9d:	xor    %r14d,%r14d
- ba0:	jmp    0xffffffffc0239d4b
- ba5:	xor    %r14d,%r14d
- ba8:	jmp    0xffffffffc0239d4f
- bad:	lea    0xe(%r14),%rax
- bb1:	cmp    %r15,%rax
- bb4:	ja     0xffffffffc023a44e
- bba:	test   $0x20,%cl
- bbd:	jne    0xffffffffc0239cc4
- bc3:	addq   $0x1,0x8(%rbx)
- bc8:	cmpl   $0x1ff,-0x78(%rbp)
- bcf:	mov    %r13d,%edx
- bd2:	mov    -0x30(%rbp),%rdi
- bd6:	ja     0xffffffffc023a459
- bdc:	movabs $0xffff8881a5960000,%rax
- be6:	mov    -0x78(%rbp),%rcx
- bea:	mov    0x100(%rax,%rcx,8),%rbx
- bf2:	add    %gs:0xffffffff8d195028,%rbx
- bfb:	test   %rbx,%rbx
- bfe:	jne    0xffffffffc023a455
- c04:	jmp    0xffffffffc023a459
- c09:	add    $0x8,%r14
- c0d:	movzbl (%r14),%ecx
- c11:	test   $0x80,%cl
- c14:	jne    0xffffffffc0239c6b
- c16:	add    $0x9,%r14
- c1a:	cmp    %r15,%r14
- c1d:	ja     0xffffffffc0239b0b
- c23:	test   %rax,%rax
- c26:	je     0xffffffffc0239b0b
- c2c:	movzbl (%rax),%ecx
- c2f:	mov    %ecx,%edx
- c31:	shr    $0x6,%dl
- c34:	cmp    $0x3,%dl
- c37:	je     0xffffffffc023ac44
- c3d:	cmp    $0x2,%dl
- c40:	je     0xffffffffc023ac69
- c46:	cmp    $0x1,%dl
- c49:	jne    0xffffffffc0239b0b
- c4f:	and    $0x3f,%ecx
- c52:	shl    $0xa,%rcx
- c56:	movzbl 0x1(%rax),%edx
- c5a:	lea    (%rcx,%rdx,4),%rcx
- c5e:	mov    0x2(%rax),%al
- c61:	shr    $0x6,%al
- c64:	mov    $0x1,%dl
- c66:	jmp    0xffffffffc023ac81
- c6b:	lea    0xe(%r14),%rax
- c6f:	cmp    %r15,%rax
- c72:	ja     0xffffffffc0239b0b
- c78:	test   $0x20,%cl
- c7b:	jne    0xffffffffc023a38e
- c81:	addq   $0x1,0x8(%rbx)
- c86:	cmpl   $0x1ff,-0x78(%rbp)
- c8d:	mov    -0x30(%rbp),%rdx
- c91:	ja     0xffffffffc0239b47
- c97:	movabs $0xffff8881a5960000,%rax
- ca1:	mov    -0x78(%rbp),%rcx
- ca5:	mov    0x100(%rax,%rcx,8),%rbx
- cad:	add    %gs:0xffffffff8d195028,%rbx
- cb6:	test   %rbx,%rbx
- cb9:	jne    0xffffffffc0239b43
- cbf:	jmp    0xffffffffc0239b47
- cc4:	cmpb   $0x8,0x5(%r14)
- cc9:	jb     0xffffffffc023a44e
- ccf:	add    $0x6,%r14
- cd3:	mov    %r14,%rax
- cd6:	test   %rax,%rax
- cd9:	je     0xffffffffc023a44e
- cdf:	movzbl (%rax),%ecx
- ce2:	mov    %ecx,%edx
- ce4:	shr    $0x6,%dl
- ce7:	cmp    $0x3,%dl
- cea:	je     0xffffffffc023a256
- cf0:	cmp    $0x2,%dl
- cf3:	je     0xffffffffc023a27b
- cf9:	cmp    $0x1,%dl
- cfc:	jne    0xffffffffc023a44e
- d02:	and    $0x3f,%ecx
- d05:	shl    $0xa,%rcx
- d09:	movzbl 0x1(%rax),%edx
- d0d:	lea    (%rcx,%rdx,4),%rcx
- d11:	mov    0x2(%rax),%al
- d14:	shr    $0x6,%al
- d17:	mov    $0x1,%dl
- d19:	jmp    0xffffffffc023a293
- d1e:	mov    %rax,0x8(%r14)
- d22:	mov    (%r14),%eax
- d25:	xor    %r14d,%r14d
- d28:	cmp    $0x1000,%rax
- d2e:	mov    %eax,-0x38(%rbp)
- d31:	lea    (%rax,%rax,2),%rax
- d35:	movabs $0xffffc90008355000,%rcx
- d3f:	lea    0x100(%rcx,%rax,8),%rax
- d47:	cmovb  %rax,%r14
- d4b:	mov    -0x30(%rbp),%rdx
- d4f:	cmpb   $0x11,-0x3c(%rbp)
- d53:	jne    0xffffffffc0239e17
- d59:	testb  $0x2,0x1(%rdx)
- d5d:	je     0xffffffffc0239e17
- d63:	movabs $0xffff88816ff34000,%rax
- d6d:	mov    0x1110(%rax),%rbx
- d74:	add    %gs:0xffffffff8d195028,%rbx
- d7d:	test   %rbx,%rbx
- d80:	je     0xffffffffc0239e17
- d86:	mov    $0xffffffff8749d630,%rax
- d8d:	call   *%rax
- d8f:	mov    %rax,%rcx
- d92:	sub    0x8(%rbx),%rcx
- d96:	cmp    $0x3b9aca01,%rcx
- d9d:	jb     0xffffffffc0239dac
- d9f:	movq   $0x1,(%rbx)
- da6:	mov    %rax,0x8(%rbx)
- daa:	jmp    0xffffffffc0239dbe
- dac:	mov    (%rbx),%rax
- daf:	add    $0x1,%rax
- db3:	mov    %rax,(%rbx)
- db6:	cmp    $0x1e848,%rax
- dbc:	ja     0xffffffffc0239e17
- dbe:	movabs $0xffff88816f5b4800,%rdi
- dc8:	lea    -0xa0(%rbp),%rsi
- dcf:	mov    $0xffffffff8749c930,%rbx
- dd6:	call   *%rbx
- dd8:	test   %rax,%rax
- ddb:	je     0xffffffffc0239e17
- ddd:	lea    -0x38(%rbp),%rsi
- de1:	mov    %rax,%rdi
- de4:	call   *%rbx
- de6:	test   %rax,%rax
- de9:	je     0xffffffffc0239e17
- deb:	movabs $0xffff88816ff34000,%rax
- df5:	mov    0x1178(%rax),%rax
- dfc:	add    %gs:0xffffffff8d195028,%rax
- e05:	test   %rax,%rax
- e08:	je     0xffffffffc0239fa5
- e0e:	addq   $0x1,(%rax)
- e12:	jmp    0xffffffffc0239fa5
- e17:	test   %r14,%r14
- e1a:	je     0xffffffffc0239fa5
- e20:	mov    -0x78(%rbp),%rcx
- e24:	cmp    $0x3ff,%ecx
- e2a:	ja     0xffffffffc023aa49
- e30:	movabs $0xffff88816ff34000,%rax
- e3a:	mov    0x100(%rax,%rcx,8),%rcx
- e42:	add    %gs:0xffffffff8d195028,%rcx
- e4b:	test   %rcx,%rcx
- e4e:	je     0xffffffffc023aa49
- e54:	movzwl -0x88(%rbp),%eax
- e5b:	mov    %eax,%r13d
- e5e:	rol    $0x8,%r13w
- e63:	addq   $0x1,(%rcx)
- e67:	movzwl %r13w,%eax
- e6b:	add    %rax,0x8(%rcx)
- e6f:	mov    -0x38(%rbp),%ecx
- e72:	cmp    $0xfff,%rcx
- e79:	ja     0xffffffffc023aa49
- e7f:	movabs $0xffffc900083dd000,%rdx
- e89:	mov    0x100(%rdx,%rcx,8),%rcx
- e91:	add    %gs:0xffffffff8d195028,%rcx
- e9a:	test   %rcx,%rcx
- e9d:	je     0xffffffffc023aa49
- ea3:	addq   $0x1,(%rcx)
- ea7:	add    %rax,0x8(%rcx)
- eab:	mov    %r15w,-0x40(%rbp)
- eb0:	testb  $0x1,0x10(%r14)
- eb5:	jne    0xffffffffc023a194
- ebb:	movzwl -0x5e(%rbp),%eax
- ebf:	mov    %rax,-0x88(%rbp)
- ec6:	mov    $0xffffffff89635c20,%rax
- ecd:	mov    %r12,%rdi
- ed0:	mov    $0xffffffec,%esi
- ed5:	call   *%rax
- ed7:	test   %eax,%eax
- ed9:	jne    0xffffffffc023aa49
- edf:	mov    (%r12),%rax
- ee3:	mov    0x8(%r12),%rcx
- ee8:	lea    0xe(%rax),%rdx
- eec:	cmp    %rcx,%rdx
- eef:	ja     0xffffffffc023aa49
- ef5:	lea    0x22(%rax),%rdx
- ef9:	mov    $0x1,%ebx
- efe:	cmp    %rcx,%rdx
- f01:	ja     0xffffffffc023aa4e
- f07:	rol    $0x8,%r15w
- f0c:	mov    -0x88(%rbp),%rdx
- f13:	xor    %r15d,%edx
- f16:	shl    $0x10,%edx
- f19:	lea    0x10ac(%rdx),%edi
- f1f:	movabs $0xffff8881977f2c00,%rcx
- f29:	movzwl 0x104(%rcx),%esi
- f30:	mov    %si,0x4(%rax)
- f34:	mov    0x100(%rcx),%ecx
- f3a:	mov    %ecx,(%rax)
- f3c:	mov    0x14(%rax),%ecx
- f3f:	mov    %ecx,0x6(%rax)
- f42:	movzwl 0x18(%rax),%ecx
- f46:	mov    %cx,0xa(%rax)
- f4a:	movw   $0x8,0xc(%rax)
- f50:	mov    -0x33(%rbp),%bl
- f53:	mov    (%r14),%ecx
- f56:	movb   $0x45,0xe(%rax)
- f5a:	mov    %bl,0xf(%rax)
- f5d:	add    $0x14,%r13d
- f61:	rol    $0x8,%r13w
- f66:	mov    %r13w,0x10(%rax)
- f6b:	movl   $0x0,0x12(%rax)
- f72:	mov    %ecx,0x1e(%rax)
- f75:	mov    %edi,0x1a(%rax)
- f78:	movw   $0x440,0x16(%rax)
- f7e:	movzwl 0xe(%rax),%ebx
- f82:	movzwl %r13w,%esi
- f86:	movzwl 0x16(%rax),%edi
- f8a:	shr    $0x10,%edx
- f8d:	add    %rsi,%rdx
- f90:	movzwl %cx,%esi
- f93:	add    %rdx,%rsi
- f96:	shr    $0x10,%rcx
- f9a:	add    %rsi,%rcx
- f9d:	add    %rbx,%rcx
- fa0:	jmp    0xffffffffc023a742
- fa5:	cmpb   $0x6,-0x3c(%rbp)
- fa9:	movabs $0xffff88816ff34000,%rax
- fb3:	jne    0xffffffffc0239fe8
- fb5:	mov    0x1108(%rax),%rax
- fbc:	add    %gs:0xffffffff8d195028,%rax
- fc5:	test   %rax,%rax
- fc8:	je     0xffffffffc023aa49
- fce:	mov    -0x34(%rbp),%ecx
- fd1:	shl    $0x2,%ecx
- fd4:	not    %ecx
- fd6:	and    $0x8,%ecx
- fd9:	addq   $0x1,(%rax,%rcx,1)
- fde:	movabs $0xffff88816ff34000,%rax
- fe8:	movq   $0x0,-0x68(%rbp)
- ff0:	movq   $0x0,-0x70(%rbp)
- ff8:	mov    0x1110(%rax),%rbx
- fff:	add    %gs:0xffffffff8d195028,%rbx
-1008:	mov    $0x1,%r14b
-100b:	test   %rbx,%rbx
-100e:	je     0xffffffffc023a036
-1010:	mov    $0xffffffff8749d630,%rax
-1017:	call   *%rax
-1019:	mov    %rax,%rcx
-101c:	sub    0x8(%rbx),%rcx
-1020:	cmp    $0x3b9aca01,%rcx
-1027:	jb     0xffffffffc023a03a
-1029:	movq   $0x1,(%rbx)
-1030:	mov    %rax,0x8(%rbx)
-1034:	jmp    0xffffffffc023a04d
-1036:	xor    %eax,%eax
-1038:	jmp    0xffffffffc023a050
-103a:	mov    (%rbx),%rcx
-103d:	add    $0x1,%rcx
-1041:	mov    %rcx,(%rbx)
-1044:	cmp    $0x1e848,%rcx
-104b:	ja     0xffffffffc023a050
-104d:	xor    %r14d,%r14d
-1050:	mov    -0x30(%rbp),%rcx
-1054:	testb  $0x8,(%rcx)
-1057:	jne    0xffffffffc023a063
-1059:	mov    $0xe0adc0f7,%edx
-105e:	add    -0x60(%rbp),%edx
-1061:	jmp    0xffffffffc023a080
-1063:	movzwl -0x3e(%rbp),%ecx
-1067:	mov    %cx,-0x40(%rbp)
-106b:	movq   $0x0,-0x60(%rbp)
-1073:	movq   $0x0,-0x58(%rbp)
-107b:	mov    $0xe0adc0f7,%edx
-1080:	mov    $0xe0adc0f7,%esi
-1085:	add    -0x40(%rbp),%esi
-1088:	mov    %esi,%ecx
-108a:	xor    $0xe0adc0f7,%ecx
-1090:	mov    %esi,%edi
-1092:	rol    $0xe,%edi
-1095:	sub    %edi,%ecx
-1097:	xor    %ecx,%edx
-1099:	mov    %ecx,%edi
-109b:	rol    $0xb,%edi
-109e:	sub    %edi,%edx
-10a0:	xor    %edx,%esi
-10a2:	mov    %edx,%edi
-10a4:	rol    $0x19,%edi
-10a7:	sub    %edi,%esi
-10a9:	xor    %esi,%ecx
-10ab:	mov    %esi,%edi
-10ad:	rol    $0x10,%edi
-10b0:	sub    %edi,%ecx
-10b2:	xor    %ecx,%edx
-10b4:	mov    %ecx,%edi
-10b6:	rol    $0x4,%edi
-10b9:	sub    %edi,%edx
-10bb:	xor    %edx,%esi
-10bd:	rol    $0xe,%edx
-10c0:	sub    %edx,%esi
-10c2:	xor    %esi,%ecx
-10c4:	rol    $0x18,%esi
-10c7:	sub    %esi,%ecx
-10c9:	mov    $0xffff0001,%edx
-10ce:	imul   %rcx,%rdx
-10d2:	shr    $0x30,%rdx
-10d6:	mov    %edx,%esi
-10d8:	shl    $0x10,%esi
-10db:	or     %edx,%esi
-10dd:	sub    %esi,%ecx
-10df:	mov    -0x30(%rbp),%rdx
-10e3:	mov    0x4(%rdx),%esi
-10e6:	mov    %esi,%edx
-10e8:	shl    $0x10,%edx
-10eb:	add    %esi,%edx
-10ed:	add    %ecx,%edx
-10ef:	cmp    $0x20001ff,%edx
-10f5:	ja     0xffffffffc023aa49
-10fb:	mov    %edx,%ecx
-10fd:	movabs $0xffffc9000862a000,%rdx
-1107:	mov    0x100(%rdx,%rcx,8),%r13d
-110f:	test   %r13,%r13
-1112:	je     0xffffffffc023a149
-1114:	mov    %r13d,-0x38(%rbp)
-1118:	cmp    $0x1000,%r13d
-111f:	jb     0xffffffffc023a171
-1121:	movabs $0xffff88816ff34000,%rax
-112b:	mov    0x1148(%rax),%rax
-1132:	add    %gs:0xffffffff8d195028,%rax
-113b:	test   %rax,%rax
-113e:	jne    0xffffffffc023aa45
-1144:	jmp    0xffffffffc023aa49
-1149:	movabs $0xffff88816ff34000,%rax
-1153:	mov    0x1148(%rax),%rax
-115a:	add    %gs:0xffffffff8d195028,%rax
-1163:	test   %rax,%rax
-1166:	jne    0xffffffffc023aa41
-116c:	jmp    0xffffffffc023aa49
-1171:	cmpq   $0x0,-0x80(%rbp)
-1176:	je     0xffffffffc023a18c
-1178:	mov    -0x30(%rbp),%rcx
-117c:	mov    (%rcx),%cl
-117e:	and    $0x2,%cl
-1181:	shr    %cl
-1183:	or     %cl,%r14b
-1186:	je     0xffffffffc023a2c6
-118c:	mov    %r13d,%eax
-118f:	jmp    0xffffffffc023a2ee
-1194:	mov    $0xffffffff89635c20,%rax
-119b:	mov    %r12,%rdi
-119e:	mov    $0xffffffd8,%esi
-11a3:	call   *%rax
-11a5:	test   %eax,%eax
-11a7:	jne    0xffffffffc023aa49
-11ad:	mov    (%r12),%rax
-11b1:	mov    0x8(%r12),%rcx
-11b6:	lea    0xe(%rax),%rdx
-11ba:	cmp    %rcx,%rdx
-11bd:	ja     0xffffffffc023aa49
-11c3:	lea    0x36(%rax),%rdx
-11c7:	mov    $0x1,%ebx
-11cc:	cmp    %rcx,%rdx
-11cf:	movzwl -0x88(%rbp),%esi
-11d6:	ja     0xffffffffc023aa4e
-11dc:	movabs $0xffff8881977f2c00,%rcx
-11e6:	movzwl 0x104(%rcx),%edx
-11ed:	mov    %dx,0x4(%rax)
-11f1:	mov    0x100(%rcx),%ecx
-11f7:	mov    %ecx,(%rax)
-11f9:	mov    0x28(%rax),%ecx
-11fc:	mov    %ecx,0x6(%rax)
-11ff:	movzwl 0x2c(%rax),%ecx
-1203:	mov    %cx,0xa(%rax)
-1207:	movw   $0xdd86,0xc(%rax)
-120d:	movzwl -0x40(%rbp),%ecx
-1211:	xor    -0x60(%rbp),%ecx
-1214:	mov    -0x33(%rbp),%bl
-1217:	movw   $0x0,0x10(%rax)
-121d:	mov    %ebx,%edx
-121f:	shr    $0x4,%dl
-1222:	or     $0x60,%dl
-1225:	mov    %dl,0xe(%rax)
-1228:	shl    $0x4,%bl
-122b:	mov    %bl,0xf(%rax)
-122e:	movw   $0x4004,0x14(%rax)
-1234:	mov    %si,0x12(%rax)
-1238:	movq   $0x1,0x16(%rax)
-1240:	movl   $0x0,0x1e(%rax)
-1247:	mov    %ecx,0x22(%rax)
-124a:	mov    (%r14),%rcx
-124d:	mov    0x8(%r14),%rdx
-1251:	jmp    0xffffffffc023ab3c
-1256:	movzbl 0x1(%rax),%ecx
-125a:	shl    $0x18,%rcx
-125e:	movzbl 0x2(%rax),%edx
-1262:	shl    $0x10,%rdx
-1266:	or     %rcx,%rdx
-1269:	movzbl 0x3(%rax),%ecx
-126d:	shl    $0x8,%rcx
-1271:	or     %rdx,%rcx
-1274:	mov    0x4(%rax),%al
-1277:	mov    $0x3,%dl
-1279:	jmp    0xffffffffc023a293
-127b:	movzbl 0x1(%rax),%edx
-127f:	shl    $0x10,%rdx
-1283:	movzbl 0x2(%rax),%ecx
-1287:	shl    $0x8,%rcx
-128b:	or     %rdx,%rcx
-128e:	mov    0x3(%rax),%al
-1291:	mov    $0x2,%dl
-1293:	movzbl %al,%eax
-1296:	or     %rcx,%rax
-1299:	test   %eax,%eax
-129b:	jle    0xffffffffc023a44e
-12a1:	cmp    $0x1,%dl
-12a4:	je     0xffffffffc023a3ae
-12aa:	cmp    $0x3,%dl
-12ad:	je     0xffffffffc023a3b5
-12b3:	cmp    $0x2,%dl
-12b6:	jne    0xffffffffc023a3bc
-12bc:	mov    $0x40,%ecx
-12c1:	jmp    0xffffffffc023a3c1
-12c6:	cmpb   $0x11,-0x3c(%rbp)
-12ca:	jne    0xffffffffc023a2d0
-12cc:	mov    %rax,-0x68(%rbp)
-12d0:	mov    %r13d,-0x70(%rbp)
-12d4:	lea    -0x60(%rbp),%rsi
-12d8:	lea    -0x70(%rbp),%rdx
-12dc:	mov    $0xffffffff8749c9c0,%rax
-12e3:	mov    -0x80(%rbp),%rdi
-12e7:	xor    %ecx,%ecx
-12e9:	call   *%rax
-12eb:	mov    -0x38(%rbp),%eax
-12ee:	movabs $0xffff8881977f3000,%rdi
-12f8:	mov    0x100(%rdi),%ebx
-12fe:	movzwl 0x110(%rdi),%edx
-1305:	movzwl -0x90(%rbp),%esi
-130c:	mov    -0x8e(%rbp),%cl
-1312:	mov    %cl,0x112(%rdi)
-1318:	cmp    -0xa0(%rbp),%ebx
-131e:	jne    0xffffffffc023a35d
-1320:	cmp    %si,%dx
-1323:	jne    0xffffffffc023a35d
-1325:	test   %cl,%cl
-1327:	je     0xffffffffc023a35d
-1329:	cmp    $0xfff,%eax
-132e:	ja     0xffffffffc023aa49
-1334:	mov    %eax,%eax
-1336:	movabs $0xffffc900083e7000,%rcx
-1340:	mov    0x100(%rcx,%rax,8),%rax
-1348:	add    %gs:0xffffffff8d195028,%rax
-1351:	test   %rax,%rax
-1354:	je     0xffffffffc023aa49
-135a:	addl   $0x1,(%rax)
-135d:	lea    0x0(,%r13,2),%rax
-1365:	add    %r13,%rax
-1368:	movabs $0xffffc90008355000,%rcx
-1372:	lea    (%rcx,%rax,8),%r14
-1376:	add    $0x100,%r14
-137d:	mov    -0xb0(%rbp),%rax
-1384:	addq   $0x1,0x8(%rax)
-1389:	jmp    0xffffffffc0239e20
-138e:	cmpb   $0x8,0x5(%r14)
-1393:	jb     0xffffffffc0239b0b
-1399:	add    $0x6,%r14
-139d:	mov    %r14,%rax
-13a0:	test   %rax,%rax
-13a3:	jne    0xffffffffc0239c2c
-13a9:	jmp    0xffffffffc0239b0b
-13ae:	mov    $0x38,%ecx
-13b3:	jmp    0xffffffffc023a3c1
-13b5:	mov    $0x48,%ecx
-13ba:	jmp    0xffffffffc023a3c1
-13bc:	mov    $0x30,%ecx
-13c1:	addq   $0x1,(%rbx,%rcx,1)
-13c6:	cmp    $0xfffffd,%eax
-13cb:	ja     0xffffffffc023a443
-13cd:	movabs $0xffffc900219f1000,%rcx
-13d7:	mov    0x100(%rcx,%rax,8),%ecx
-13de:	test   %rcx,%rcx
-13e1:	je     0xffffffffc023a443
-13e3:	mov    %ecx,-0x38(%rbp)
-13e6:	xor    %r15d,%r15d
-13e9:	cmp    $0x1000,%ecx
-13ef:	lea    (%rcx,%rcx,2),%rax
-13f3:	movabs $0xffffc90008355000,%rcx
-13fd:	lea    0x100(%rcx,%rax,8),%rax
-1405:	cmovb  %rax,%r15
-1409:	test   %r15,%r15
-140c:	je     0xffffffffc023ad9a
-1412:	lea    -0x60(%rbp),%rsi
-1416:	mov    $0xffffffff8749c930,%rax
-141d:	mov    -0x80(%rbp),%rdi
-1421:	call   *%rax
-1423:	test   %rax,%rax
-1426:	je     0xffffffffc023aca5
-142c:	mov    -0x38(%rbp),%ecx
-142f:	cmp    %ecx,(%rax)
-1431:	jne    0xffffffffc023ada4
-1437:	mov    %rbx,%rax
-143a:	add    $0x50,%rax
-143e:	jmp    0xffffffffc023ae24
-1443:	addq   $0x1,0x10(%rbx)
-1448:	cltq
-144a:	mov    %rax,0x18(%rbx)
-144e:	mov    %r13d,%edx
-1451:	mov    -0x30(%rbp),%rdi
-1455:	addq   $0x1,(%rbx)
-1459:	movzwl -0x40(%rbp),%r14d
-145e:	testb  $0x2,-0x34(%rbp)
-1462:	jne    0xffffffffc023a4af
-1464:	testb  $0x2,(%rdi)
-1467:	jne    0xffffffffc023a4af
-1469:	mov    %edx,%r13d
-146c:	lea    -0x60(%rbp),%rsi
-1470:	mov    $0xffffffff8749c930,%rax
-1477:	mov    -0x80(%rbp),%rdi
-147b:	call   *%rax
-147d:	test   %rax,%rax
-1480:	je     0xffffffffc023a4aa
-1482:	mov    %rax,%rbx
-1485:	cmpb   $0x11,-0x3c(%rbp)
-1489:	jne    0xffffffffc023a4b8
-148b:	mov    $0xffffffff8749d630,%rax
-1492:	call   *%rax
-1494:	mov    %rax,%rcx
-1497:	sub    0x8(%rbx),%rcx
-149b:	movabs $0x6fc23ac00,%rdx
-14a5:	cmp    %rdx,%rcx
-14a8:	jbe    0xffffffffc023a4b4
-14aa:	xor    %r15d,%r15d
-14ad:	jmp    0xffffffffc023a4e0
-14af:	xor    %r15d,%r15d
-14b2:	jmp    0xffffffffc023a4e7
-14b4:	mov    %rax,0x8(%rbx)
-14b8:	mov    (%rbx),%eax
-14ba:	xor    %r15d,%r15d
-14bd:	cmp    $0x1000,%rax
-14c3:	mov    %eax,-0x38(%rbp)
-14c6:	lea    (%rax,%rax,2),%rax
-14ca:	movabs $0xffffc90008355000,%rcx
-14d4:	lea    0x100(%rcx,%rax,8),%rax
-14dc:	cmovb  %rax,%r15
-14e0:	mov    %r13d,%edx
-14e3:	mov    -0x30(%rbp),%rdi
-14e7:	cmpb   $0x11,-0x3c(%rbp)
-14eb:	jne    0xffffffffc023a5c7
-14f1:	testb  $0x2,0x1(%rdi)
-14f5:	je     0xffffffffc023a5c7
-14fb:	movabs $0xffff88816ff34000,%rax
-1505:	mov    0x1110(%rax),%rbx
-150c:	add    %gs:0xffffffff8d195028,%rbx
-1515:	test   %rbx,%rbx
-1518:	je     0xffffffffc023a5c7
-151e:	mov    %edx,%r13d
-1521:	mov    $0xffffffff8749d630,%rax
-1528:	call   *%rax
-152a:	mov    %rax,%rcx
-152d:	sub    0x8(%rbx),%rcx
-1531:	cmp    $0x3b9aca01,%rcx
-1538:	jb     0xffffffffc023a547
-153a:	movq   $0x1,(%rbx)
-1541:	mov    %rax,0x8(%rbx)
-1545:	jmp    0xffffffffc023a560
-1547:	mov    (%rbx),%rax
-154a:	add    $0x1,%rax
-154e:	mov    %rax,(%rbx)
-1551:	cmp    $0x1e848,%rax
-1557:	mov    %r13d,%edx
-155a:	mov    -0x30(%rbp),%rdi
-155e:	ja     0xffffffffc023a5c7
-1560:	movabs $0xffff88816f5b4800,%rdi
-156a:	lea    -0xa0(%rbp),%rsi
-1571:	mov    $0xffffffff8749c930,%rbx
-1578:	call   *%rbx
-157a:	mov    -0x30(%rbp),%rdi
-157e:	mov    %r13d,%edx
-1581:	test   %rax,%rax
-1584:	je     0xffffffffc023a5c7
-1586:	lea    -0x38(%rbp),%rsi
-158a:	mov    %rax,%rdi
-158d:	call   *%rbx
-158f:	mov    -0x30(%rbp),%rdi
-1593:	mov    %r13d,%edx
-1596:	test   %rax,%rax
-1599:	je     0xffffffffc023a5c7
-159b:	movabs $0xffff88816ff34000,%rax
-15a5:	mov    0x1178(%rax),%rax
-15ac:	add    %gs:0xffffffff8d195028,%rax
-15b5:	test   %rax,%rax
-15b8:	je     0xffffffffc023a7b5
-15be:	addq   $0x1,(%rax)
-15c2:	jmp    0xffffffffc023a7b5
-15c7:	test   %r15,%r15
-15ca:	je     0xffffffffc023a7b5
-15d0:	movabs $0xffff88816ff34000,%rax
-15da:	mov    -0x78(%rbp),%rcx
-15de:	cmp    $0x3ff,%ecx
-15e4:	ja     0xffffffffc023aa49
-15ea:	mov    0x100(%rax,%rcx,8),%rcx
-15f2:	add    %gs:0xffffffff8d195028,%rcx
-15fb:	test   %rcx,%rcx
-15fe:	je     0xffffffffc023aa49
-1604:	rol    $0x8,%dx
-1608:	addq   $0x1,(%rcx)
-160c:	movzwl %dx,%eax
-160f:	add    %rax,0x8(%rcx)
-1613:	mov    -0x38(%rbp),%ecx
-1616:	cmp    $0xfff,%rcx
-161d:	ja     0xffffffffc023aa49
-1623:	mov    %edx,-0x88(%rbp)
-1629:	movabs $0xffffc900083dd000,%rdx
-1633:	mov    0x100(%rdx,%rcx,8),%rcx
-163b:	add    %gs:0xffffffff8d195028,%rcx
-1644:	test   %rcx,%rcx
-1647:	je     0xffffffffc023aa49
-164d:	addq   $0x1,(%rcx)
-1651:	add    %rax,0x8(%rcx)
-1655:	mov    %r14w,-0x40(%rbp)
-165a:	testb  $0x1,0x10(%r15)
-165f:	jne    0xffffffffc023aa85
-1665:	movzwl -0x5e(%rbp),%r13d
-166a:	mov    $0xffffffff89635c20,%rax
-1671:	mov    %r12,%rdi
-1674:	mov    $0xffffffec,%esi
-1679:	call   *%rax
-167b:	test   %eax,%eax
-167d:	jne    0xffffffffc023aa49
-1683:	mov    (%r12),%rax
-1687:	mov    0x8(%r12),%rcx
-168c:	lea    0xe(%rax),%rdx
-1690:	cmp    %rcx,%rdx
-1693:	ja     0xffffffffc023aa49
-1699:	lea    0x22(%rax),%rdx
-169d:	mov    $0x1,%ebx
-16a2:	cmp    %rcx,%rdx
-16a5:	ja     0xffffffffc023aa4e
-16ab:	rol    $0x8,%r14w
-16b0:	xor    %r14d,%r13d
-16b3:	shl    $0x10,%r13d
-16b7:	lea    0x10ac(%r13),%edx
-16be:	movabs $0xffff8881977f2c00,%rcx
-16c8:	movzwl 0x104(%rcx),%esi
-16cf:	mov    %si,0x4(%rax)
-16d3:	mov    0x100(%rcx),%ecx
-16d9:	mov    %ecx,(%rax)
-16db:	mov    0x14(%rax),%ecx
-16de:	mov    %ecx,0x6(%rax)
-16e1:	movzwl 0x18(%rax),%ecx
-16e5:	mov    %cx,0xa(%rax)
-16e9:	movw   $0x8,0xc(%rax)
-16ef:	mov    -0x33(%rbp),%bl
-16f2:	mov    (%r15),%ecx
-16f5:	movb   $0x45,0xe(%rax)
-16f9:	mov    %bl,0xf(%rax)
-16fc:	mov    -0x88(%rbp),%esi
-1702:	add    $0x14,%esi
-1705:	rol    $0x8,%si
-1709:	mov    %si,0x10(%rax)
-170d:	movl   $0x0,0x12(%rax)
-1714:	mov    %ecx,0x1e(%rax)
-1717:	mov    %edx,0x1a(%rax)
-171a:	movw   $0x440,0x16(%rax)
-1720:	movzwl 0xe(%rax),%edx
-1724:	movzwl %si,%esi
-1727:	movzwl 0x16(%rax),%edi
-172b:	shr    $0x10,%r13d
-172f:	add    %rsi,%r13
-1732:	movzwl %cx,%esi
-1735:	add    %r13,%rsi
-1738:	shr    $0x10,%rcx
-173c:	add    %rsi,%rcx
-173f:	add    %rdx,%rcx
-1742:	add    %rdi,%rcx
-1745:	add    $0x10ac,%rcx
-174c:	mov    %rcx,%rdx
-174f:	shr    $0x10,%rdx
-1753:	movzwl %cx,%esi
-1756:	add    %rdx,%rsi
-1759:	cmp    $0x10000,%rcx
-1760:	cmovb  %rcx,%rsi
-1764:	mov    %rsi,%rcx
-1767:	shr    $0x10,%rcx
-176b:	movzwl %si,%edx
-176e:	add    %rcx,%rdx
-1771:	cmp    $0x10000,%rsi
-1778:	cmovb  %rsi,%rdx
-177c:	mov    %rdx,%rcx
-177f:	shr    $0x10,%rcx
-1783:	movzwl %dx,%esi
-1786:	add    %rcx,%rsi
-1789:	cmp    $0x10000,%rdx
-1790:	cmovb  %rdx,%rsi
-1794:	mov    %esi,%ecx
-1796:	shr    $0x10,%ecx
-1799:	cmp    $0x10000,%rsi
-17a0:	mov    $0x10000,%edx
-17a5:	cmovae %ecx,%edx
-17a8:	add    %esi,%edx
-17aa:	not    %edx
-17ac:	mov    %dx,0x18(%rax)
-17b0:	jmp    0xffffffffc0239415
-17b5:	cmpb   $0x6,-0x3c(%rbp)
-17b9:	movabs $0xffff88816ff34000,%rsi
-17c3:	jne    0xffffffffc023a7ee
-17c5:	mov    0x1108(%rsi),%rax
-17cc:	add    %gs:0xffffffff8d195028,%rax
-17d5:	test   %rax,%rax
-17d8:	je     0xffffffffc023aa49
-17de:	mov    -0x34(%rbp),%ecx
-17e1:	shl    $0x2,%ecx
-17e4:	not    %ecx
-17e6:	and    $0x8,%ecx
-17e9:	addq   $0x1,(%rax,%rcx,1)
-17ee:	mov    %edx,-0x88(%rbp)
-17f4:	movq   $0x0,-0x68(%rbp)
-17fc:	movq   $0x0,-0x70(%rbp)
-1804:	mov    0x1110(%rsi),%rbx
-180b:	add    %gs:0xffffffff8d195028,%rbx
-1814:	mov    $0x1,%r15b
-1817:	test   %rbx,%rbx
-181a:	je     0xffffffffc023a846
-181c:	mov    $0xffffffff8749d630,%rax
-1823:	call   *%rax
-1825:	mov    %rax,%rcx
-1828:	sub    0x8(%rbx),%rcx
-182c:	cmp    $0x3b9aca01,%rcx
-1833:	jb     0xffffffffc023a84a
-1835:	movq   $0x1,(%rbx)
-183c:	mov    %rax,0x8(%rbx)
-1840:	mov    -0x30(%rbp),%rdi
-1844:	jmp    0xffffffffc023a861
-1846:	xor    %eax,%eax
-1848:	jmp    0xffffffffc023a864
-184a:	mov    (%rbx),%rcx
-184d:	add    $0x1,%rcx
-1851:	mov    %rcx,(%rbx)
-1854:	cmp    $0x1e848,%rcx
-185b:	mov    -0x30(%rbp),%rdi
-185f:	ja     0xffffffffc023a864
-1861:	xor    %r15d,%r15d
-1864:	testb  $0x8,(%rdi)
-1867:	jne    0xffffffffc023a884
-1869:	mov    -0x60(%rbp),%edi
-186c:	mov    -0x5c(%rbp),%ecx
-186f:	mov    -0x58(%rbp),%edx
-1872:	mov    -0x51(%rbp),%r11b
-1876:	mov    -0x52(%rbp),%r10b
-187a:	mov    -0x53(%rbp),%r9b
-187e:	mov    -0x54(%rbp),%r8b
-1882:	jmp    0xffffffffc023a8ae
-1884:	movzwl -0x3e(%rbp),%ecx
-1888:	mov    %cx,-0x40(%rbp)
-188c:	movq   $0x0,-0x60(%rbp)
-1894:	movq   $0x0,-0x58(%rbp)
-189c:	xor    %r8d,%r8d
-189f:	xor    %r9d,%r9d
-18a2:	xor    %r10d,%r10d
-18a5:	xor    %r11d,%r11d
-18a8:	xor    %edx,%edx
-18aa:	xor    %ecx,%ecx
-18ac:	xor    %edi,%edi
-18ae:	lea    -0x21523f01(%rdx),%ebx
-18b4:	sub    %edx,%edi
-18b6:	rol    $0x4,%ebx
-18b9:	xor    %edi,%ebx
-18bb:	mov    %ecx,%edi
-18bd:	add    $0xdeadc0ff,%edi
-18c3:	add    %ecx,%edx
-18c5:	add    $0xbd5b81fe,%edx
-18cb:	sub    %ebx,%edi
-18cd:	mov    %ebx,%esi
-18cf:	rol    $0x6,%esi
-18d2:	xor    %edi,%esi
-18d4:	add    %edx,%ebx
-18d6:	mov    %esi,%ecx
-18d8:	rol    $0x8,%ecx
-18db:	sub    %esi,%edx
-18dd:	xor    %edx,%ecx
-18df:	add    %ebx,%esi
-18e1:	sub    %ecx,%ebx
-18e3:	mov    %ecx,%edi
-18e5:	rol    $0x10,%edi
-18e8:	xor    %ebx,%edi
-18ea:	add    %esi,%ecx
-18ec:	sub    %edi,%esi
-18ee:	mov    %edi,%edx
-18f0:	rol    $0x13,%edx
-18f3:	xor    %esi,%edx
-18f5:	add    %ecx,%edi
-18f7:	sub    %edx,%ecx
-18f9:	mov    %edx,%r13d
-18fc:	rol    $0x4,%r13d
-1900:	add    %edi,%edx
-1902:	movzbl %r11b,%ebx
-1906:	shl    $0x18,%ebx
-1909:	movzbl %r10b,%esi
-190d:	shl    $0x10,%esi
-1910:	or     %ebx,%esi
-1912:	movzbl %r9b,%ebx
-1916:	shl    $0x8,%ebx
-1919:	or     %esi,%ebx
-191b:	movzbl %r8b,%esi
-191f:	or     %ebx,%esi
-1921:	add    %edi,%esi
-1923:	xor    %edx,%ecx
-1925:	xor    %r13d,%ecx
-1928:	mov    %edx,%edi
-192a:	rol    $0xe,%edi
-192d:	sub    %edi,%ecx
-192f:	xor    %ecx,%esi
-1931:	mov    %ecx,%edi
-1933:	rol    $0xb,%edi
-1936:	sub    %edi,%esi
-1938:	xor    %esi,%edx
-193a:	mov    %esi,%edi
-193c:	rol    $0x19,%edi
-193f:	sub    %edi,%edx
-1941:	xor    %edx,%ecx
-1943:	mov    %edx,%edi
-1945:	rol    $0x10,%edi
-1948:	sub    %edi,%ecx
-194a:	xor    %ecx,%esi
-194c:	mov    %ecx,%edi
-194e:	rol    $0x4,%edi
-1951:	sub    %edi,%esi
-1953:	xor    %esi,%edx
-1955:	rol    $0xe,%esi
-1958:	sub    %esi,%edx
-195a:	xor    %edx,%ecx
-195c:	rol    $0x18,%edx
-195f:	sub    %edx,%ecx
-1961:	mov    $0xe0adc0f7,%esi
-1966:	add    -0x40(%rbp),%esi
-1969:	add    $0xe0adc0f7,%ecx
-196f:	mov    %esi,%edx
-1971:	xor    $0xe0adc0f7,%edx
-1977:	mov    %esi,%edi
-1979:	rol    $0xe,%edi
-197c:	sub    %edi,%edx
-197e:	xor    %edx,%ecx
-1980:	mov    %edx,%edi
-1982:	rol    $0xb,%edi
-1985:	sub    %edi,%ecx
-1987:	xor    %ecx,%esi
-1989:	mov    %ecx,%edi
-198b:	rol    $0x19,%edi
-198e:	sub    %edi,%esi
-1990:	xor    %esi,%edx
-1992:	mov    %esi,%edi
-1994:	rol    $0x10,%edi
-1997:	sub    %edi,%edx
-1999:	xor    %edx,%ecx
-199b:	mov    %edx,%edi
-199d:	rol    $0x4,%edi
-19a0:	sub    %edi,%ecx
-19a2:	xor    %ecx,%esi
-19a4:	rol    $0xe,%ecx
-19a7:	sub    %ecx,%esi
-19a9:	xor    %esi,%edx
-19ab:	rol    $0x18,%esi
-19ae:	sub    %esi,%edx
-19b0:	mov    $0xffff0001,%ecx
-19b5:	imul   %rdx,%rcx
-19b9:	shr    $0x30,%rcx
-19bd:	mov    %ecx,%esi
-19bf:	shl    $0x10,%esi
-19c2:	or     %ecx,%esi
-19c4:	sub    %esi,%edx
-19c6:	mov    -0x30(%rbp),%rcx
-19ca:	mov    0x4(%rcx),%esi
-19cd:	mov    %esi,%ecx
-19cf:	shl    $0x10,%ecx
-19d2:	add    %esi,%ecx
-19d4:	add    %edx,%ecx
-19d6:	cmp    $0x20001ff,%ecx
-19dc:	ja     0xffffffffc023aa49
-19de:	mov    %ecx,%ecx
-19e0:	movabs $0xffffc9000862a000,%rdx
-19ea:	mov    0x100(%rdx,%rcx,8),%ebx
-19f1:	test   %rbx,%rbx
-19f4:	je     0xffffffffc023aa22
-19f6:	mov    %ebx,-0x38(%rbp)
-19f9:	cmp    $0x1000,%ebx
-19ff:	jb     0xffffffffc023aa62
-1a01:	movabs $0xffff88816ff34000,%rax
-1a0b:	mov    0x1148(%rax),%rax
-1a12:	add    %gs:0xffffffff8d195028,%rax
-1a1b:	test   %rax,%rax
-1a1e:	jne    0xffffffffc023aa45
-1a20:	jmp    0xffffffffc023aa49
-1a22:	movabs $0xffff88816ff34000,%rax
-1a2c:	mov    0x1148(%rax),%rax
-1a33:	add    %gs:0xffffffff8d195028,%rax
-1a3c:	test   %rax,%rax
-1a3f:	je     0xffffffffc023aa49
-1a41:	add    $0x8,%rax
-1a45:	addq   $0x1,(%rax)
-1a49:	mov    $0x1,%ebx
-1a4e:	mov    %ebx,%eax
-1a50:	add    $0x88,%rsp
-1a57:	pop    %rbx
-1a58:	pop    %r12
-1a5a:	pop    %r13
-1a5c:	pop    %r14
-1a5e:	pop    %r15
-1a60:	pop    %rbp
-1a61:	ret
-1a62:	cmpq   $0x0,-0x80(%rbp)
-1a67:	je     0xffffffffc023aa7d
-1a69:	mov    -0x30(%rbp),%rcx
-1a6d:	mov    (%rcx),%cl
-1a6f:	and    $0x2,%cl
-1a72:	shr    %cl
-1a74:	or     %cl,%r15b
-1a77:	je     0xffffffffc023ab49
-1a7d:	mov    %ebx,%r8d
-1a80:	jmp    0xffffffffc023ab71
-1a85:	mov    $0xffffffff89635c20,%rax
-1a8c:	mov    %r12,%rdi
-1a8f:	mov    $0xffffffd8,%esi
-1a94:	call   *%rax
-1a96:	test   %eax,%eax
-1a98:	jne    0xffffffffc023aa49
-1a9a:	mov    (%r12),%rax
-1a9e:	mov    0x8(%r12),%rcx
-1aa3:	lea    0xe(%rax),%rdx
-1aa7:	cmp    %rcx,%rdx
-1aaa:	ja     0xffffffffc023aa49
-1aac:	lea    0x36(%rax),%rdx
-1ab0:	mov    $0x1,%ebx
-1ab5:	cmp    %rcx,%rdx
-1ab8:	ja     0xffffffffc023aa4e
-1aba:	movabs $0xffff8881977f2c00,%rcx
-1ac4:	movzwl 0x104(%rcx),%edx
-1acb:	mov    %dx,0x4(%rax)
-1acf:	mov    0x100(%rcx),%ecx
-1ad5:	mov    %ecx,(%rax)
-1ad7:	mov    0x28(%rax),%ecx
-1ada:	mov    %ecx,0x6(%rax)
-1add:	movzwl 0x2c(%rax),%ecx
-1ae1:	mov    %cx,0xa(%rax)
-1ae5:	movw   $0xdd86,0xc(%rax)
-1aeb:	movzwl -0x40(%rbp),%ecx
-1aef:	xor    -0x54(%rbp),%ecx
-1af2:	mov    -0x88(%rbp),%esi
-1af8:	add    $0x28,%esi
-1afb:	mov    -0x33(%rbp),%bl
-1afe:	movw   $0x0,0x10(%rax)
-1b04:	mov    %ebx,%edx
-1b06:	shr    $0x4,%dl
-1b09:	or     $0x60,%dl
-1b0c:	mov    %dl,0xe(%rax)
-1b0f:	shl    $0x4,%bl
-1b12:	mov    %bl,0xf(%rax)
-1b15:	movw   $0x4029,0x14(%rax)
-1b1b:	rol    $0x8,%si
-1b1f:	mov    %si,0x12(%rax)
-1b23:	movq   $0x1,0x16(%rax)
-1b2b:	movl   $0x0,0x1e(%rax)
-1b32:	mov    %ecx,0x22(%rax)
-1b35:	mov    (%r15),%rcx
-1b38:	mov    0x8(%r15),%rdx
-1b3c:	mov    %rcx,0x26(%rax)
-1b40:	mov    %rdx,0x2e(%rax)
-1b44:	jmp    0xffffffffc0239415
-1b49:	cmpb   $0x11,-0x3c(%rbp)
-1b4d:	jne    0xffffffffc023ab53
-1b4f:	mov    %rax,-0x68(%rbp)
-1b53:	mov    %ebx,-0x70(%rbp)
-1b56:	lea    -0x60(%rbp),%rsi
-1b5a:	lea    -0x70(%rbp),%rdx
-1b5e:	mov    $0xffffffff8749c9c0,%rax
-1b65:	mov    -0x80(%rbp),%rdi
-1b69:	xor    %ecx,%ecx
-1b6b:	call   *%rax
-1b6d:	mov    -0x38(%rbp),%r8d
-1b71:	movabs $0xffff8881977f3000,%rcx
-1b7b:	mov    0x100(%rcx),%eax
-1b81:	mov    $0x1,%dl
-1b83:	cmp    -0xa0(%rbp),%eax
-1b89:	jne    0xffffffffc023abb6
-1b8b:	mov    0x104(%rcx),%eax
-1b91:	cmp    -0x9c(%rbp),%eax
-1b97:	jne    0xffffffffc023abb6
-1b99:	mov    0x108(%rcx),%eax
-1b9f:	cmp    -0x98(%rbp),%eax
-1ba5:	jne    0xffffffffc023abb6
-1ba7:	mov    0x10c(%rcx),%eax
-1bad:	cmp    -0x94(%rbp),%eax
-1bb3:	setne  %dl
-1bb6:	movzwl 0x110(%rcx),%edi
-1bbd:	movzwl -0x90(%rbp),%esi
-1bc4:	mov    -0x8e(%rbp),%al
-1bca:	mov    %al,0x112(%rcx)
-1bd0:	test   %dl,%dl
-1bd2:	jne    0xffffffffc023ac14
-1bd4:	cmp    %si,%di
-1bd7:	jne    0xffffffffc023ac14
-1bd9:	test   %al,%al
-1bdb:	je     0xffffffffc023ac14
-1bdd:	cmp    $0xfff,%r8d
-1be4:	ja     0xffffffffc023aa49
-1bea:	mov    %r8d,%eax
-1bed:	movabs $0xffffc900083e7000,%rcx
-1bf7:	mov    0x100(%rcx,%rax,8),%rax
-1bff:	add    %gs:0xffffffff8d195028,%rax
-1c08:	test   %rax,%rax
-1c0b:	je     0xffffffffc023aa49
-1c11:	addl   $0x1,(%rax)
-1c14:	lea    (%rbx,%rbx,2),%rax
-1c18:	movabs $0xffffc90008355000,%rcx
-1c22:	lea    (%rcx,%rax,8),%r15
-1c26:	add    $0x100,%r15
-1c2d:	mov    -0xb0(%rbp),%rax
-1c34:	addq   $0x1,0x8(%rax)
-1c39:	mov    -0x88(%rbp),%edx
-1c3f:	jmp    0xffffffffc023a5d0
-1c44:	movzbl 0x1(%rax),%ecx
-1c48:	shl    $0x18,%rcx
-1c4c:	movzbl 0x2(%rax),%edx
-1c50:	shl    $0x10,%rdx
-1c54:	or     %rcx,%rdx
-1c57:	movzbl 0x3(%rax),%ecx
-1c5b:	shl    $0x8,%rcx
-1c5f:	or     %rdx,%rcx
-1c62:	mov    0x4(%rax),%al
-1c65:	mov    $0x3,%dl
-1c67:	jmp    0xffffffffc023ac81
-1c69:	movzbl 0x1(%rax),%edx
-1c6d:	shl    $0x10,%rdx
-1c71:	movzbl 0x2(%rax),%ecx
-1c75:	shl    $0x8,%rcx
-1c79:	or     %rdx,%rcx
-1c7c:	mov    0x3(%rax),%al
-1c7f:	mov    $0x2,%dl
-1c81:	movzbl %al,%eax
-1c84:	or     %rcx,%rax
-1c87:	test   %eax,%eax
-1c89:	jle    0xffffffffc0239b0b
-1c8f:	cmp    $0x1,%dl
-1c92:	je     0xffffffffc023acf5
-1c94:	cmp    $0x3,%dl
-1c97:	je     0xffffffffc023acfc
-1c99:	cmp    $0x2,%dl
-1c9c:	jne    0xffffffffc023ad03
-1c9e:	mov    $0x40,%ecx
-1ca3:	jmp    0xffffffffc023ad08
-1ca5:	movabs $0xffff88816ff34000,%rax
-1caf:	mov    0x1110(%rax),%r14
-1cb6:	add    %gs:0xffffffff8d195028,%r14
-1cbf:	test   %r14,%r14
-1cc2:	je     0xffffffffc023ae1d
-1cc8:	mov    $0xffffffff8749d630,%rax
-1ccf:	call   *%rax
-1cd1:	mov    %rax,%rcx
-1cd4:	sub    0x8(%r14),%rcx
-1cd8:	cmp    $0x3b9aca01,%rcx
-1cdf:	jb     0xffffffffc023adde
-1ce5:	movq   $0x1,(%r14)
-1cec:	mov    %rax,0x8(%r14)
-1cf0:	jmp    0xffffffffc023adf0
-1cf5:	mov    $0x38,%ecx
-1cfa:	jmp    0xffffffffc023ad08
-1cfc:	mov    $0x48,%ecx
-1d01:	jmp    0xffffffffc023ad08
-1d03:	mov    $0x30,%ecx
-1d08:	addq   $0x1,(%rbx,%rcx,1)
-1d0d:	cmp    $0xfffffd,%eax
-1d12:	ja     0xffffffffc023ad86
-1d14:	movabs $0xffffc900219f1000,%rcx
-1d1e:	mov    0x100(%rcx,%rax,8),%ecx
-1d25:	test   %rcx,%rcx
-1d28:	je     0xffffffffc023ad86
-1d2a:	mov    %ecx,-0x38(%rbp)
-1d2d:	xor    %r14d,%r14d
-1d30:	cmp    $0x1000,%ecx
-1d36:	lea    (%rcx,%rcx,2),%rax
-1d3a:	movabs $0xffffc90008355000,%rcx
-1d44:	lea    0x100(%rcx,%rax,8),%rax
-1d4c:	cmovb  %rax,%r14
-1d50:	test   %r14,%r14
-1d53:	je     0xffffffffc023ad9a
-1d55:	lea    -0x60(%rbp),%rsi
-1d59:	mov    $0xffffffff8749c930,%rax
-1d60:	mov    -0x80(%rbp),%rdi
-1d64:	call   *%rax
-1d66:	test   %rax,%rax
-1d69:	je     0xffffffffc023ae3a
-1d6f:	mov    -0x38(%rbp),%ecx
-1d72:	cmp    %ecx,(%rax)
-1d74:	jne    0xffffffffc023ae83
-1d7a:	mov    %rbx,%rax
-1d7d:	add    $0x50,%rax
-1d81:	jmp    0xffffffffc023af03
-1d86:	addq   $0x1,0x10(%rbx)
-1d8b:	cltq
-1d8d:	mov    %rax,0x18(%rbx)
-1d91:	mov    -0x30(%rbp),%rdx
-1d95:	jmp    0xffffffffc0239b43
-1d9a:	addq   $0x1,0x28(%rbx)
-1d9f:	jmp    0xffffffffc023aa49
-1da4:	mov    %ecx,(%rax)
-1da6:	addq   $0x1,0x58(%rbx)
-1dab:	cmpl   $0x1ff,-0x78(%rbp)
-1db2:	ja     0xffffffffc023ae28
-1db4:	movabs $0xffff8881a5960000,%rax
-1dbe:	mov    -0x78(%rbp),%rcx
-1dc2:	mov    0x100(%rax,%rcx,8),%rax
-1dca:	add    %gs:0xffffffff8d195028,%rax
-1dd3:	test   %rax,%rax
-1dd6:	je     0xffffffffc023ae28
-1dd8:	add    $0x8,%rax
-1ddc:	jmp    0xffffffffc023ae24
-1dde:	mov    (%r14),%rax
-1de1:	add    $0x1,%rax
-1de5:	mov    %rax,(%r14)
-1de8:	cmp    $0x1e848,%rax
-1dee:	ja     0xffffffffc023ae1d
-1df0:	movq   $0x0,-0x70(%rbp)
-1df8:	movq   $0x0,-0x68(%rbp)
-1e00:	mov    -0x38(%rbp),%eax
-1e03:	mov    %eax,-0x70(%rbp)
-1e06:	lea    -0x60(%rbp),%rsi
-1e0a:	lea    -0x70(%rbp),%rdx
-1e0e:	mov    $0xffffffff8749c9c0,%rax
-1e15:	mov    -0x80(%rbp),%rdi
-1e19:	xor    %ecx,%ecx
-1e1b:	call   *%rax
-1e1d:	mov    %rbx,%rax
-1e20:	add    $0x60,%rax
-1e24:	addq   $0x1,(%rax)
-1e28:	addq   $0x1,0x20(%rbx)
-1e2d:	movzwl -0x40(%rbp),%r14d
-1e32:	mov    %r13d,%edx
-1e35:	jmp    0xffffffffc023a5d0
-1e3a:	movabs $0xffff88816ff34000,%rax
-1e44:	mov    0x1110(%rax),%r15
-1e4b:	add    %gs:0xffffffff8d195028,%r15
-1e54:	test   %r15,%r15
-1e57:	je     0xffffffffc023aefc
-1e5d:	mov    $0xffffffff8749d630,%rax
-1e64:	call   *%rax
-1e66:	mov    %rax,%rcx
-1e69:	sub    0x8(%r15),%rcx
-1e6d:	cmp    $0x3b9aca01,%rcx
-1e74:	jb     0xffffffffc023aebd
-1e76:	movq   $0x1,(%r15)
-1e7d:	mov    %rax,0x8(%r15)
-1e81:	jmp    0xffffffffc023aecf
-1e83:	mov    %ecx,(%rax)
-1e85:	addq   $0x1,0x58(%rbx)
-1e8a:	cmpl   $0x1ff,-0x78(%rbp)
-1e91:	ja     0xffffffffc023af07
-1e93:	movabs $0xffff8881a5960000,%rax
-1e9d:	mov    -0x78(%rbp),%rcx
-1ea1:	mov    0x100(%rax,%rcx,8),%rax
-1ea9:	add    %gs:0xffffffff8d195028,%rax
-1eb2:	test   %rax,%rax
-1eb5:	je     0xffffffffc023af07
-1eb7:	add    $0x8,%rax
-1ebb:	jmp    0xffffffffc023af03
-1ebd:	mov    (%r15),%rax
-1ec0:	add    $0x1,%rax
-1ec4:	mov    %rax,(%r15)
-1ec7:	cmp    $0x1e848,%rax
-1ecd:	ja     0xffffffffc023aefc
-1ecf:	movq   $0x0,-0x70(%rbp)
-1ed7:	movq   $0x0,-0x68(%rbp)
-1edf:	mov    -0x38(%rbp),%eax
-1ee2:	mov    %eax,-0x70(%rbp)
-1ee5:	lea    -0x60(%rbp),%rsi
-1ee9:	lea    -0x70(%rbp),%rdx
-1eed:	mov    $0xffffffff8749c9c0,%rax
-1ef4:	mov    -0x80(%rbp),%rdi
-1ef8:	xor    %ecx,%ecx
-1efa:	call   *%rax
-1efc:	mov    %rbx,%rax
-1eff:	add    $0x60,%rax
-1f03:	addq   $0x1,(%rax)
-1f07:	addq   $0x1,0x20(%rbx)
-1f0c:	movzwl -0x40(%rbp),%r15d
-1f11:	jmp    0xffffffffc0239e20
+   5:	push   %r15
+   7:	push   %r14
+   9:	push   %r13
+   b:	push   %r12
+   d:	push   %rbx
+   e:	sub    $0x88,%rsp
+  15:	mov    (%rdi),%rbx
+  18:	mov    0x8(%rdi),%r15
+  1c:	lea    0xe(%rbx),%rax
+  20:	mov    $0x1,%ebp
+  25:	cmp    %r15,%rax
+  28:	ja     0xffffffffc0542ed1
+  2e:	mov    %rdi,%r13
+  31:	movzwl 0xc(%rbx),%ecx
+  35:	cmp    $0xdd86,%ecx
+  3b:	je     0xffffffffc054115f
+  41:	mov    $0x2,%ebp
+  46:	cmp    $0x8,%cx
+  4a:	jne    0xffffffffc0542ed1
+  50:	movq   $0x0,0x38(%rsp)
+  59:	movq   $0x0,0x30(%rsp)
+  62:	movq   $0x0,0x28(%rsp)
+  6b:	movq   $0x0,0x20(%rsp)
+  74:	movq   $0x0,0x18(%rsp)
+  7d:	movq   $0x0,0x10(%rsp)
+  86:	movl   $0x0,0x68(%rsp)
+  8e:	movq   $0x0,0x60(%rsp)
+  97:	movq   $0x0,0x58(%rsp)
+  a0:	lea    0x22(%rbx),%r14
+  a4:	cmp    %r15,%r14
+  a7:	ja     0xffffffffc0542ecc
+  ad:	mov    (%rax),%al
+  af:	and    $0xf,%al
+  b1:	cmp    $0x5,%al
+  b3:	jne    0xffffffffc0542ecc
+  b9:	mov    0xf(%rbx),%al
+  bc:	mov    %al,0x3d(%rsp)
+  c0:	mov    0x17(%rbx),%al
+  c3:	mov    %al,0x34(%rsp)
+  c7:	movzwl 0x14(%rbx),%ecx
+  cb:	test   $0xff3f,%ecx
+  d1:	jne    0xffffffffc0542ecc
+  d7:	movzwl 0x10(%rbx),%edi
+  db:	cmp    $0x1,%al
+  dd:	jne    0xffffffffc0541426
+  e3:	lea    0x2a(%rbx),%rax
+  e7:	cmp    %r15,%rax
+  ea:	ja     0xffffffffc0542ecc
+  f0:	mov    (%r14),%dl
+  f3:	cmp    $0x3,%dl
+  f6:	je     0xffffffffc0541955
+  fc:	mov    $0x2,%ebp
+ 101:	cmp    $0x8,%dl
+ 104:	jne    0xffffffffc0542ed1
+ 10a:	movzwl %di,%r8d
+ 10e:	movb   $0x0,0x22(%rbx)
+ 112:	addw   $0x8,0x24(%rbx)
+ 117:	movb   $0x40,0x16(%rbx)
+ 11b:	mov    0x1a(%rbx),%eax
+ 11e:	mov    0x1e(%rbx),%esi
+ 121:	mov    %eax,0x1e(%rbx)
+ 124:	mov    %esi,0x1a(%rbx)
+ 127:	movzwl 0xe(%rbx),%edi
+ 12b:	movzwl 0x12(%rbx),%ebp
+ 12f:	movzwl 0x16(%rbx),%r9d
+ 134:	movzwl %si,%edx
+ 137:	shr    $0x10,%rsi
+ 13b:	add    %rdx,%rsi
+ 13e:	movzwl %ax,%edx
+ 141:	add    %rsi,%rdx
+ 144:	shr    $0x10,%rax
+ 148:	add    %rdx,%rax
+ 14b:	add    %rdi,%rax
+ 14e:	add    %r8,%rax
+ 151:	add    %rbp,%rax
+ 154:	add    %rcx,%rax
+ 157:	add    %r9,%rax
+ 15a:	jmp    0xffffffffc0541342
+ 15f:	movq   $0x0,0x38(%rsp)
+ 168:	movq   $0x0,0x30(%rsp)
+ 171:	movq   $0x0,0x28(%rsp)
+ 17a:	movq   $0x0,0x20(%rsp)
+ 183:	movq   $0x0,0x18(%rsp)
+ 18c:	movq   $0x0,0x10(%rsp)
+ 195:	movl   $0x0,0x68(%rsp)
+ 19d:	movq   $0x0,0x60(%rsp)
+ 1a6:	movq   $0x0,0x58(%rsp)
+ 1af:	lea    0x36(%rbx),%r14
+ 1b3:	cmp    %r15,%r14
+ 1b6:	ja     0xffffffffc0542ecc
+ 1bc:	mov    0x14(%rbx),%al
+ 1bf:	mov    %al,0x34(%rsp)
+ 1c3:	mov    0xe(%rbx),%cl
+ 1c6:	shl    $0x4,%cl
+ 1c9:	mov    %cl,0x3d(%rsp)
+ 1cd:	mov    0xf(%rbx),%dl
+ 1d0:	shr    $0x4,%dl
+ 1d3:	or     %cl,%dl
+ 1d5:	mov    %dl,0x3d(%rsp)
+ 1d9:	cmp    $0x2c,%al
+ 1db:	je     0xffffffffc0542ecc
+ 1e1:	movzwl 0x12(%rbx),%edi
+ 1e5:	cmp    $0x3a,%al
+ 1e7:	jne    0xffffffffc0541288
+ 1ed:	lea    0x3e(%rbx),%rax
+ 1f1:	cmp    %r15,%rax
+ 1f4:	ja     0xffffffffc0542ecc
+ 1fa:	mov    (%r14),%al
+ 1fd:	cmp    $0x2,%al
+ 1ff:	je     0xffffffffc05414c7
+ 205:	cmp    $0x1,%al
+ 207:	je     0xffffffffc0541500
+ 20d:	mov    $0x2,%ebp
+ 212:	cmp    $0x80,%al
+ 214:	jne    0xffffffffc0542ed1
+ 21a:	movb   $0x81,0x36(%rbx)
+ 21e:	addw   $0xffff,0x38(%rbx)
+ 223:	movb   $0x40,0x15(%rbx)
+ 227:	mov    0x16(%rbx),%rax
+ 22b:	mov    0x1e(%rbx),%rcx
+ 22f:	mov    %rcx,0x48(%rsp)
+ 234:	mov    %rax,0x40(%rsp)
+ 239:	mov    0x26(%rbx),%rax
+ 23d:	mov    0x2e(%rbx),%rcx
+ 241:	mov    %rax,0x16(%rbx)
+ 245:	mov    %rcx,0x1e(%rbx)
+ 249:	mov    0x40(%rsp),%rax
+ 24e:	mov    0x48(%rsp),%rcx
+ 253:	mov    %rax,0x26(%rbx)
+ 257:	mov    %rcx,0x2e(%rbx)
+ 25b:	movzwl 0xa(%rbx),%eax
+ 25f:	mov    %ax,0x7c(%rsp)
+ 264:	mov    0x6(%rbx),%eax
+ 267:	mov    %eax,0x78(%rsp)
+ 26b:	mov    (%rbx),%eax
+ 26d:	mov    %eax,0x6(%rbx)
+ 270:	movzwl 0x4(%rbx),%eax
+ 274:	mov    %ax,0xa(%rbx)
+ 278:	mov    0x78(%rsp),%eax
+ 27c:	mov    %eax,(%rbx)
+ 27e:	movzwl 0x7c(%rsp),%eax
+ 283:	jmp    0xffffffffc05413cd
+ 288:	mov    0x16(%rbx),%rcx
+ 28c:	mov    0x1e(%rbx),%rdx
+ 290:	mov    %rdx,0x18(%rsp)
+ 295:	mov    %rcx,0x10(%rsp)
+ 29a:	mov    0x26(%rbx),%rcx
+ 29e:	mov    0x2e(%rbx),%rdx
+ 2a2:	mov    %rcx,0x20(%rsp)
+ 2a7:	mov    %rdx,0x28(%rsp)
+ 2ac:	cmp    $0x1,%al
+ 2ae:	jne    0xffffffffc05413db
+ 2b4:	lea    0x3e(%rbx),%rax
+ 2b8:	cmp    %r15,%rax
+ 2bb:	ja     0xffffffffc0542ecc
+ 2c1:	mov    (%r14),%cl
+ 2c4:	cmp    $0x3,%cl
+ 2c7:	je     0xffffffffc05417ec
+ 2cd:	mov    $0x2,%ebp
+ 2d2:	cmp    $0x8,%cl
+ 2d5:	jne    0xffffffffc0542ed1
+ 2db:	lea    0x2a(%rbx),%rax
+ 2df:	mov    $0x1,%ebp
+ 2e4:	cmp    %r15,%rax
+ 2e7:	ja     0xffffffffc0542ed1
+ 2ed:	movb   $0x0,0x22(%rbx)
+ 2f1:	addw   $0x8,0x24(%rbx)
+ 2f6:	movb   $0x40,0x16(%rbx)
+ 2fa:	mov    0x1a(%rbx),%eax
+ 2fd:	mov    0x1e(%rbx),%ecx
+ 300:	mov    %eax,0x1e(%rbx)
+ 303:	mov    %ecx,0x1a(%rbx)
+ 306:	movzwl 0xe(%rbx),%r9d
+ 30b:	movzwl 0x10(%rbx),%esi
+ 30f:	movzwl 0x12(%rbx),%edi
+ 313:	movzwl 0x14(%rbx),%ebp
+ 317:	movzwl 0x16(%rbx),%r8d
+ 31c:	movzwl %cx,%edx
+ 31f:	shr    $0x10,%rcx
+ 323:	add    %rdx,%rcx
+ 326:	movzwl %ax,%edx
+ 329:	add    %rcx,%rdx
+ 32c:	shr    $0x10,%rax
+ 330:	add    %rdx,%rax
+ 333:	add    %r9,%rax
+ 336:	add    %rsi,%rax
+ 339:	add    %rdi,%rax
+ 33c:	add    %rbp,%rax
+ 33f:	add    %r8,%rax
+ 342:	mov    %rax,%rcx
+ 345:	shr    $0x10,%rcx
+ 349:	movzwl %ax,%edx
+ 34c:	add    %rcx,%rdx
+ 34f:	cmp    $0x10000,%rax
+ 355:	cmovb  %rax,%rdx
+ 359:	mov    %rdx,%rax
+ 35c:	shr    $0x10,%rax
+ 360:	movzwl %dx,%ecx
+ 363:	add    %rax,%rcx
+ 366:	cmp    $0x10000,%rdx
+ 36d:	cmovb  %rdx,%rcx
+ 371:	mov    %rcx,%rax
+ 374:	shr    $0x10,%rax
+ 378:	movzwl %cx,%edx
+ 37b:	add    %rax,%rdx
+ 37e:	cmp    $0x10000,%rcx
+ 385:	cmovb  %rcx,%rdx
+ 389:	mov    %edx,%eax
+ 38b:	shr    $0x10,%eax
+ 38e:	cmp    $0x10000,%rdx
+ 395:	mov    $0x10000,%ecx
+ 39a:	cmovae %eax,%ecx
+ 39d:	add    %edx,%ecx
+ 39f:	not    %ecx
+ 3a1:	mov    %cx,0x18(%rbx)
+ 3a5:	movzwl 0xa(%rbx),%eax
+ 3a9:	mov    %ax,0x44(%rsp)
+ 3ae:	mov    0x6(%rbx),%eax
+ 3b1:	mov    %eax,0x40(%rsp)
+ 3b5:	mov    (%rbx),%eax
+ 3b7:	mov    %eax,0x6(%rbx)
+ 3ba:	movzwl 0x4(%rbx),%eax
+ 3be:	mov    %ax,0xa(%rbx)
+ 3c2:	mov    0x40(%rsp),%eax
+ 3c6:	mov    %eax,(%rbx)
+ 3c8:	movzwl 0x44(%rsp),%eax
+ 3cd:	mov    %ax,0x4(%rbx)
+ 3d1:	mov    $0x3,%ebp
+ 3d6:	jmp    0xffffffffc0542ed1
+ 3db:	mov    $0x2,%dl
+ 3dd:	mov    $0x1,%cl
+ 3df:	mov    $0x2,%ebp
+ 3e4:	cmp    $0x10,%al
+ 3e6:	jg     0xffffffffc054154e
+ 3ec:	cmp    $0x4,%al
+ 3ee:	je     0xffffffffc0541683
+ 3f4:	cmp    $0x6,%al
+ 3f6:	jne    0xffffffffc0542ed1
+ 3fc:	lea    0x66(%rbx),%rax
+ 400:	test   %cl,%cl
+ 402:	cmovne %r14,%rax
+ 406:	lea    0x14(%rax),%rsi
+ 40a:	cmp    %r15,%rsi
+ 40d:	ja     0xffffffffc0542ecc
+ 413:	testb  $0x2,0xd(%rax)
+ 417:	je     0xffffffffc05417cd
+ 41d:	mov    %dl,0x3c(%rsp)
+ 421:	jmp    0xffffffffc05417cd
+ 426:	mov    0x1a(%rbx),%ecx
+ 429:	mov    %ecx,0x10(%rsp)
+ 42d:	mov    0x1e(%rbx),%ecx
+ 430:	mov    %ecx,0x20(%rsp)
+ 434:	cmp    $0x3a,%al
+ 436:	jne    0xffffffffc054147c
+ 438:	lea    0x2a(%rbx),%rax
+ 43c:	cmp    %r15,%rax
+ 43f:	ja     0xffffffffc0542ecc
+ 445:	mov    (%r14),%al
+ 448:	cmp    $0x2,%al
+ 44a:	je     0xffffffffc0541b5c
+ 450:	cmp    $0x1,%al
+ 452:	je     0xffffffffc0541b95
+ 458:	mov    $0x2,%ebp
+ 45d:	cmp    $0x80,%al
+ 45f:	jne    0xffffffffc0542ed1
+ 465:	lea    0x3e(%rbx),%rax
+ 469:	mov    $0x1,%ebp
+ 46e:	cmp    %r15,%rax
+ 471:	ja     0xffffffffc0542ed1
+ 477:	jmp    0xffffffffc054121a
+ 47c:	mov    $0x2,%dl
+ 47e:	mov    $0x1,%cl
+ 480:	mov    $0x2,%ebp
+ 485:	cmp    $0x10,%al
+ 487:	jg     0xffffffffc0541be5
+ 48d:	cmp    $0x4,%al
+ 48f:	je     0xffffffffc05419ff
+ 495:	cmp    $0x6,%al
+ 497:	jne    0xffffffffc0542ed1
+ 49d:	lea    0x3e(%rbx),%rax
+ 4a1:	test   %cl,%cl
+ 4a3:	cmovne %r14,%rax
+ 4a7:	lea    0x14(%rax),%rsi
+ 4ab:	cmp    %r15,%rsi
+ 4ae:	ja     0xffffffffc0542ecc
+ 4b4:	testb  $0x2,0xd(%rax)
+ 4b8:	je     0xffffffffc0541d43
+ 4be:	mov    %dl,0x3c(%rsp)
+ 4c2:	jmp    0xffffffffc0541d43
+ 4c7:	movabs $0xffff8881934f0000,%rax
+ 4d1:	mov    0x1160(%rax),%rax
+ 4d8:	add    %gs:0xffffffff92795028,%rax
+ 4e1:	test   %rax,%rax
+ 4e4:	je     0xffffffffc0542ecc
+ 4ea:	addq   $0x1,(%rax)
+ 4ee:	mov    0x3a(%rbx),%ecx
+ 4f1:	bswap  %ecx
+ 4f3:	cmp    $0x4ff,%ecx
+ 4f9:	ja     0xffffffffc0541500
+ 4fb:	addq   $0x1,0x8(%rax)
+ 500:	lea    0x66(%rbx),%rax
+ 504:	cmp    %r15,%rax
+ 507:	ja     0xffffffffc0542ecc
+ 50d:	mov    0x44(%rbx),%al
+ 510:	mov    %al,0x34(%rsp)
+ 514:	movb   $0x1,0x3c(%rsp)
+ 519:	mov    0x56(%rbx),%rcx
+ 51d:	mov    0x5e(%rbx),%rdx
+ 521:	mov    %rcx,0x10(%rsp)
+ 526:	mov    %rdx,0x18(%rsp)
+ 52b:	mov    0x46(%rbx),%rcx
+ 52f:	mov    0x4e(%rbx),%rdx
+ 533:	mov    %rcx,0x20(%rsp)
+ 538:	mov    %rdx,0x28(%rsp)
+ 53d:	mov    $0x3,%dl
+ 53f:	xor    %ecx,%ecx
+ 541:	mov    $0x2,%ebp
+ 546:	cmp    $0x10,%al
+ 548:	jle    0xffffffffc05413ec
+ 54e:	cmp    $0x11,%al
+ 550:	je     0xffffffffc05417b6
+ 556:	cmp    $0x29,%al
+ 558:	jne    0xffffffffc0542ed1
+ 55e:	mov    0x20(%rsp),%rax
+ 563:	mov    0x28(%rsp),%rcx
+ 568:	mov    %rcx,0x48(%rsp)
+ 56d:	mov    %rax,0x40(%rsp)
+ 572:	movabs $0xffff8881016ac800,%rdi
+ 57c:	lea    0x40(%rsp),%rsi
+ 581:	mov    $0xffffffff8ca9c930,%rax
+ 588:	call   *%rax
+ 58a:	mov    %rax,%r14
+ 58d:	test   %rax,%rax
+ 590:	je     0xffffffffc05415b9
+ 592:	movabs $0xffff8881934f0000,%rax
+ 59c:	mov    0x1130(%rax),%rax
+ 5a3:	add    %gs:0xffffffff92795028,%rax
+ 5ac:	test   %rax,%rax
+ 5af:	je     0xffffffffc0542ecc
+ 5b5:	addq   $0x1,(%rax)
+ 5b9:	lea    0x5e(%rbx),%rax
+ 5bd:	mov    $0x1,%ebp
+ 5c2:	mov    $0x1,%r12d
+ 5c8:	cmp    %r15,%rax
+ 5cb:	ja     0xffffffffc05415e0
+ 5cd:	addb   $0xff,0x3d(%rbx)
+ 5d1:	mov    $0x1,%eax
+ 5d6:	mov    $0xffffffff,%r12d
+ 5dc:	cmove  %eax,%r12d
+ 5e0:	movzwl 0xa(%rbx),%eax
+ 5e4:	mov    %ax,0x32(%rbx)
+ 5e8:	mov    0x6(%rbx),%eax
+ 5eb:	mov    %eax,0x2e(%rbx)
+ 5ee:	mov    (%rbx),%eax
+ 5f0:	mov    %eax,0x28(%rbx)
+ 5f3:	movzwl 0x4(%rbx),%eax
+ 5f7:	mov    %ax,0x2c(%rbx)
+ 5fb:	movw   $0xdd86,0x34(%rbx)
+ 601:	mov    $0xffffffff8ec35c20,%rax
+ 608:	mov    %r13,%rdi
+ 60b:	mov    $0x28,%esi
+ 610:	call   *%rax
+ 612:	test   %eax,%eax
+ 614:	jne    0xffffffffc0542ed1
+ 61a:	movabs $0xffff8881934f0000,%rax
+ 624:	mov    0x1150(%rax),%rcx
+ 62b:	add    %gs:0xffffffff92795028,%rcx
+ 634:	test   %rcx,%rcx
+ 637:	je     0xffffffffc0542ed1
+ 63d:	addq   $0x1,0x8(%rcx)
+ 642:	test   %r12d,%r12d
+ 645:	mov    $0x2,%ebp
+ 64a:	cmovns %r12d,%ebp
+ 64e:	test   %r14,%r14
+ 651:	je     0xffffffffc0542ed1
+ 657:	test   %r12d,%r12d
+ 65a:	jns    0xffffffffc0542ed1
+ 660:	mov    0x1170(%rax),%rax
+ 667:	add    %gs:0xffffffff92795028,%rax
+ 670:	test   %rax,%rax
+ 673:	je     0xffffffffc0541b35
+ 679:	addq   $0x1,0x8(%rax)
+ 67e:	jmp    0xffffffffc0541b35
+ 683:	mov    0x20(%rsp),%rax
+ 688:	mov    0x28(%rsp),%rcx
+ 68d:	mov    %rcx,0x48(%rsp)
+ 692:	mov    %rax,0x40(%rsp)
+ 697:	movabs $0xffff8881016ac800,%rdi
+ 6a1:	lea    0x40(%rsp),%rsi
+ 6a6:	mov    $0xffffffff8ca9c930,%rax
+ 6ad:	call   *%rax
+ 6af:	mov    %rax,%r14
+ 6b2:	test   %rax,%rax
+ 6b5:	je     0xffffffffc05416de
+ 6b7:	movabs $0xffff8881934f0000,%rax
+ 6c1:	mov    0x1130(%rax),%rax
+ 6c8:	add    %gs:0xffffffff92795028,%rax
+ 6d1:	test   %rax,%rax
+ 6d4:	je     0xffffffffc0542ecc
+ 6da:	addq   $0x1,(%rax)
+ 6de:	lea    0x4a(%rbx),%rax
+ 6e2:	mov    $0x1,%ebp
+ 6e7:	mov    $0x1,%r12d
+ 6ed:	cmp    %r15,%rax
+ 6f0:	ja     0xffffffffc0541718
+ 6f2:	movzwl 0x40(%rbx),%eax
+ 6f6:	lea    0x1(%rax),%ecx
+ 6f9:	shr    $0x10,%ecx
+ 6fc:	add    %ecx,%eax
+ 6fe:	add    $0x1,%eax
+ 701:	mov    %ax,0x40(%rbx)
+ 705:	addb   $0xff,0x3e(%rbx)
+ 709:	mov    $0x1,%eax
+ 70e:	mov    $0xffffffff,%r12d
+ 714:	cmove  %eax,%r12d
+ 718:	movzwl 0xa(%rbx),%eax
+ 71c:	mov    %ax,0x32(%rbx)
+ 720:	mov    0x6(%rbx),%eax
+ 723:	mov    %eax,0x2e(%rbx)
+ 726:	mov    (%rbx),%eax
+ 728:	mov    %eax,0x28(%rbx)
+ 72b:	movzwl 0x4(%rbx),%eax
+ 72f:	mov    %ax,0x2c(%rbx)
+ 733:	movw   $0x8,0x34(%rbx)
+ 739:	mov    $0xffffffff8ec35c20,%rax
+ 740:	mov    %r13,%rdi
+ 743:	mov    $0x28,%esi
+ 748:	call   *%rax
+ 74a:	test   %eax,%eax
+ 74c:	jne    0xffffffffc0542ed1
+ 752:	movabs $0xffff8881934f0000,%rax
+ 75c:	mov    0x1150(%rax),%rcx
+ 763:	add    %gs:0xffffffff92795028,%rcx
+ 76c:	test   %rcx,%rcx
+ 76f:	je     0xffffffffc0542ed1
+ 775:	addq   $0x1,0x8(%rcx)
+ 77a:	test   %r12d,%r12d
+ 77d:	mov    $0x2,%ebp
+ 782:	cmovns %r12d,%ebp
+ 786:	test   %r14,%r14
+ 789:	je     0xffffffffc0542ed1
+ 78f:	test   %r12d,%r12d
+ 792:	jns    0xffffffffc0542ed1
+ 798:	mov    0x1170(%rax),%rax
+ 79f:	add    %gs:0xffffffff92795028,%rax
+ 7a8:	test   %rax,%rax
+ 7ab:	jne    0xffffffffc0541b31
+ 7b1:	jmp    0xffffffffc0541b35
+ 7b6:	lea    0x66(%rbx),%rax
+ 7ba:	test   %cl,%cl
+ 7bc:	cmovne %r14,%rax
+ 7c0:	lea    0x8(%rax),%rdx
+ 7c4:	cmp    %r15,%rdx
+ 7c7:	ja     0xffffffffc0542ecc
+ 7cd:	test   %cl,%cl
+ 7cf:	mov    %edi,0x54(%rsp)
+ 7d3:	je     0xffffffffc054185c
+ 7d9:	movzwl (%rax),%edx
+ 7dc:	lea    0x30(%rsp),%rcx
+ 7e1:	mov    %dx,0x30(%rsp)
+ 7e6:	add    $0x2,%rax
+ 7ea:	jmp    0xffffffffc054186a
+ 7ec:	cmpb   $0x4,0x37(%rbx)
+ 7f0:	jne    0xffffffffc0541824
+ 7f2:	movabs $0xffff8881934f0000,%rcx
+ 7fc:	mov    0x1168(%rcx),%rcx
+ 803:	add    %gs:0xffffffff92795028,%rcx
+ 80c:	test   %rcx,%rcx
+ 80f:	je     0xffffffffc0542ecc
+ 815:	addq   $0x1,(%rcx)
+ 819:	cmpb   $0x4,0x3c(%rbx)
+ 81d:	ja     0xffffffffc0541824
+ 81f:	addq   $0x1,0x8(%rcx)
+ 824:	lea    0x52(%rbx),%rcx
+ 828:	cmp    %r15,%rcx
+ 82b:	ja     0xffffffffc0542ecc
+ 831:	mov    (%rax),%al
+ 833:	and    $0xf,%al
+ 835:	cmp    $0x5,%al
+ 837:	jne    0xffffffffc0542ecc
+ 83d:	mov    0x47(%rbx),%al
+ 840:	mov    %al,0x34(%rsp)
+ 844:	movb   $0x1,0x3c(%rsp)
+ 849:	mov    0x4e(%rbx),%ecx
+ 84c:	mov    %ecx,0x10(%rsp)
+ 850:	mov    0x4a(%rbx),%ecx
+ 853:	mov    %ecx,0x20(%rsp)
+ 857:	jmp    0xffffffffc054153d
+ 85c:	movzwl 0x2(%rax),%edx
+ 860:	lea    0x30(%rsp),%rcx
+ 865:	mov    %dx,0x30(%rsp)
+ 86a:	movzwl (%rax),%eax
+ 86d:	mov    %ax,0x2(%rcx)
+ 871:	mov    0x20(%rsp),%rax
+ 876:	mov    0x28(%rsp),%rcx
+ 87b:	mov    %rcx,0x60(%rsp)
+ 880:	mov    %rax,0x58(%rsp)
+ 885:	movzwl 0x32(%rsp),%eax
+ 88a:	mov    %ax,0x68(%rsp)
+ 88f:	mov    0x34(%rsp),%al
+ 893:	mov    %al,0x6a(%rsp)
+ 897:	movabs $0xffff8881016ad000,%rdi
+ 8a1:	lea    0x58(%rsp),%rsi
+ 8a6:	mov    $0xffffffff8ca9c930,%r12
+ 8ad:	call   *%r12
+ 8b0:	mov    %rax,%rdi
+ 8b3:	test   %rax,%rax
+ 8b6:	je     0xffffffffc05419c5
+ 8bc:	mov    %r15,%rax
+ 8bf:	sub    %rbx,%rax
+ 8c2:	cmp    $0x5ea,%rax
+ 8c8:	jg     0xffffffffc0542ecc
+ 8ce:	movabs $0xffff8881934f0000,%r12
+ 8d8:	mov    0x1100(%r12),%rsi
+ 8e0:	add    %gs:0xffffffff92795028,%rsi
+ 8e9:	test   %rsi,%rsi
+ 8ec:	je     0xffffffffc0542ecc
+ 8f2:	addq   $0x1,(%rsi)
+ 8f6:	testb  $0x1,(%rdi)
+ 8f9:	je     0xffffffffc0541902
+ 8fb:	movw   $0x0,0x30(%rsp)
+ 902:	mov    0x4(%rdi),%edx
+ 905:	mov    $0xffffffff92795034,%rax
+ 90c:	add    %gs:0xffffffff92795028,%rax
+ 915:	mov    (%rax),%rax
+ 918:	test   $0xffffff80,%eax
+ 91d:	je     0xffffffffc0541e55
+ 923:	mov    0x1118(%r12),%rax
+ 92b:	add    %gs:0xffffffff92795028,%rax
+ 934:	test   %rax,%rax
+ 937:	je     0xffffffffc0542ecc
+ 93d:	addq   $0x1,(%rax)
+ 941:	movabs $0xffff8881016ad800,%rax
+ 94b:	mov    %rax,0x8(%rsp)
+ 950:	jmp    0xffffffffc0541e77
+ 955:	cmpb   $0x4,0x23(%rbx)
+ 959:	jne    0xffffffffc054198d
+ 95b:	movabs $0xffff8881934f0000,%rcx
+ 965:	mov    0x1168(%rcx),%rcx
+ 96c:	add    %gs:0xffffffff92795028,%rcx
+ 975:	test   %rcx,%rcx
+ 978:	je     0xffffffffc0542ecc
+ 97e:	addq   $0x1,(%rcx)
+ 982:	cmpb   $0x4,0x28(%rbx)
+ 986:	ja     0xffffffffc054198d
+ 988:	addq   $0x1,0x8(%rcx)
+ 98d:	lea    0x3e(%rbx),%rcx
+ 991:	cmp    %r15,%rcx
+ 994:	ja     0xffffffffc0542ecc
+ 99a:	mov    (%rax),%al
+ 99c:	and    $0xf,%al
+ 99e:	cmp    $0x5,%al
+ 9a0:	jne    0xffffffffc0542ecc
+ 9a6:	mov    0x33(%rbx),%al
+ 9a9:	mov    %al,0x34(%rsp)
+ 9ad:	movb   $0x1,0x3c(%rsp)
+ 9b2:	mov    0x3a(%rbx),%ecx
+ 9b5:	mov    %ecx,0x10(%rsp)
+ 9b9:	mov    0x36(%rbx),%ecx
+ 9bc:	mov    %ecx,0x20(%rsp)
+ 9c0:	jmp    0xffffffffc0541bd4
+ 9c5:	movw   $0x0,0x68(%rsp)
+ 9cc:	movabs $0xffff8881016ad000,%rdi
+ 9d6:	lea    0x58(%rsp),%rsi
+ 9db:	call   *%r12
+ 9de:	test   %rax,%rax
+ 9e1:	je     0xffffffffc0542ed1
+ 9e7:	mov    %rax,%rdi
+ 9ea:	testb  $0x88,(%rax)
+ 9ed:	jne    0xffffffffc05418bc
+ 9f3:	movw   $0x0,0x32(%rsp)
+ 9fa:	jmp    0xffffffffc05418bc
+ 9ff:	movl   $0x0,0x4c(%rsp)
+ a07:	movq   $0x0,0x44(%rsp)
+ a10:	mov    0x20(%rsp),%eax
+ a14:	mov    %eax,0x40(%rsp)
+ a18:	movabs $0xffff8881016ac800,%rdi
+ a22:	lea    0x40(%rsp),%rsi
+ a27:	mov    $0xffffffff8ca9c930,%rax
+ a2e:	call   *%rax
+ a30:	mov    %rax,%r14
+ a33:	test   %rax,%rax
+ a36:	je     0xffffffffc0541a5f
+ a38:	movabs $0xffff8881934f0000,%rax
+ a42:	mov    0x1130(%rax),%rax
+ a49:	add    %gs:0xffffffff92795028,%rax
+ a52:	test   %rax,%rax
+ a55:	je     0xffffffffc0542ecc
+ a5b:	addq   $0x1,(%rax)
+ a5f:	lea    0x14(%rbx),%rax
+ a63:	lea    0x36(%rbx),%rcx
+ a67:	mov    $0x1,%ebp
+ a6c:	mov    $0x1,%r12d
+ a72:	cmp    %r15,%rcx
+ a75:	ja     0xffffffffc0541a9d
+ a77:	movzwl 0x2c(%rbx),%ecx
+ a7b:	lea    0x1(%rcx),%edx
+ a7e:	shr    $0x10,%edx
+ a81:	add    %edx,%ecx
+ a83:	add    $0x1,%ecx
+ a86:	mov    %cx,0x2c(%rbx)
+ a8a:	addb   $0xff,0x2a(%rbx)
+ a8e:	mov    $0x1,%ecx
+ a93:	mov    $0xffffffff,%r12d
+ a99:	cmove  %ecx,%r12d
+ a9d:	movzwl 0xa(%rbx),%ecx
+ aa1:	mov    %cx,0x1e(%rbx)
+ aa5:	mov    0x6(%rbx),%ecx
+ aa8:	mov    %ecx,0x1a(%rbx)
+ aab:	movzwl 0x4(%rbx),%ecx
+ aaf:	mov    %cx,0x4(%rax)
+ ab3:	mov    (%rbx),%ecx
+ ab5:	mov    %ecx,(%rax)
+ ab7:	movw   $0x8,0x20(%rbx)
+ abd:	mov    $0xffffffff8ec35c20,%rax
+ ac4:	mov    %r13,%rdi
+ ac7:	mov    $0x14,%esi
+ acc:	call   *%rax
+ ace:	test   %eax,%eax
+ ad0:	jne    0xffffffffc0542ed1
+ ad6:	movabs $0xffff8881934f0000,%rax
+ ae0:	mov    0x1150(%rax),%rcx
+ ae7:	add    %gs:0xffffffff92795028,%rcx
+ af0:	test   %rcx,%rcx
+ af3:	je     0xffffffffc0542ed1
+ af9:	addq   $0x1,0x8(%rcx)
+ afe:	test   %r12d,%r12d
+ b01:	mov    $0x2,%ebp
+ b06:	cmovns %r12d,%ebp
+ b0a:	test   %r14,%r14
+ b0d:	je     0xffffffffc0542ed1
+ b13:	test   %r12d,%r12d
+ b16:	jns    0xffffffffc0542ed1
+ b1c:	mov    0x1170(%rax),%rax
+ b23:	add    %gs:0xffffffff92795028,%rax
+ b2c:	test   %rax,%rax
+ b2f:	je     0xffffffffc0541b35
+ b31:	addq   $0x1,(%rax)
+ b35:	movabs $0xffff888106a39400,%rax
+ b3f:	mov    0x100(%rax),%rcx
+ b46:	test   %rcx,%rcx
+ b49:	je     0xffffffffc0541f30
+ b4f:	mov    %r13,%rdi
+ b52:	call   *0x30(%rcx)
+ b55:	mov    %eax,%ebp
+ b57:	jmp    0xffffffffc0542ed1
+ b5c:	movabs $0xffff8881934f0000,%rax
+ b66:	mov    0x1160(%rax),%rax
+ b6d:	add    %gs:0xffffffff92795028,%rax
+ b76:	test   %rax,%rax
+ b79:	je     0xffffffffc0542ecc
+ b7f:	addq   $0x1,(%rax)
+ b83:	mov    0x26(%rbx),%ecx
+ b86:	bswap  %ecx
+ b88:	cmp    $0x4ff,%ecx
+ b8e:	ja     0xffffffffc0541b95
+ b90:	addq   $0x1,0x8(%rax)
+ b95:	lea    0x52(%rbx),%rax
+ b99:	cmp    %r15,%rax
+ b9c:	ja     0xffffffffc0542ecc
+ ba2:	lea    0x20(%rsp),%rcx
+ ba7:	mov    0x30(%rbx),%al
+ baa:	mov    %al,0x34(%rsp)
+ bae:	movb   $0x1,0x3c(%rsp)
+ bb3:	mov    0x42(%rbx),%rdx
+ bb7:	mov    0x4a(%rbx),%rsi
+ bbb:	mov    %rsi,0x18(%rsp)
+ bc0:	mov    %rdx,0x10(%rsp)
+ bc5:	mov    0x32(%rbx),%rdx
+ bc9:	mov    0x3a(%rbx),%rsi
+ bcd:	mov    %rdx,(%rcx)
+ bd0:	mov    %rsi,0x8(%rcx)
+ bd4:	mov    $0x3,%dl
+ bd6:	xor    %ecx,%ecx
+ bd8:	mov    $0x2,%ebp
+ bdd:	cmp    $0x10,%al
+ bdf:	jle    0xffffffffc054148d
+ be5:	cmp    $0x11,%al
+ be7:	je     0xffffffffc0541d2c
+ bed:	cmp    $0x29,%al
+ bef:	jne    0xffffffffc0542ed1
+ bf5:	movl   $0x0,0x4c(%rsp)
+ bfd:	movq   $0x0,0x44(%rsp)
+ c06:	mov    0x20(%rsp),%eax
+ c0a:	mov    %eax,0x40(%rsp)
+ c0e:	movabs $0xffff8881016ac800,%rdi
+ c18:	lea    0x40(%rsp),%rsi
+ c1d:	mov    $0xffffffff8ca9c930,%rax
+ c24:	call   *%rax
+ c26:	mov    %rax,%r14
+ c29:	test   %rax,%rax
+ c2c:	je     0xffffffffc0541c55
+ c2e:	movabs $0xffff8881934f0000,%rax
+ c38:	mov    0x1130(%rax),%rax
+ c3f:	add    %gs:0xffffffff92795028,%rax
+ c48:	test   %rax,%rax
+ c4b:	je     0xffffffffc0542ecc
+ c51:	addq   $0x1,(%rax)
+ c55:	lea    0x36(%rbx),%rax
+ c59:	mov    $0x1,%ebp
+ c5e:	cmp    %r15,%rax
+ c61:	ja     0xffffffffc0542ed1
+ c67:	lea    0x5e(%rbx),%rax
+ c6b:	mov    $0x1,%ebp
+ c70:	mov    $0x1,%r12d
+ c76:	cmp    %r15,%rax
+ c79:	ja     0xffffffffc0541c8e
+ c7b:	addb   $0xff,0x3d(%rbx)
+ c7f:	mov    $0x1,%eax
+ c84:	mov    $0xffffffff,%r12d
+ c8a:	cmove  %eax,%r12d
+ c8e:	movzwl 0xa(%rbx),%eax
+ c92:	mov    %ax,0x32(%rbx)
+ c96:	mov    0x6(%rbx),%eax
+ c99:	mov    %eax,0x2e(%rbx)
+ c9c:	mov    (%rbx),%eax
+ c9e:	mov    %eax,0x28(%rbx)
+ ca1:	movzwl 0x4(%rbx),%eax
+ ca5:	mov    %ax,0x2c(%rbx)
+ ca9:	movw   $0xdd86,0x34(%rbx)
+ caf:	mov    $0xffffffff8ec35c20,%rax
+ cb6:	mov    %r13,%rdi
+ cb9:	mov    $0x28,%esi
+ cbe:	call   *%rax
+ cc0:	test   %eax,%eax
+ cc2:	jne    0xffffffffc0542ed1
+ cc8:	movabs $0xffff8881934f0000,%rax
+ cd2:	mov    0x1150(%rax),%rcx
+ cd9:	add    %gs:0xffffffff92795028,%rcx
+ ce2:	test   %rcx,%rcx
+ ce5:	je     0xffffffffc0542ed1
+ ceb:	addq   $0x1,0x8(%rcx)
+ cf0:	test   %r12d,%r12d
+ cf3:	mov    $0x2,%ebp
+ cf8:	cmovns %r12d,%ebp
+ cfc:	test   %r14,%r14
+ cff:	je     0xffffffffc0542ed1
+ d05:	test   %r12d,%r12d
+ d08:	jns    0xffffffffc0542ed1
+ d0e:	mov    0x1170(%rax),%rax
+ d15:	add    %gs:0xffffffff92795028,%rax
+ d1e:	test   %rax,%rax
+ d21:	jne    0xffffffffc0541679
+ d27:	jmp    0xffffffffc0541b35
+ d2c:	lea    0x3e(%rbx),%rax
+ d30:	test   %cl,%cl
+ d32:	cmovne %r14,%rax
+ d36:	lea    0x8(%rax),%rdx
+ d3a:	cmp    %r15,%rdx
+ d3d:	ja     0xffffffffc0542ecc
+ d43:	test   %cl,%cl
+ d45:	mov    %di,0x54(%rsp)
+ d4a:	je     0xffffffffc0541d5f
+ d4c:	movzwl (%rax),%edx
+ d4f:	lea    0x30(%rsp),%rcx
+ d54:	mov    %dx,0x30(%rsp)
+ d59:	add    $0x2,%rax
+ d5d:	jmp    0xffffffffc0541d6d
+ d5f:	movzwl 0x2(%rax),%edx
+ d63:	lea    0x30(%rsp),%rcx
+ d68:	mov    %dx,0x30(%rsp)
+ d6d:	movzwl (%rax),%eax
+ d70:	mov    %ax,0x2(%rcx)
+ d74:	mov    0x20(%rsp),%eax
+ d78:	mov    %eax,0x58(%rsp)
+ d7c:	movzwl 0x32(%rsp),%eax
+ d81:	mov    %ax,0x68(%rsp)
+ d86:	mov    0x34(%rsp),%al
+ d8a:	mov    %al,0x6a(%rsp)
+ d8e:	movabs $0xffff8881016ad000,%rdi
+ d98:	lea    0x58(%rsp),%rsi
+ d9d:	mov    $0xffffffff8ca9c930,%r12
+ da4:	call   *%r12
+ da7:	mov    %rax,%rdx
+ daa:	test   %rax,%rax
+ dad:	je     0xffffffffc0541ef6
+ db3:	mov    %r15,%rax
+ db6:	sub    %rbx,%rax
+ db9:	cmp    $0x5ea,%rax
+ dbf:	jg     0xffffffffc0542ecc
+ dc5:	movabs $0xffff8881934f0000,%r12
+ dcf:	mov    0x1100(%r12),%rbp
+ dd7:	add    %gs:0xffffffff92795028,%rbp
+ de0:	test   %rbp,%rbp
+ de3:	je     0xffffffffc0542ecc
+ de9:	addq   $0x1,0x0(%rbp)
+ dee:	testb  $0x1,(%rdx)
+ df1:	je     0xffffffffc0541dfa
+ df3:	movw   $0x0,0x30(%rsp)
+ dfa:	mov    0x4(%rdx),%eax
+ dfd:	mov    %rax,0x80(%rsp)
+ e05:	mov    $0xffffffff92795034,%rax
+ e0c:	add    %gs:0xffffffff92795028,%rax
+ e15:	mov    (%rax),%rax
+ e18:	test   $0xffffff80,%eax
+ e1d:	je     0xffffffffc0541f6f
+ e23:	mov    0x1118(%r12),%rax
+ e2b:	add    %gs:0xffffffff92795028,%rax
+ e34:	test   %rax,%rax
+ e37:	je     0xffffffffc0542ecc
+ e3d:	addq   $0x1,(%rax)
+ e41:	movabs $0xffff8881016ad800,%rax
+ e4b:	mov    %rax,0x70(%rsp)
+ e50:	jmp    0xffffffffc0541f91
+ e55:	mov    %eax,%eax
+ e57:	movabs $0xffff888140160000,%rcx
+ e61:	mov    0x100(%rcx,%rax,8),%rax
+ e69:	mov    %rax,0x8(%rsp)
+ e6e:	test   %rax,%rax
+ e71:	je     0xffffffffc0541923
+ e77:	mov    %rsi,0x80(%rsp)
+ e7f:	testb  $0x4,(%rdi)
+ e82:	je     0xffffffffc05428f5
+ e88:	testb  $0x1,0x3c(%rsp)
+ e8d:	jne    0xffffffffc0541f3a
+ e93:	movabs $0xffff888106a38800,%rax
+ e9d:	mov    0x100(%rax),%rbp
+ ea4:	add    %gs:0xffffffff92795028,%rbp
+ ead:	test   %rbp,%rbp
+ eb0:	je     0xffffffffc0542ecc
+ eb6:	add    $0x66,%rbx
+ eba:	testb  $0x1,0x3c(%rsp)
+ ebf:	cmove  %r14,%rbx
+ ec3:	lea    0x9(%rbx),%rax
+ ec7:	cmp    %r15,%rax
+ eca:	ja     0xffffffffc05428f0
+ ed0:	mov    %rdx,(%rsp)
+ ed4:	add    $0x8,%rbx
+ ed8:	movzbl (%rbx),%ecx
+ edb:	test   $0x80,%cl
+ ede:	jne    0xffffffffc054209a
+ ee4:	add    $0x9,%rbx
+ ee8:	cmp    %r15,%rbx
+ eeb:	ja     0xffffffffc05428ec
+ ef1:	jmp    0xffffffffc05421ca
+ ef6:	movw   $0x0,0x68(%rsp)
+ efd:	movabs $0xffff8881016ad000,%rdi
+ f07:	lea    0x58(%rsp),%rsi
+ f0c:	call   *%r12
+ f0f:	test   %rax,%rax
+ f12:	je     0xffffffffc0542ed1
+ f18:	mov    %rax,%rdx
+ f1b:	testb  $0x88,(%rax)
+ f1e:	jne    0xffffffffc0541db3
+ f24:	movw   $0x0,0x32(%rsp)
+ f2b:	jmp    0xffffffffc0541db3
+ f30:	mov    $0x2,%ebp
+ f35:	jmp    0xffffffffc0542ed1
+ f3a:	mov    0x1158(%r12),%rbp
+ f42:	add    %gs:0xffffffff92795028,%rbp
+ f4b:	test   %rbp,%rbp
+ f4e:	je     0xffffffffc0542ecc
+ f54:	addq   $0x1,0x0(%rbp)
+ f59:	mov    0x37(%rbx),%al
+ f5c:	add    $0xfd,%al
+ f5e:	cmp    $0x1,%al
+ f60:	ja     0xffffffffc05428f5
+ f66:	add    $0x8,%rbp
+ f6a:	jmp    0xffffffffc05428f0
+ f6f:	mov    %eax,%eax
+ f71:	movabs $0xffff888140160000,%rcx
+ f7b:	mov    0x100(%rcx,%rax,8),%rax
+ f83:	mov    %rax,0x70(%rsp)
+ f88:	test   %rax,%rax
+ f8b:	je     0xffffffffc0541e23
+ f91:	testb  $0x4,(%rdx)
+ f94:	mov    %rdx,0x8(%rsp)
+ f99:	je     0xffffffffc054202f
+ f9f:	testb  $0x1,0x3c(%rsp)
+ fa4:	jne    0xffffffffc0541fee
+ fa6:	movabs $0xffff888106a38800,%rax
+ fb0:	mov    0x100(%rax),%rax
+ fb7:	add    %gs:0xffffffff92795028,%rax
+ fc0:	mov    %rax,(%rsp)
+ fc4:	test   %rax,%rax
+ fc7:	je     0xffffffffc0542ecc
+ fcd:	add    $0x3e,%rbx
+ fd1:	testb  $0x1,0x3c(%rsp)
+ fd6:	cmove  %r14,%rbx
+ fda:	lea    0x9(%rbx),%rax
+ fde:	cmp    %r15,%rax
+ fe1:	jbe    0xffffffffc05420ee
+ fe7:	mov    0x8(%rsp),%rdx
+ fec:	jmp    0xffffffffc0542027
+ fee:	mov    0x1158(%r12),%rax
+ ff6:	add    %gs:0xffffffff92795028,%rax
+ fff:	mov    %rax,(%rsp)
+1003:	test   %rax,%rax
+1006:	je     0xffffffffc0542ecc
+100c:	mov    (%rsp),%rax
+1010:	addq   $0x1,(%rax)
+1014:	mov    0x23(%rbx),%al
+1017:	and    $0xfd,%al
+1019:	cmp    $0x1,%al
+101b:	mov    0x8(%rsp),%rdx
+1020:	jne    0xffffffffc054202f
+1022:	addq   $0x8,(%rsp)
+1027:	mov    (%rsp),%rax
+102b:	addq   $0x1,(%rax)
+102f:	movzwl 0x30(%rsp),%r15d
+1035:	testb  $0x2,0x3c(%rsp)
+103a:	jne    0xffffffffc0542092
+103c:	testb  $0x2,(%rdx)
+103f:	jne    0xffffffffc054208a
+1041:	lea    0x10(%rsp),%rsi
+1046:	mov    $0xffffffff8ca9c930,%rax
+104d:	mov    0x70(%rsp),%rdi
+1052:	call   *%rax
+1054:	test   %rax,%rax
+1057:	je     0xffffffffc054208a
+1059:	mov    %rax,%rbx
+105c:	cmpb   $0x11,0x34(%rsp)
+1061:	jne    0xffffffffc0542216
+1067:	mov    $0xffffffff8ca9d630,%rax
+106e:	call   *%rax
+1070:	mov    %rax,%rcx
+1073:	sub    0x8(%rbx),%rcx
+1077:	movabs $0x6fc23ac00,%rdx
+1081:	cmp    %rdx,%rcx
+1084:	jbe    0xffffffffc0542212
+108a:	xor    %r14d,%r14d
+108d:	jmp    0xffffffffc054223f
+1092:	xor    %r14d,%r14d
+1095:	jmp    0xffffffffc0542244
+109a:	lea    0xe(%rbx),%rax
+109e:	cmp    %r15,%rax
+10a1:	ja     0xffffffffc05428ec
+10a7:	test   $0x20,%cl
+10aa:	jne    0xffffffffc05421b9
+10b0:	addq   $0x1,0x8(%rbp)
+10b5:	mov    (%rsp),%rdx
+10b9:	cmp    $0x1ff,%edx
+10bf:	ja     0xffffffffc05428f5
+10c5:	movabs $0xffff8881531f0000,%rax
+10cf:	mov    0x100(%rax,%rdx,8),%rbp
+10d7:	add    %gs:0xffffffff92795028,%rbp
+10e0:	test   %rbp,%rbp
+10e3:	jne    0xffffffffc05428f0
+10e9:	jmp    0xffffffffc05428f5
+10ee:	add    $0x8,%rbx
+10f2:	movzbl (%rbx),%ecx
+10f5:	test   $0x80,%cl
+10f8:	jne    0xffffffffc054214f
+10fa:	add    $0x9,%rbx
+10fe:	cmp    %r15,%rbx
+1101:	ja     0xffffffffc0541fe7
+1107:	test   %rax,%rax
+110a:	je     0xffffffffc0541fe7
+1110:	movzbl (%rax),%ecx
+1113:	mov    %ecx,%edx
+1115:	shr    $0x6,%dl
+1118:	cmp    $0x3,%dl
+111b:	je     0xffffffffc05430cc
+1121:	cmp    $0x2,%dl
+1124:	je     0xffffffffc05430f1
+112a:	cmp    $0x1,%dl
+112d:	jne    0xffffffffc0541fe7
+1133:	and    $0x3f,%ecx
+1136:	shl    $0xa,%rcx
+113a:	movzbl 0x1(%rax),%edx
+113e:	lea    (%rcx,%rdx,4),%rcx
+1142:	mov    0x2(%rax),%al
+1145:	shr    $0x6,%al
+1148:	mov    $0x1,%dl
+114a:	jmp    0xffffffffc0543109
+114f:	lea    0xe(%rbx),%rax
+1153:	cmp    %r15,%rax
+1156:	ja     0xffffffffc0541fe7
+115c:	test   $0x20,%cl
+115f:	jne    0xffffffffc0542828
+1165:	mov    (%rsp),%rax
+1169:	addq   $0x1,0x8(%rax)
+116e:	cmpl   $0x1ff,0x80(%rsp)
+1179:	mov    0x8(%rsp),%rdx
+117e:	ja     0xffffffffc054202f
+1184:	movabs $0xffff8881531f0000,%rax
+118e:	mov    0x80(%rsp),%rcx
+1196:	mov    0x100(%rax,%rcx,8),%rax
+119e:	add    %gs:0xffffffff92795028,%rax
+11a7:	mov    %rax,(%rsp)
+11ab:	test   %rax,%rax
+11ae:	jne    0xffffffffc0542027
+11b4:	jmp    0xffffffffc054202f
+11b9:	cmpb   $0x8,0x5(%rbx)
+11bd:	jb     0xffffffffc05428ec
+11c3:	add    $0x6,%rbx
+11c7:	mov    %rbx,%rax
+11ca:	test   %rax,%rax
+11cd:	je     0xffffffffc05428ec
+11d3:	movzbl (%rax),%ecx
+11d6:	mov    %ecx,%edx
+11d8:	shr    $0x6,%dl
+11db:	cmp    $0x3,%dl
+11de:	je     0xffffffffc05426fa
+11e4:	cmp    $0x2,%dl
+11e7:	je     0xffffffffc054271f
+11ed:	cmp    $0x1,%dl
+11f0:	jne    0xffffffffc05428ec
+11f6:	and    $0x3f,%ecx
+11f9:	shl    $0xa,%rcx
+11fd:	movzbl 0x1(%rax),%edx
+1201:	lea    (%rcx,%rdx,4),%rcx
+1205:	mov    0x2(%rax),%al
+1208:	shr    $0x6,%al
+120b:	mov    $0x1,%dl
+120d:	jmp    0xffffffffc0542737
+1212:	mov    %rax,0x8(%rbx)
+1216:	mov    (%rbx),%eax
+1218:	xor    %r14d,%r14d
+121b:	cmp    $0x1000,%rax
+1221:	mov    %eax,0x38(%rsp)
+1225:	lea    (%rax,%rax,2),%rax
+1229:	movabs $0xffffc900086d3000,%rcx
+1233:	lea    0x100(%rcx,%rax,8),%rax
+123b:	cmovb  %rax,%r14
+123f:	mov    0x8(%rsp),%rdx
+1244:	cmpb   $0x11,0x34(%rsp)
+1249:	jne    0xffffffffc05422fa
+124f:	testb  $0x2,0x1(%rdx)
+1253:	je     0xffffffffc05422fa
+1259:	mov    0x1110(%r12),%rbx
+1261:	add    %gs:0xffffffff92795028,%rbx
+126a:	test   %rbx,%rbx
+126d:	je     0xffffffffc05422fa
+1273:	mov    $0xffffffff8ca9d630,%rax
+127a:	call   *%rax
+127c:	mov    %rax,%rcx
+127f:	sub    0x8(%rbx),%rcx
+1283:	cmp    $0x3b9aca01,%rcx
+128a:	jb     0xffffffffc0542299
+128c:	movq   $0x1,(%rbx)
+1293:	mov    %rax,0x8(%rbx)
+1297:	jmp    0xffffffffc05422ab
+1299:	mov    (%rbx),%rax
+129c:	add    $0x1,%rax
+12a0:	mov    %rax,(%rbx)
+12a3:	cmp    $0x1e848,%rax
+12a9:	ja     0xffffffffc05422fa
+12ab:	movabs $0xffff8881016af000,%rdi
+12b5:	lea    0x58(%rsp),%rsi
+12ba:	mov    $0xffffffff8ca9c930,%rbx
+12c1:	call   *%rbx
+12c3:	test   %rax,%rax
+12c6:	je     0xffffffffc05422fa
+12c8:	lea    0x38(%rsp),%rsi
+12cd:	mov    %rax,%rdi
+12d0:	call   *%rbx
+12d2:	test   %rax,%rax
+12d5:	je     0xffffffffc05422fa
+12d7:	mov    0x1178(%r12),%rax
+12df:	add    %gs:0xffffffff92795028,%rax
+12e8:	test   %rax,%rax
+12eb:	je     0xffffffffc0542468
+12f1:	addq   $0x1,(%rax)
+12f5:	jmp    0xffffffffc0542468
+12fa:	test   %r14,%r14
+12fd:	je     0xffffffffc0542468
+1303:	mov    0x80(%rsp),%rax
+130b:	cmp    $0x3ff,%eax
+1310:	ja     0xffffffffc0542ecc
+1316:	mov    0x100(%r12,%rax,8),%rcx
+131e:	add    %gs:0xffffffff92795028,%rcx
+1327:	test   %rcx,%rcx
+132a:	je     0xffffffffc0542ecc
+1330:	movzwl 0x54(%rsp),%eax
+1335:	mov    %eax,%ebx
+1337:	rol    $0x8,%bx
+133b:	addq   $0x1,(%rcx)
+133f:	movzwl %bx,%eax
+1342:	add    %rax,0x8(%rcx)
+1346:	mov    0x38(%rsp),%ecx
+134a:	cmp    $0xfff,%rcx
+1351:	ja     0xffffffffc0542ecc
+1357:	movabs $0xffffc90008433000,%rdx
+1361:	mov    0x100(%rdx,%rcx,8),%rcx
+1369:	add    %gs:0xffffffff92795028,%rcx
+1372:	test   %rcx,%rcx
+1375:	je     0xffffffffc0542ecc
+137b:	addq   $0x1,(%rcx)
+137f:	add    %rax,0x8(%rcx)
+1383:	mov    %r15w,0x30(%rsp)
+1389:	testb  $0x1,0x10(%r14)
+138e:	jne    0xffffffffc054263f
+1394:	movzwl 0x12(%rsp),%r12d
+139a:	mov    $0xffffffff8ec35c20,%rax
+13a1:	mov    %r13,%rdi
+13a4:	mov    $0xffffffec,%esi
+13a9:	call   *%rax
+13ab:	test   %eax,%eax
+13ad:	jne    0xffffffffc0542ecc
+13b3:	mov    0x0(%r13),%rax
+13b7:	mov    0x8(%r13),%rcx
+13bb:	lea    0xe(%rax),%rdx
+13bf:	cmp    %rcx,%rdx
+13c2:	ja     0xffffffffc0542ecc
+13c8:	lea    0x22(%rax),%rdx
+13cc:	mov    $0x1,%ebp
+13d1:	cmp    %rcx,%rdx
+13d4:	ja     0xffffffffc0542ed1
+13da:	rol    $0x8,%r15w
+13df:	xor    %r15d,%r12d
+13e2:	shl    $0x10,%r12d
+13e6:	lea    0x10ac(%r12),%edi
+13ee:	movabs $0xffff888106a39000,%rcx
+13f8:	movzwl 0x104(%rcx),%esi
+13ff:	mov    %si,0x4(%rax)
+1403:	mov    0x100(%rcx),%ecx
+1409:	mov    %ecx,(%rax)
+140b:	mov    0x14(%rax),%ecx
+140e:	mov    %ecx,0x6(%rax)
+1411:	movzwl 0x18(%rax),%ecx
+1415:	mov    %cx,0xa(%rax)
+1419:	movw   $0x8,0xc(%rax)
+141f:	mov    0x3d(%rsp),%dl
+1423:	mov    (%r14),%ecx
+1426:	movb   $0x45,0xe(%rax)
+142a:	mov    %dl,0xf(%rax)
+142d:	add    $0x14,%ebx
+1430:	rol    $0x8,%bx
+1434:	mov    %bx,0x10(%rax)
+1438:	movl   $0x0,0x12(%rax)
+143f:	mov    %ecx,0x1e(%rax)
+1442:	mov    %edi,0x1a(%rax)
+1445:	movw   $0x440,0x16(%rax)
+144b:	movzwl 0xe(%rax),%edx
+144f:	movzwl %bx,%esi
+1452:	movzwl 0x16(%rax),%edi
+1456:	shr    $0x10,%r12d
+145a:	add    %rsi,%r12
+145d:	movzwl %cx,%esi
+1460:	add    %r12,%rsi
+1463:	jmp    0xffffffffc0542bc6
+1468:	cmpb   $0x6,0x34(%rsp)
+146d:	jne    0xffffffffc054249a
+146f:	mov    0x1108(%r12),%rax
+1477:	add    %gs:0xffffffff92795028,%rax
+1480:	test   %rax,%rax
+1483:	je     0xffffffffc0542ecc
+1489:	mov    0x3c(%rsp),%ecx
+148d:	shl    $0x2,%ecx
+1490:	not    %ecx
+1492:	and    $0x8,%ecx
+1495:	addq   $0x1,(%rax,%rcx,1)
+149a:	movq   $0x0,0x48(%rsp)
+14a3:	movq   $0x0,0x40(%rsp)
+14ac:	mov    0x1110(%r12),%rbx
+14b4:	add    %gs:0xffffffff92795028,%rbx
+14bd:	mov    $0x1,%r14b
+14c0:	test   %rbx,%rbx
+14c3:	je     0xffffffffc05424eb
+14c5:	mov    $0xffffffff8ca9d630,%rax
+14cc:	call   *%rax
+14ce:	mov    %rax,%rcx
+14d1:	sub    0x8(%rbx),%rcx
+14d5:	cmp    $0x3b9aca01,%rcx
+14dc:	jb     0xffffffffc05424ef
+14de:	movq   $0x1,(%rbx)
+14e5:	mov    %rax,0x8(%rbx)
+14e9:	jmp    0xffffffffc0542502
+14eb:	xor    %eax,%eax
+14ed:	jmp    0xffffffffc0542505
+14ef:	mov    (%rbx),%rcx
+14f2:	add    $0x1,%rcx
+14f6:	mov    %rcx,(%rbx)
+14f9:	cmp    $0x1e848,%rcx
+1500:	ja     0xffffffffc0542505
+1502:	xor    %r14d,%r14d
+1505:	mov    0x8(%rsp),%rcx
+150a:	testb  $0x8,(%rcx)
+150d:	jne    0xffffffffc054251a
+150f:	mov    $0xe0adc0f7,%edx
+1514:	add    0x10(%rsp),%edx
+1518:	jmp    0xffffffffc054253b
+151a:	movzwl 0x32(%rsp),%ecx
+151f:	mov    %cx,0x30(%rsp)
+1524:	movq   $0x0,0x10(%rsp)
+152d:	movq   $0x0,0x18(%rsp)
+1536:	mov    $0xe0adc0f7,%edx
+153b:	mov    $0xe0adc0f7,%esi
+1540:	add    0x30(%rsp),%esi
+1544:	mov    %esi,%ecx
+1546:	xor    $0xe0adc0f7,%ecx
+154c:	mov    %esi,%edi
+154e:	rol    $0xe,%edi
+1551:	sub    %edi,%ecx
+1553:	xor    %ecx,%edx
+1555:	mov    %ecx,%edi
+1557:	rol    $0xb,%edi
+155a:	sub    %edi,%edx
+155c:	xor    %edx,%esi
+155e:	mov    %edx,%edi
+1560:	rol    $0x19,%edi
+1563:	sub    %edi,%esi
+1565:	xor    %esi,%ecx
+1567:	mov    %esi,%edi
+1569:	rol    $0x10,%edi
+156c:	sub    %edi,%ecx
+156e:	xor    %ecx,%edx
+1570:	mov    %ecx,%edi
+1572:	rol    $0x4,%edi
+1575:	sub    %edi,%edx
+1577:	xor    %edx,%esi
+1579:	rol    $0xe,%edx
+157c:	sub    %edx,%esi
+157e:	xor    %esi,%ecx
+1580:	rol    $0x18,%esi
+1583:	sub    %esi,%ecx
+1585:	mov    $0xffff0001,%edx
+158a:	imul   %rcx,%rdx
+158e:	shr    $0x30,%rdx
+1592:	mov    %edx,%esi
+1594:	shl    $0x10,%esi
+1597:	or     %edx,%esi
+1599:	sub    %esi,%ecx
+159b:	mov    0x8(%rsp),%rdx
+15a0:	mov    0x4(%rdx),%esi
+15a3:	mov    %esi,%edx
+15a5:	shl    $0x10,%edx
+15a8:	add    %esi,%edx
+15aa:	add    %ecx,%edx
+15ac:	cmp    $0x20001ff,%edx
+15b2:	ja     0xffffffffc0542ecc
+15b8:	mov    %edx,%ecx
+15ba:	movabs $0xffffc90022885000,%rdx
+15c4:	mov    0x100(%rdx,%rcx,8),%ebx
+15cb:	test   %rbx,%rbx
+15ce:	je     0xffffffffc05425fb
+15d0:	mov    %ebx,0x38(%rsp)
+15d4:	cmp    $0x1000,%ebx
+15da:	jb     0xffffffffc054261a
+15dc:	mov    0x1148(%r12),%rax
+15e4:	add    %gs:0xffffffff92795028,%rax
+15ed:	test   %rax,%rax
+15f0:	jne    0xffffffffc0542ec8
+15f6:	jmp    0xffffffffc0542ecc
+15fb:	mov    0x1148(%r12),%rax
+1603:	add    %gs:0xffffffff92795028,%rax
+160c:	test   %rax,%rax
+160f:	jne    0xffffffffc0542ec4
+1615:	jmp    0xffffffffc0542ecc
+161a:	cmpq   $0x0,0x70(%rsp)
+1620:	je     0xffffffffc0542637
+1622:	mov    0x8(%rsp),%rcx
+1627:	mov    (%rcx),%cl
+1629:	and    $0x2,%cl
+162c:	shr    %cl
+162e:	or     %cl,%r14b
+1631:	je     0xffffffffc054276a
+1637:	mov    %ebx,%r8d
+163a:	jmp    0xffffffffc0542799
+163f:	mov    $0xffffffff8ec35c20,%rax
+1646:	mov    %r13,%rdi
+1649:	mov    $0xffffffd8,%esi
+164e:	call   *%rax
+1650:	test   %eax,%eax
+1652:	jne    0xffffffffc0542ecc
+1658:	mov    0x0(%r13),%rax
+165c:	mov    0x8(%r13),%rcx
+1660:	lea    0xe(%rax),%rdx
+1664:	cmp    %rcx,%rdx
+1667:	ja     0xffffffffc0542ecc
+166d:	lea    0x36(%rax),%rdx
+1671:	mov    $0x1,%ebp
+1676:	cmp    %rcx,%rdx
+1679:	movzwl 0x54(%rsp),%esi
+167e:	ja     0xffffffffc0542ed1
+1684:	movabs $0xffff888106a39000,%rcx
+168e:	movzwl 0x104(%rcx),%edx
+1695:	mov    %dx,0x4(%rax)
+1699:	mov    0x100(%rcx),%ecx
+169f:	mov    %ecx,(%rax)
+16a1:	mov    0x28(%rax),%ecx
+16a4:	mov    %ecx,0x6(%rax)
+16a7:	movzwl 0x2c(%rax),%ecx
+16ab:	mov    %cx,0xa(%rax)
+16af:	movw   $0xdd86,0xc(%rax)
+16b5:	movzwl 0x30(%rsp),%ecx
+16ba:	xor    0x10(%rsp),%ecx
+16be:	mov    0x3d(%rsp),%bl
+16c2:	movw   $0x0,0x10(%rax)
+16c8:	mov    %ebx,%edx
+16ca:	shr    $0x4,%dl
+16cd:	or     $0x60,%dl
+16d0:	mov    %dl,0xe(%rax)
+16d3:	shl    $0x4,%bl
+16d6:	mov    %bl,0xf(%rax)
+16d9:	movw   $0x4004,0x14(%rax)
+16df:	mov    %si,0x12(%rax)
+16e3:	movq   $0x1,0x16(%rax)
+16eb:	movl   $0x0,0x1e(%rax)
+16f2:	mov    %ecx,0x22(%rax)
+16f5:	jmp    0xffffffffc0542fb4
+16fa:	movzbl 0x1(%rax),%ecx
+16fe:	shl    $0x18,%rcx
+1702:	movzbl 0x2(%rax),%edx
+1706:	shl    $0x10,%rdx
+170a:	or     %rcx,%rdx
+170d:	movzbl 0x3(%rax),%ecx
+1711:	shl    $0x8,%rcx
+1715:	or     %rdx,%rcx
+1718:	mov    0x4(%rax),%al
+171b:	mov    $0x3,%dl
+171d:	jmp    0xffffffffc0542737
+171f:	movzbl 0x1(%rax),%edx
+1723:	shl    $0x10,%rdx
+1727:	movzbl 0x2(%rax),%ecx
+172b:	shl    $0x8,%rcx
+172f:	or     %rdx,%rcx
+1732:	mov    0x3(%rax),%al
+1735:	mov    $0x2,%dl
+1737:	movzbl %al,%eax
+173a:	or     %rcx,%rax
+173d:	test   %eax,%eax
+173f:	jle    0xffffffffc05428ec
+1745:	cmp    $0x1,%dl
+1748:	je     0xffffffffc0542847
+174e:	cmp    $0x3,%dl
+1751:	je     0xffffffffc054284e
+1757:	cmp    $0x2,%dl
+175a:	jne    0xffffffffc0542855
+1760:	mov    $0x40,%ecx
+1765:	jmp    0xffffffffc054285a
+176a:	cmpb   $0x11,0x34(%rsp)
+176f:	jne    0xffffffffc0542776
+1771:	mov    %rax,0x48(%rsp)
+1776:	mov    %ebx,0x40(%rsp)
+177a:	lea    0x10(%rsp),%rsi
+177f:	lea    0x40(%rsp),%rdx
+1784:	mov    $0xffffffff8ca9c9c0,%rax
+178b:	mov    0x70(%rsp),%rdi
+1790:	xor    %ecx,%ecx
+1792:	call   *%rax
+1794:	mov    0x38(%rsp),%r8d
+1799:	movabs $0xffff888106a39800,%rdi
+17a3:	mov    0x100(%rdi),%eax
+17a9:	movzwl 0x110(%rdi),%edx
+17b0:	movzwl 0x68(%rsp),%esi
+17b5:	mov    0x6a(%rsp),%cl
+17b9:	mov    %cl,0x112(%rdi)
+17bf:	cmp    0x58(%rsp),%eax
+17c3:	jne    0xffffffffc0542805
+17c5:	cmp    %si,%dx
+17c8:	jne    0xffffffffc0542805
+17ca:	test   %cl,%cl
+17cc:	je     0xffffffffc0542805
+17ce:	cmp    $0xfff,%r8d
+17d5:	ja     0xffffffffc0542ecc
+17db:	mov    %r8d,%eax
+17de:	movabs $0xffffc9000857b000,%rcx
+17e8:	mov    0x100(%rcx,%rax,8),%rax
+17f0:	add    %gs:0xffffffff92795028,%rax
+17f9:	test   %rax,%rax
+17fc:	je     0xffffffffc0542ecc
+1802:	addl   $0x1,(%rax)
+1805:	lea    (%rbx,%rbx,2),%rax
+1809:	movabs $0xffffc900086d3000,%rcx
+1813:	lea    (%rcx,%rax,8),%r14
+1817:	add    $0x100,%r14
+181e:	addq   $0x1,0x8(%rbp)
+1823:	jmp    0xffffffffc0542303
+1828:	cmpb   $0x8,0x5(%rbx)
+182c:	jb     0xffffffffc0541fe7
+1832:	add    $0x6,%rbx
+1836:	mov    %rbx,%rax
+1839:	test   %rax,%rax
+183c:	jne    0xffffffffc0542110
+1842:	jmp    0xffffffffc0541fe7
+1847:	mov    $0x38,%ecx
+184c:	jmp    0xffffffffc054285a
+184e:	mov    $0x48,%ecx
+1853:	jmp    0xffffffffc054285a
+1855:	mov    $0x30,%ecx
+185a:	addq   $0x1,0x0(%rbp,%rcx,1)
+1860:	cmp    $0xfffffd,%eax
+1865:	ja     0xffffffffc05428e1
+1867:	movabs $0xffffc900086ed000,%rcx
+1871:	mov    0x100(%rcx,%rax,8),%ecx
+1878:	test   %rcx,%rcx
+187b:	je     0xffffffffc05428e1
+187d:	mov    %ecx,0x38(%rsp)
+1881:	xor    %r14d,%r14d
+1884:	cmp    $0x1000,%ecx
+188a:	lea    (%rcx,%rcx,2),%rax
+188e:	movabs $0xffffc900086d3000,%rcx
+1898:	lea    0x100(%rcx,%rax,8),%rax
+18a0:	cmovb  %rax,%r14
+18a4:	test   %r14,%r14
+18a7:	je     0xffffffffc054312d
+18ad:	lea    0x10(%rsp),%rsi
+18b2:	mov    $0xffffffff8ca9c930,%rax
+18b9:	mov    0x8(%rsp),%rdi
+18be:	call   *%rax
+18c0:	test   %rax,%rax
+18c3:	je     0xffffffffc0543137
+18c9:	mov    0x38(%rsp),%ecx
+18cd:	cmp    %ecx,(%rax)
+18cf:	jne    0xffffffffc0543235
+18d5:	mov    %rbp,%rax
+18d8:	add    $0x50,%rax
+18dc:	jmp    0xffffffffc05432ce
+18e1:	addq   $0x1,0x10(%rbp)
+18e6:	cltq
+18e8:	mov    %rax,0x18(%rbp)
+18ec:	mov    (%rsp),%rdx
+18f0:	addq   $0x1,0x0(%rbp)
+18f5:	movzwl 0x30(%rsp),%eax
+18fa:	mov    %eax,0x70(%rsp)
+18fe:	testb  $0x2,0x3c(%rsp)
+1903:	jne    0xffffffffc0542956
+1905:	testb  $0x2,(%rdi)
+1908:	jne    0xffffffffc0542956
+190a:	mov    %rdi,%r15
+190d:	mov    %rdx,%rbx
+1910:	lea    0x10(%rsp),%rsi
+1915:	mov    $0xffffffff8ca9c930,%rax
+191c:	mov    0x8(%rsp),%rdi
+1921:	call   *%rax
+1923:	test   %rax,%rax
+1926:	je     0xffffffffc0542951
+1928:	mov    %rax,%rbp
+192b:	cmpb   $0x11,0x34(%rsp)
+1930:	jne    0xffffffffc054295f
+1932:	mov    $0xffffffff8ca9d630,%rax
+1939:	call   *%rax
+193b:	mov    %rax,%rcx
+193e:	sub    0x8(%rbp),%rcx
+1942:	movabs $0x6fc23ac00,%rdx
+194c:	cmp    %rdx,%rcx
+194f:	jbe    0xffffffffc054295b
+1951:	xor    %r14d,%r14d
+1954:	jmp    0xffffffffc0542989
+1956:	xor    %r14d,%r14d
+1959:	jmp    0xffffffffc054298f
+195b:	mov    %rax,0x8(%rbp)
+195f:	mov    0x0(%rbp),%eax
+1962:	xor    %r14d,%r14d
+1965:	cmp    $0x1000,%rax
+196b:	mov    %eax,0x38(%rsp)
+196f:	lea    (%rax,%rax,2),%rax
+1973:	movabs $0xffffc900086d3000,%rcx
+197d:	lea    0x100(%rcx,%rax,8),%rax
+1985:	cmovb  %rax,%r14
+1989:	mov    %rbx,%rdx
+198c:	mov    %r15,%rdi
+198f:	cmpb   $0x11,0x34(%rsp)
+1994:	jne    0xffffffffc0542a60
+199a:	testb  $0x2,0x1(%rdi)
+199e:	je     0xffffffffc0542a60
+19a4:	mov    0x1110(%r12),%rbp
+19ac:	add    %gs:0xffffffff92795028,%rbp
+19b5:	test   %rbp,%rbp
+19b8:	je     0xffffffffc0542a60
+19be:	mov    %rdi,%r15
+19c1:	mov    %rdx,%rbx
+19c4:	mov    $0xffffffff8ca9d630,%rax
+19cb:	call   *%rax
+19cd:	mov    %rax,%rcx
+19d0:	sub    0x8(%rbp),%rcx
+19d4:	cmp    $0x3b9aca01,%rcx
+19db:	jb     0xffffffffc05429eb
+19dd:	movq   $0x1,0x0(%rbp)
+19e5:	mov    %rax,0x8(%rbp)
+19e9:	jmp    0xffffffffc0542a05
+19eb:	mov    0x0(%rbp),%rax
+19ef:	add    $0x1,%rax
+19f3:	mov    %rax,0x0(%rbp)
+19f7:	cmp    $0x1e848,%rax
+19fd:	mov    %rbx,%rdx
+1a00:	mov    %r15,%rdi
+1a03:	ja     0xffffffffc0542a60
+1a05:	movabs $0xffff8881016af000,%rdi
+1a0f:	lea    0x58(%rsp),%rsi
+1a14:	mov    $0xffffffff8ca9c930,%rbp
+1a1b:	call   *%rbp
+1a1d:	mov    %r15,%rdi
+1a20:	mov    %rbx,%rdx
+1a23:	test   %rax,%rax
+1a26:	je     0xffffffffc0542a60
+1a28:	lea    0x38(%rsp),%rsi
+1a2d:	mov    %rax,%rdi
+1a30:	call   *%rbp
+1a32:	mov    %r15,%rdi
+1a35:	mov    %rbx,%rdx
+1a38:	test   %rax,%rax
+1a3b:	je     0xffffffffc0542a60
+1a3d:	mov    0x1178(%r12),%rax
+1a45:	add    %gs:0xffffffff92795028,%rax
+1a4e:	test   %rax,%rax
+1a51:	je     0xffffffffc0542c43
+1a57:	addq   $0x1,(%rax)
+1a5b:	jmp    0xffffffffc0542c43
+1a60:	test   %r14,%r14
+1a63:	je     0xffffffffc0542c43
+1a69:	cmp    $0x3ff,%edx
+1a6f:	ja     0xffffffffc0542ecc
+1a75:	mov    0x100(%r12,%rdx,8),%rcx
+1a7d:	add    %gs:0xffffffff92795028,%rcx
+1a86:	test   %rcx,%rcx
+1a89:	je     0xffffffffc0542ecc
+1a8f:	mov    0x54(%rsp),%eax
+1a93:	rol    $0x8,%ax
+1a97:	addq   $0x1,(%rcx)
+1a9b:	mov    %eax,%r12d
+1a9e:	movzwl %ax,%eax
+1aa1:	add    %rax,0x8(%rcx)
+1aa5:	mov    0x38(%rsp),%ecx
+1aa9:	cmp    $0xfff,%rcx
+1ab0:	ja     0xffffffffc0542ecc
+1ab6:	movabs $0xffffc90008433000,%rdx
+1ac0:	mov    0x100(%rdx,%rcx,8),%rcx
+1ac8:	add    %gs:0xffffffff92795028,%rcx
+1ad1:	test   %rcx,%rcx
+1ad4:	je     0xffffffffc0542ecc
+1ada:	addq   $0x1,(%rcx)
+1ade:	add    %rax,0x8(%rcx)
+1ae2:	mov    0x70(%rsp),%eax
+1ae6:	mov    %ax,0x30(%rsp)
+1aeb:	testb  $0x1,0x10(%r14)
+1af0:	jne    0xffffffffc0542f05
+1af6:	movzwl 0x12(%rsp),%ebx
+1afb:	mov    $0xffffffff8ec35c20,%rax
+1b02:	mov    %r13,%rdi
+1b05:	mov    $0xffffffec,%esi
+1b0a:	call   *%rax
+1b0c:	test   %eax,%eax
+1b0e:	jne    0xffffffffc0542ecc
+1b14:	mov    0x0(%r13),%rax
+1b18:	mov    0x8(%r13),%rcx
+1b1c:	lea    0xe(%rax),%rdx
+1b20:	cmp    %rcx,%rdx
+1b23:	ja     0xffffffffc0542ecc
+1b29:	lea    0x22(%rax),%rdx
+1b2d:	mov    $0x1,%ebp
+1b32:	cmp    %rcx,%rdx
+1b35:	ja     0xffffffffc0542ed1
+1b3b:	mov    0x70(%rsp),%ecx
+1b3f:	rol    $0x8,%cx
+1b43:	xor    %ecx,%ebx
+1b45:	shl    $0x10,%ebx
+1b48:	lea    0x10ac(%rbx),%edi
+1b4e:	movabs $0xffff888106a39000,%rcx
+1b58:	movzwl 0x104(%rcx),%esi
+1b5f:	mov    %si,0x4(%rax)
+1b63:	mov    0x100(%rcx),%ecx
+1b69:	mov    %ecx,(%rax)
+1b6b:	mov    0x14(%rax),%ecx
+1b6e:	mov    %ecx,0x6(%rax)
+1b71:	movzwl 0x18(%rax),%ecx
+1b75:	mov    %cx,0xa(%rax)
+1b79:	movw   $0x8,0xc(%rax)
+1b7f:	mov    0x3d(%rsp),%dl
+1b83:	mov    (%r14),%ecx
+1b86:	movb   $0x45,0xe(%rax)
+1b8a:	mov    %dl,0xf(%rax)
+1b8d:	add    $0x14,%r12d
+1b91:	rol    $0x8,%r12w
+1b96:	mov    %r12w,0x10(%rax)
+1b9b:	movl   $0x0,0x12(%rax)
+1ba2:	mov    %ecx,0x1e(%rax)
+1ba5:	mov    %edi,0x1a(%rax)
+1ba8:	movw   $0x440,0x16(%rax)
+1bae:	movzwl 0xe(%rax),%edx
+1bb2:	movzwl %r12w,%esi
+1bb6:	movzwl 0x16(%rax),%edi
+1bba:	shr    $0x10,%ebx
+1bbd:	add    %rsi,%rbx
+1bc0:	movzwl %cx,%esi
+1bc3:	add    %rbx,%rsi
+1bc6:	shr    $0x10,%rcx
+1bca:	add    %rsi,%rcx
+1bcd:	add    %rdx,%rcx
+1bd0:	add    %rdi,%rcx
+1bd3:	add    $0x10ac,%rcx
+1bda:	mov    %rcx,%rdx
+1bdd:	shr    $0x10,%rdx
+1be1:	movzwl %cx,%esi
+1be4:	add    %rdx,%rsi
+1be7:	cmp    $0x10000,%rcx
+1bee:	cmovb  %rcx,%rsi
+1bf2:	mov    %rsi,%rcx
+1bf5:	shr    $0x10,%rcx
+1bf9:	movzwl %si,%edx
+1bfc:	add    %rcx,%rdx
+1bff:	cmp    $0x10000,%rsi
+1c06:	cmovb  %rsi,%rdx
+1c0a:	mov    %rdx,%rcx
+1c0d:	shr    $0x10,%rcx
+1c11:	movzwl %dx,%esi
+1c14:	add    %rcx,%rsi
+1c17:	cmp    $0x10000,%rdx
+1c1e:	cmovb  %rdx,%rsi
+1c22:	mov    %esi,%ecx
+1c24:	shr    $0x10,%ecx
+1c27:	cmp    $0x10000,%rsi
+1c2e:	mov    $0x10000,%edx
+1c33:	cmovae %ecx,%edx
+1c36:	add    %esi,%edx
+1c38:	not    %edx
+1c3a:	mov    %dx,0x18(%rax)
+1c3e:	jmp    0xffffffffc05413d1
+1c43:	cmpb   $0x6,0x34(%rsp)
+1c48:	jne    0xffffffffc0542c75
+1c4a:	mov    0x1108(%r12),%rax
+1c52:	add    %gs:0xffffffff92795028,%rax
+1c5b:	test   %rax,%rax
+1c5e:	je     0xffffffffc0542ecc
+1c64:	mov    0x3c(%rsp),%ecx
+1c68:	shl    $0x2,%ecx
+1c6b:	not    %ecx
+1c6d:	and    $0x8,%ecx
+1c70:	addq   $0x1,(%rax,%rcx,1)
+1c75:	mov    %rdx,(%rsp)
+1c79:	movq   $0x0,0x48(%rsp)
+1c82:	movq   $0x0,0x40(%rsp)
+1c8b:	mov    0x1110(%r12),%rbx
+1c93:	add    %gs:0xffffffff92795028,%rbx
+1c9c:	mov    $0x1,%r14b
+1c9f:	test   %rbx,%rbx
+1ca2:	je     0xffffffffc0542ccd
+1ca4:	mov    %rdi,%rbp
+1ca7:	mov    $0xffffffff8ca9d630,%rax
+1cae:	call   *%rax
+1cb0:	mov    %rax,%rcx
+1cb3:	sub    0x8(%rbx),%rcx
+1cb7:	cmp    $0x3b9aca01,%rcx
+1cbe:	jb     0xffffffffc0542cd1
+1cc0:	movq   $0x1,(%rbx)
+1cc7:	mov    %rax,0x8(%rbx)
+1ccb:	jmp    0xffffffffc0542ce4
+1ccd:	xor    %eax,%eax
+1ccf:	jmp    0xffffffffc0542cea
+1cd1:	mov    (%rbx),%rcx
+1cd4:	add    $0x1,%rcx
+1cd8:	mov    %rcx,(%rbx)
+1cdb:	cmp    $0x1e848,%rcx
+1ce2:	ja     0xffffffffc0542ce7
+1ce4:	xor    %r14d,%r14d
+1ce7:	mov    %rbp,%rdi
+1cea:	testb  $0x8,(%rdi)
+1ced:	jne    0xffffffffc0542d14
+1cef:	mov    %rdi,%r15
+1cf2:	mov    0x10(%rsp),%edx
+1cf6:	mov    0x14(%rsp),%ecx
+1cfa:	mov    0x18(%rsp),%esi
+1cfe:	mov    0x1f(%rsp),%bpl
+1d03:	mov    0x1e(%rsp),%r10b
+1d08:	mov    0x1d(%rsp),%r9b
+1d0d:	mov    0x1c(%rsp),%r8b
+1d12:	jmp    0xffffffffc0542d44
+1d14:	mov    %rdi,%r15
+1d17:	movzwl 0x32(%rsp),%ecx
+1d1c:	mov    %cx,0x30(%rsp)
+1d21:	movq   $0x0,0x10(%rsp)
+1d2a:	movq   $0x0,0x18(%rsp)
+1d33:	xor    %r8d,%r8d
+1d36:	xor    %r9d,%r9d
+1d39:	xor    %r10d,%r10d
+1d3c:	xor    %ebp,%ebp
+1d3e:	xor    %esi,%esi
+1d40:	xor    %ecx,%ecx
+1d42:	xor    %edx,%edx
+1d44:	lea    -0x21523f01(%rsi),%ebx
+1d4a:	sub    %esi,%edx
+1d4c:	rol    $0x4,%ebx
+1d4f:	xor    %edx,%ebx
+1d51:	mov    %ecx,%edx
+1d53:	add    $0xdeadc0ff,%edx
+1d59:	add    %ecx,%esi
+1d5b:	add    $0xbd5b81fe,%esi
+1d61:	sub    %ebx,%edx
+1d63:	mov    %ebx,%edi
+1d65:	rol    $0x6,%edi
+1d68:	xor    %edx,%edi
+1d6a:	add    %esi,%ebx
+1d6c:	mov    %edi,%ecx
+1d6e:	rol    $0x8,%ecx
+1d71:	sub    %edi,%esi
+1d73:	xor    %esi,%ecx
+1d75:	add    %ebx,%edi
+1d77:	sub    %ecx,%ebx
+1d79:	mov    %ecx,%esi
+1d7b:	rol    $0x10,%esi
+1d7e:	xor    %ebx,%esi
+1d80:	add    %edi,%ecx
+1d82:	sub    %esi,%edi
+1d84:	mov    %esi,%ebx
+1d86:	rol    $0x13,%ebx
+1d89:	xor    %edi,%ebx
+1d8b:	add    %ecx,%esi
+1d8d:	sub    %ebx,%ecx
+1d8f:	mov    %ebx,%r11d
+1d92:	rol    $0x4,%r11d
+1d96:	add    %esi,%ebx
+1d98:	movzbl %bpl,%edx
+1d9c:	shl    $0x18,%edx
+1d9f:	movzbl %r10b,%ebp
+1da3:	shl    $0x10,%ebp
+1da6:	or     %edx,%ebp
+1da8:	movzbl %r9b,%edi
+1dac:	shl    $0x8,%edi
+1daf:	or     %ebp,%edi
+1db1:	movzbl %r8b,%edx
+1db5:	or     %edi,%edx
+1db7:	add    %esi,%edx
+1db9:	xor    %ebx,%ecx
+1dbb:	xor    %r11d,%ecx
+1dbe:	mov    %ebx,%esi
+1dc0:	rol    $0xe,%esi
+1dc3:	sub    %esi,%ecx
+1dc5:	xor    %ecx,%edx
+1dc7:	mov    %ecx,%esi
+1dc9:	rol    $0xb,%esi
+1dcc:	sub    %esi,%edx
+1dce:	xor    %edx,%ebx
+1dd0:	mov    %edx,%esi
+1dd2:	rol    $0x19,%esi
+1dd5:	sub    %esi,%ebx
+1dd7:	xor    %ebx,%ecx
+1dd9:	mov    %ebx,%esi
+1ddb:	rol    $0x10,%esi
+1dde:	sub    %esi,%ecx
+1de0:	xor    %ecx,%edx
+1de2:	mov    %ecx,%esi
+1de4:	rol    $0x4,%esi
+1de7:	sub    %esi,%edx
+1de9:	xor    %edx,%ebx
+1deb:	rol    $0xe,%edx
+1dee:	sub    %edx,%ebx
+1df0:	xor    %ebx,%ecx
+1df2:	rol    $0x18,%ebx
+1df5:	sub    %ebx,%ecx
+1df7:	mov    $0xe0adc0f7,%esi
+1dfc:	add    0x30(%rsp),%esi
+1e00:	add    $0xe0adc0f7,%ecx
+1e06:	mov    %esi,%edx
+1e08:	xor    $0xe0adc0f7,%edx
+1e0e:	mov    %esi,%edi
+1e10:	rol    $0xe,%edi
+1e13:	sub    %edi,%edx
+1e15:	xor    %edx,%ecx
+1e17:	mov    %edx,%edi
+1e19:	rol    $0xb,%edi
+1e1c:	sub    %edi,%ecx
+1e1e:	xor    %ecx,%esi
+1e20:	mov    %ecx,%edi
+1e22:	rol    $0x19,%edi
+1e25:	sub    %edi,%esi
+1e27:	xor    %esi,%edx
+1e29:	mov    %esi,%edi
+1e2b:	rol    $0x10,%edi
+1e2e:	sub    %edi,%edx
+1e30:	xor    %edx,%ecx
+1e32:	mov    %edx,%edi
+1e34:	rol    $0x4,%edi
+1e37:	sub    %edi,%ecx
+1e39:	xor    %ecx,%esi
+1e3b:	rol    $0xe,%ecx
+1e3e:	sub    %ecx,%esi
+1e40:	xor    %esi,%edx
+1e42:	rol    $0x18,%esi
+1e45:	sub    %esi,%edx
+1e47:	mov    $0xffff0001,%ecx
+1e4c:	imul   %rdx,%rcx
+1e50:	shr    $0x30,%rcx
+1e54:	mov    %ecx,%esi
+1e56:	shl    $0x10,%esi
+1e59:	or     %ecx,%esi
+1e5b:	sub    %esi,%edx
+1e5d:	mov    0x4(%r15),%esi
+1e61:	mov    %esi,%ecx
+1e63:	shl    $0x10,%ecx
+1e66:	add    %esi,%ecx
+1e68:	add    %edx,%ecx
+1e6a:	cmp    $0x20001ff,%ecx
+1e70:	ja     0xffffffffc0542ecc
+1e72:	mov    %ecx,%ecx
+1e74:	movabs $0xffffc90022885000,%rdx
+1e7e:	mov    0x100(%rdx,%rcx,8),%ebp
+1e85:	test   %rbp,%rbp
+1e88:	je     0xffffffffc0542eae
+1e8a:	mov    %ebp,0x38(%rsp)
+1e8e:	cmp    $0x1000,%ebp
+1e94:	jb     0xffffffffc0542ee5
+1e96:	mov    0x1148(%r12),%rax
+1e9e:	add    %gs:0xffffffff92795028,%rax
+1ea7:	test   %rax,%rax
+1eaa:	jne    0xffffffffc0542ec8
+1eac:	jmp    0xffffffffc0542ecc
+1eae:	mov    0x1148(%r12),%rax
+1eb6:	add    %gs:0xffffffff92795028,%rax
+1ebf:	test   %rax,%rax
+1ec2:	je     0xffffffffc0542ecc
+1ec4:	add    $0x8,%rax
+1ec8:	addq   $0x1,(%rax)
+1ecc:	mov    $0x1,%ebp
+1ed1:	mov    %ebp,%eax
+1ed3:	add    $0x88,%rsp
+1eda:	pop    %rbx
+1edb:	pop    %r12
+1edd:	pop    %r13
+1edf:	pop    %r14
+1ee1:	pop    %r15
+1ee3:	pop    %rbp
+1ee4:	ret
+1ee5:	cmpq   $0x0,0x8(%rsp)
+1eeb:	je     0xffffffffc0542efe
+1eed:	mov    (%r15),%cl
+1ef0:	and    $0x2,%cl
+1ef3:	shr    %cl
+1ef5:	or     %cl,%r14b
+1ef8:	je     0xffffffffc0542fc8
+1efe:	mov    %ebp,%eax
+1f00:	jmp    0xffffffffc0542ff6
+1f05:	mov    $0xffffffff8ec35c20,%rax
+1f0c:	mov    %r13,%rdi
+1f0f:	mov    $0xffffffd8,%esi
+1f14:	call   *%rax
+1f16:	test   %eax,%eax
+1f18:	jne    0xffffffffc0542ecc
+1f1a:	mov    0x0(%r13),%rax
+1f1e:	mov    0x8(%r13),%rcx
+1f22:	lea    0xe(%rax),%rdx
+1f26:	cmp    %rcx,%rdx
+1f29:	ja     0xffffffffc0542ecc
+1f2b:	lea    0x36(%rax),%rdx
+1f2f:	mov    $0x1,%ebp
+1f34:	cmp    %rcx,%rdx
+1f37:	ja     0xffffffffc0542ed1
+1f39:	movabs $0xffff888106a39000,%rcx
+1f43:	movzwl 0x104(%rcx),%edx
+1f4a:	mov    %dx,0x4(%rax)
+1f4e:	mov    0x100(%rcx),%ecx
+1f54:	mov    %ecx,(%rax)
+1f56:	mov    0x28(%rax),%ecx
+1f59:	mov    %ecx,0x6(%rax)
+1f5c:	movzwl 0x2c(%rax),%ecx
+1f60:	mov    %cx,0xa(%rax)
+1f64:	movw   $0xdd86,0xc(%rax)
+1f6a:	movzwl 0x30(%rsp),%esi
+1f6f:	xor    0x1c(%rsp),%esi
+1f73:	add    $0x28,%r12d
+1f77:	mov    0x3d(%rsp),%cl
+1f7b:	movw   $0x0,0x10(%rax)
+1f81:	mov    %ecx,%edx
+1f83:	shr    $0x4,%dl
+1f86:	or     $0x60,%dl
+1f89:	mov    %dl,0xe(%rax)
+1f8c:	shl    $0x4,%cl
+1f8f:	mov    %cl,0xf(%rax)
+1f92:	movw   $0x4029,0x14(%rax)
+1f98:	rol    $0x8,%r12w
+1f9d:	mov    %r12w,0x12(%rax)
+1fa2:	movq   $0x1,0x16(%rax)
+1faa:	movl   $0x0,0x1e(%rax)
+1fb1:	mov    %esi,0x22(%rax)
+1fb4:	mov    (%r14),%rcx
+1fb7:	mov    0x8(%r14),%rdx
+1fbb:	mov    %rcx,0x26(%rax)
+1fbf:	mov    %rdx,0x2e(%rax)
+1fc3:	jmp    0xffffffffc05413d1
+1fc8:	cmpb   $0x11,0x34(%rsp)
+1fcd:	jne    0xffffffffc0542fd4
+1fcf:	mov    %rax,0x48(%rsp)
+1fd4:	mov    %ebp,0x40(%rsp)
+1fd8:	lea    0x10(%rsp),%rsi
+1fdd:	lea    0x40(%rsp),%rdx
+1fe2:	mov    $0xffffffff8ca9c9c0,%rax
+1fe9:	mov    0x8(%rsp),%rdi
+1fee:	xor    %ecx,%ecx
+1ff0:	call   *%rax
+1ff2:	mov    0x38(%rsp),%eax
+1ff6:	movabs $0xffff888106a39800,%rcx
+2000:	mov    0x100(%rcx),%esi
+2006:	mov    $0x1,%dl
+2008:	cmp    0x58(%rsp),%esi
+200c:	jne    0xffffffffc0543033
+200e:	mov    0x104(%rcx),%esi
+2014:	cmp    0x5c(%rsp),%esi
+2018:	jne    0xffffffffc0543033
+201a:	mov    0x108(%rcx),%esi
+2020:	cmp    0x60(%rsp),%esi
+2024:	jne    0xffffffffc0543033
+2026:	mov    0x10c(%rcx),%edx
+202c:	cmp    0x64(%rsp),%edx
+2030:	setne  %dl
+2033:	movzwl 0x110(%rcx),%esi
+203a:	movzwl 0x68(%rsp),%edi
+203f:	mov    0x6a(%rsp),%bl
+2043:	mov    %bl,0x112(%rcx)
+2049:	test   %dl,%dl
+204b:	jne    0xffffffffc054308a
+204d:	cmp    %di,%si
+2050:	jne    0xffffffffc054308a
+2052:	test   %bl,%bl
+2054:	je     0xffffffffc054308a
+2056:	cmp    $0xfff,%eax
+205b:	ja     0xffffffffc0542ecc
+2061:	mov    %eax,%eax
+2063:	movabs $0xffffc9000857b000,%rcx
+206d:	mov    0x100(%rcx,%rax,8),%rax
+2075:	add    %gs:0xffffffff92795028,%rax
+207e:	test   %rax,%rax
+2081:	je     0xffffffffc0542ecc
+2087:	addl   $0x1,(%rax)
+208a:	lea    0x0(,%rbp,2),%rax
+2092:	add    %rbp,%rax
+2095:	movabs $0xffffc900086d3000,%rcx
+209f:	lea    (%rcx,%rax,8),%r14
+20a3:	add    $0x100,%r14
+20aa:	mov    0x80(%rsp),%rax
+20b2:	addq   $0x1,0x8(%rax)
+20b7:	mov    (%rsp),%rdx
+20bb:	cmp    $0x3ff,%edx
+20c1:	jbe    0xffffffffc0542a75
+20c7:	jmp    0xffffffffc0542ecc
+20cc:	movzbl 0x1(%rax),%ecx
+20d0:	shl    $0x18,%rcx
+20d4:	movzbl 0x2(%rax),%edx
+20d8:	shl    $0x10,%rdx
+20dc:	or     %rcx,%rdx
+20df:	movzbl 0x3(%rax),%ecx
+20e3:	shl    $0x8,%rcx
+20e7:	or     %rdx,%rcx
+20ea:	mov    0x4(%rax),%al
+20ed:	mov    $0x3,%dl
+20ef:	jmp    0xffffffffc0543109
+20f1:	movzbl 0x1(%rax),%edx
+20f5:	shl    $0x10,%rdx
+20f9:	movzbl 0x2(%rax),%ecx
+20fd:	shl    $0x8,%rcx
+2101:	or     %rdx,%rcx
+2104:	mov    0x3(%rax),%al
+2107:	mov    $0x2,%dl
+2109:	movzbl %al,%eax
+210c:	or     %rcx,%rax
+210f:	test   %eax,%eax
+2111:	jle    0xffffffffc0541fe7
+2117:	cmp    $0x1,%dl
+211a:	je     0xffffffffc054317e
+211c:	cmp    $0x3,%dl
+211f:	je     0xffffffffc0543185
+2121:	cmp    $0x2,%dl
+2124:	jne    0xffffffffc054318c
+2126:	mov    $0x40,%ecx
+212b:	jmp    0xffffffffc0543191
+212d:	addq   $0x1,0x28(%rbp)
+2132:	jmp    0xffffffffc0542ecc
+2137:	mov    0x1110(%r12),%rbx
+213f:	add    %gs:0xffffffff92795028,%rbx
+2148:	test   %rbx,%rbx
+214b:	je     0xffffffffc05432c7
+2151:	mov    $0xffffffff8ca9d630,%rax
+2158:	call   *%rax
+215a:	mov    %rax,%rcx
+215d:	sub    0x8(%rbx),%rcx
+2161:	cmp    $0x3b9aca01,%rcx
+2168:	jb     0xffffffffc0543281
+216e:	movq   $0x1,(%rbx)
+2175:	mov    %rax,0x8(%rbx)
+2179:	jmp    0xffffffffc0543293
+217e:	mov    $0x38,%ecx
+2183:	jmp    0xffffffffc0543191
+2185:	mov    $0x48,%ecx
+218a:	jmp    0xffffffffc0543191
+218c:	mov    $0x30,%ecx
+2191:	mov    (%rsp),%rdx
+2195:	addq   $0x1,(%rdx,%rcx,1)
+219a:	cmp    $0xfffffd,%eax
+219f:	ja     0xffffffffc054321c
+21a1:	movabs $0xffffc900086ed000,%rcx
+21ab:	mov    0x100(%rcx,%rax,8),%ecx
+21b2:	test   %rcx,%rcx
+21b5:	je     0xffffffffc054321c
+21b7:	mov    %ecx,0x38(%rsp)
+21bb:	xor    %r14d,%r14d
+21be:	cmp    $0x1000,%ecx
+21c4:	lea    (%rcx,%rcx,2),%rax
+21c8:	movabs $0xffffc900086d3000,%rcx
+21d2:	lea    0x100(%rcx,%rax,8),%rax
+21da:	cmovb  %rax,%r14
+21de:	test   %r14,%r14
+21e1:	je     0xffffffffc0543273
+21e7:	lea    0x10(%rsp),%rsi
+21ec:	mov    $0xffffffff8ca9c930,%rax
+21f3:	mov    0x70(%rsp),%rdi
+21f8:	call   *%rax
+21fa:	test   %rax,%rax
+21fd:	je     0xffffffffc05432f5
+2203:	mov    0x38(%rsp),%ecx
+2207:	cmp    %ecx,(%rax)
+2209:	jne    0xffffffffc0543335
+220f:	mov    (%rsp),%rax
+2213:	add    $0x50,%rax
+2217:	jmp    0xffffffffc05433cd
+221c:	mov    (%rsp),%rcx
+2220:	addq   $0x1,0x10(%rcx)
+2225:	cltq
+2227:	mov    %rax,0x18(%rcx)
+222b:	mov    0x8(%rsp),%rdx
+2230:	jmp    0xffffffffc0542027
+2235:	mov    %ecx,(%rax)
+2237:	addq   $0x1,0x58(%rbp)
+223c:	cmpl   $0x1ff,(%rsp)
+2243:	ja     0xffffffffc05432d2
+2249:	movabs $0xffff8881531f0000,%rax
+2253:	mov    (%rsp),%rcx
+2257:	mov    0x100(%rax,%rcx,8),%rax
+225f:	add    %gs:0xffffffff92795028,%rax
+2268:	test   %rax,%rax
+226b:	je     0xffffffffc05432d2
+226d:	add    $0x8,%rax
+2271:	jmp    0xffffffffc05432ce
+2273:	mov    (%rsp),%rax
+2277:	addq   $0x1,0x28(%rax)
+227c:	jmp    0xffffffffc0542ecc
+2281:	mov    (%rbx),%rax
+2284:	add    $0x1,%rax
+2288:	mov    %rax,(%rbx)
+228b:	cmp    $0x1e848,%rax
+2291:	ja     0xffffffffc05432c7
+2293:	movq   $0x0,0x40(%rsp)
+229c:	movq   $0x0,0x48(%rsp)
+22a5:	mov    0x38(%rsp),%eax
+22a9:	mov    %eax,0x40(%rsp)
+22ad:	lea    0x10(%rsp),%rsi
+22b2:	lea    0x40(%rsp),%rdx
+22b7:	mov    $0xffffffff8ca9c9c0,%rax
+22be:	mov    0x8(%rsp),%rdi
+22c3:	xor    %ecx,%ecx
+22c5:	call   *%rax
+22c7:	mov    %rbp,%rax
+22ca:	add    $0x60,%rax
+22ce:	addq   $0x1,(%rax)
+22d2:	addq   $0x1,0x20(%rbp)
+22d7:	movzwl 0x30(%rsp),%eax
+22dc:	mov    %eax,0x70(%rsp)
+22e0:	mov    (%rsp),%rdx
+22e4:	cmp    $0x3ff,%edx
+22ea:	jbe    0xffffffffc0542a75
+22f0:	jmp    0xffffffffc0542ecc
+22f5:	mov    0x1110(%r12),%rbx
+22fd:	add    %gs:0xffffffff92795028,%rbx
+2306:	test   %rbx,%rbx
+2309:	je     0xffffffffc05433c5
+230f:	mov    $0xffffffff8ca9d630,%rax
+2316:	call   *%rax
+2318:	mov    %rax,%rcx
+231b:	sub    0x8(%rbx),%rcx
+231f:	cmp    $0x3b9aca01,%rcx
+2326:	jb     0xffffffffc054337f
+2328:	movq   $0x1,(%rbx)
+232f:	mov    %rax,0x8(%rbx)
+2333:	jmp    0xffffffffc0543391
+2335:	mov    %ecx,(%rax)
+2337:	mov    (%rsp),%rax
+233b:	addq   $0x1,0x58(%rax)
+2340:	cmpl   $0x1ff,0x80(%rsp)
+234b:	ja     0xffffffffc05433d1
+2351:	movabs $0xffff8881531f0000,%rax
+235b:	mov    0x80(%rsp),%rcx
+2363:	mov    0x100(%rax,%rcx,8),%rax
+236b:	add    %gs:0xffffffff92795028,%rax
+2374:	test   %rax,%rax
+2377:	je     0xffffffffc05433d1
+2379:	add    $0x8,%rax
+237d:	jmp    0xffffffffc05433cd
+237f:	mov    (%rbx),%rax
+2382:	add    $0x1,%rax
+2386:	mov    %rax,(%rbx)
+2389:	cmp    $0x1e848,%rax
+238f:	ja     0xffffffffc05433c5
+2391:	movq   $0x0,0x40(%rsp)
+239a:	movq   $0x0,0x48(%rsp)
+23a3:	mov    0x38(%rsp),%eax
+23a7:	mov    %eax,0x40(%rsp)
+23ab:	lea    0x10(%rsp),%rsi
+23b0:	lea    0x40(%rsp),%rdx
+23b5:	mov    $0xffffffff8ca9c9c0,%rax
+23bc:	mov    0x70(%rsp),%rdi
+23c1:	xor    %ecx,%ecx
+23c3:	call   *%rax
+23c5:	mov    (%rsp),%rax
+23c9:	add    $0x60,%rax
+23cd:	addq   $0x1,(%rax)
+23d1:	mov    (%rsp),%rax
+23d5:	addq   $0x1,0x20(%rax)
+23da:	movzwl 0x30(%rsp),%r15d
+23e0:	jmp    0xffffffffc0542303
 

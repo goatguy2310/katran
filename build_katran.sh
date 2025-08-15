@@ -613,8 +613,7 @@ build_katran() {
     -DPKG_CONFIG_USE_CMAKE_PREFIX_PATH=ON \
     -DLIB_BPF_PREFIX=$LIB_BPF_PREFIX \
     -DCMAKE_CXX_STANDARD=17 \
-    -DBUILD_TESTS=On \
-    -DCMAKE_CXX_FLAGS=\"-DINLINE_DECAP\""
+    -DBUILD_TESTS=On"
 
     # Append verbose flag if VERBOSE is set to 1
     if [ "$VERBOSE" -eq 1 ]; then
