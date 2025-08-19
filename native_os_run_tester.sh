@@ -47,11 +47,11 @@ capture_dmesg_logs() {
 
 	log "Starting katran tester..."
 
-	# ${KATRAN_BUILD_DIR}/katran/lib/testing/katran_tester -balancer_prog $DEPS_DIR/bpfprog/bpf/balancer.bpf.o -test_from_fixtures=true -wait-phases=true $1 &
+	# $KATRAN_BUILD_DIR/katran/lib/testing/katran_tester -balancer_prog $DEPS_DIR/bpfprog/bpf/balancer.bpf.o -test_from_fixtures=true -wait-phases=true $1 &
 	$KATRAN_BUILD_DIR/katran/lib/testing/katran_tester -balancer_prog $DEPS_DIR/bpfprog/bpf/balancer.bpf.o -perf_testing=true -wait_phases=true $1 &
 	KAT_PID=$!
 
-	sleep 1
+	sleep 1.5
 
 	log "Message captured at $DMESG_LOG"
 	kill $DMESG_PID

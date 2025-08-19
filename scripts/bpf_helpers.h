@@ -26,8 +26,8 @@
   })
 
 /* helper functions called from eBPF programs written in C */
-// JB: only using lookup func as a fallback
-// #define real_bpf_map_lookup_elem bpf_map_lookup_elem
+// JB: reimplementing these functions as map->ops->ops (reducing 2 layers of call stack)
+/*
 static void* (*real_bpf_map_lookup_elem)(void* map, void* key) = (void*)
     BPF_FUNC_map_lookup_elem;
 static int (*bpf_map_update_elem)(
@@ -45,6 +45,12 @@ static int (*bpf_map_pop_elem)(void* map, void* value) = (void*)
     BPF_FUNC_map_pop_elem;
 static int (*bpf_map_peek_elem)(void* map, void* value) = (void*)
     BPF_FUNC_map_peek_elem;
+
+__attribute__((__always_inline__)) static inline void* real_bpf_map_lookup_elem(void* map, void* key) {
+	return ((void * (*)(void *, void *))(map + map_lookup_elem_off))(map, key);
+}
+*/
+
 static int (*bpf_probe_read)(void* dst, int size, const void* unsafe_ptr) =
     (void*)BPF_FUNC_probe_read;
 static unsigned long long (*bpf_ktime_get_ns)(void) = (void*)
@@ -386,7 +392,7 @@ static int (*bpf_skb_adjust_room)(
     __u32 mode,
     unsigned long long flags) = (void*)BPF_FUNC_skb_adjust_room;
 
-// JB: As a workaround, redefine tail call
+// JB: Here we start redefining special helper functions
 #define indexed_elem_offset(index, elem_size)	(BPF_ARR_VAL_OFF + (__u64)index * elem_size)
 
 #define access_ptr_void(ptr, offset) (void *)((char *)ptr + offset)
@@ -395,19 +401,45 @@ static int (*bpf_skb_adjust_room)(
 
 #define is_void_ptr(ptr) __builtin_types_compatible_p(__typeof__(ptr), void*)
 
-#define bpf_tail_call(ctx, prog_array_map, index) \
-	do {	\
-		int (*func)(void *);	\
-		void *bpf_prog;	\
-		\
-		bpf_prog = (void *) access_ptr_at_u64(prog_array_map, indexed_elem_offset(index, sizeof(__u64)));	\
-		if (bpf_prog) {	\
-			func = (int (*)(void *)) access_ptr_at_u64(bpf_prog, BPF_PROG_FUNC_OFF);	\
-			return func(ctx);	\
-		}	\
-	} while (0)
+// JB: Redefinitions of map ops for direct calling
+#define BPF_MAP_OPS_INLINE(name, pref, ret_type, decl_args, type_args, func_params)	\
+	__attribute__((__always_inline__)) static inline ret_type pref##bpf_##name decl_args {	\
+		return ((ret_type (*) type_args) (access_ptr_at_u64(access_ptr_at_u64(map, BPF_MAP_OPS_OFF), name##_off))) func_params;	\
+	}
+
+BPF_MAP_OPS_INLINE(map_lookup_elem, real_,
+		void*,
+		(void* map, void* key),
+		(void*, void*),
+		(map, key))
+BPF_MAP_OPS_INLINE(map_update_elem,,
+		int,
+		(void* map, void* key, void* value, unsigned long long flags),
+		(void*, void*, void*, unsigned long long),
+		(map, key, value, flags))
+BPF_MAP_OPS_INLINE(map_delete_elem,,
+		int,
+		(void* map, void* key),
+		(void*, void*),
+		(map, key))
+BPF_MAP_OPS_INLINE(map_push_elem,,
+		int,
+		(void* map, void* value, unsigned long long flags),
+		(void*, void*, unsigned long long),
+		(map, value, flags))
+BPF_MAP_OPS_INLINE(map_peek_elem,,
+		int,
+		(void* map, void* value),
+		(void*, void*),
+		(map, value))
+BPF_MAP_OPS_INLINE(map_pop_elem,,
+		int,
+		(void* map, void* value),
+		(void*, void*),
+		(map, value))
 
 // JB: redefine lookup elem as well to inline for easy cases
+// The lookup elem case where it can be inlined
 #define add_percpu_off(var) \
 	asm volatile (	\
 		"add %%gs:%1, %0"	\
@@ -416,25 +448,26 @@ static int (*bpf_skb_adjust_room)(
 		: "cc", "memory"	\
 	)
 
-#define bpf_map_lookup_elem(map, key) ({	\
+#define sizeof_member(map, member) sizeof(*((map)->member))
+#define inlined_bpf_map_lookup_elem(map, key) ({	\
 	void *__elem = NULL;	\
 	\
-	const int type = sizeof(**map.type) / sizeof(int); \
+	const int type = sizeof_member(map, type) / sizeof(int); \
 	if (type == BPF_MAP_TYPE_ARRAY) {	\
 		__u32 idx = *(__u32 *) key;	\
-		const __u32 max_entries = sizeof(**map.max_entries) / sizeof(int);	\
-		const __u32 elem_size = __builtin_align_up(sizeof(**map.value), 8);	\
+		const __u32 max_entries = sizeof_member(map, max_entries) / sizeof(int);	\
+		const __u32 elem_size = __builtin_align_up(sizeof_member(map, value), 8);	\
 		\
 		if (idx < max_entries) __elem = access_ptr_void(map, indexed_elem_offset(idx, elem_size));	\
 	} else if (type == BPF_MAP_TYPE_ARRAY_OF_MAPS) {	\
 		__u32 idx = *(__u32 *) key;	\
-		const __u32 max_entries = sizeof(**map.max_entries) / sizeof(int);	\
+		const __u32 max_entries = sizeof_member(map, max_entries) / sizeof(int);	\
 		const __u32 elem_size = sizeof(__u64);	\
 		\
 		if (idx < max_entries) __elem = (void *) access_ptr_at_u64(map, indexed_elem_offset(idx, elem_size));	\
 	} else if (type == BPF_MAP_TYPE_PERCPU_ARRAY) {	\
 		__u32 idx = *(__u32 *) key;	\
-		const __u32 max_entries = sizeof(**map.max_entries) / sizeof(int);	\
+		const __u32 max_entries = sizeof_member(map, max_entries) / sizeof(int);	\
 		const __u32 elem_size = sizeof(__u64);	\
 		\
 		if (idx < max_entries) {	\
@@ -448,7 +481,66 @@ static int (*bpf_skb_adjust_room)(
 	__elem;	\
 })
 
-// JB: Finally, redefine get_smp_processor_id
+// JB: Even if we use __builtin_choose_expr, the compiler still evaluates and parses void* to the inline branch, causing
+// errors. For this, we define a fake map so that void* can be casted to struct __fake_map__* for this evaluation
+struct __fake_map__ {
+	unsigned int *type;
+	unsigned int *max_entries;
+	unsigned int *value;
+};
+
+#define __cast_fake(ptr) __builtin_choose_expr(	\
+	__builtin_types_compatible_p(typeof(ptr), void*),	\
+	(struct __fake_map__*) ptr,	\
+	ptr	\
+)
+
+#define bpf_map_lookup_elem(map, key) __builtin_choose_expr(	\
+	__builtin_types_compatible_p(typeof(map), void*),	\
+	real_bpf_map_lookup_elem(map, key),	\
+	inlined_bpf_map_lookup_elem(__cast_fake(map), key)	\
+)
+
+// JB: redefinition of tail call
+/*
+#define bpf_tail_call(ctx, prog_array_map, index) \
+	do {	\
+		int (*func)(void *);	\
+		void *bpf_prog;	\
+		\
+		bpf_prog = (void *) access_ptr_at_u64(prog_array_map, indexed_elem_offset(index, sizeof(__u64)));	\
+		if (bpf_prog) {	\
+			func = (int (*)(void *)) access_ptr_at_u64(bpf_prog, BPF_PROG_FUNC_OFF);	\
+			return func(ctx);	\
+		}	\
+	} while (0)
+*/
+
+#define bpf_tail_call(ctx, prog_array_map, index) \
+	do {	\
+		__u64 func;	\
+		void *bpf_prog;	\
+		\
+		bpf_prog = (void *) access_ptr_at_u64(prog_array_map, indexed_elem_offset(index, sizeof(__u64)));	\
+		if (bpf_prog) {	\
+			func = access_ptr_at_u64(bpf_prog, BPF_PROG_FUNC_OFF);	\
+			asm volatile (	\
+				"add $0x88, %%rsp\n\t"	\
+				"pop %%rbx\n\t"	\
+				"pop %%r12\n\t"	\
+				"pop %%r13\n\t"	\
+				"pop %%r14\n\t"	\
+				"pop %%r15\n\t"	\
+				"pop %%rbp\n\t"	\
+				"jmp *%0\n\t"	\
+				:	\
+				: "r"(func)	\
+				: "rbx", "r12", "r13", "r14", "r15", "rbp"	\
+			    );	\
+		}	\
+	} while (0)
+
+// JB: finally, redefine get_smp_processor_id
 #define bpf_get_smp_processor_id() ({	\
 	__u64 __percpu_id = _KS_CPU_NUMBER;	\
 	add_percpu_off(__percpu_id);	\

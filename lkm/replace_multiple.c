@@ -172,7 +172,7 @@ out_free:
 	}
 	bpf_jit_free_exec(kmem);
 out:
-	if (ret) {
+	if (ret < 0) {
 		pr_err("bpf_replace: error code %d\n", ret);
 	}
 	mutex_unlock(&replace_mutex);
