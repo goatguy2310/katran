@@ -399,8 +399,6 @@ static int (*bpf_skb_adjust_room)(
 #define access_ptr_at_u32(ptr, offset) *(__u32*)((char *)ptr + offset)
 #define access_ptr_at_u64(ptr, offset) *(__u64*)((char *)ptr + offset)
 
-#define is_void_ptr(ptr) __builtin_types_compatible_p(__typeof__(ptr), void*)
-
 // JB: Redefinitions of map ops for direct calling
 #define BPF_MAP_OPS_INLINE(name, pref, ret_type, decl_args, type_args, func_params)	\
 	__attribute__((__always_inline__)) static inline ret_type pref##bpf_##name decl_args {	\
