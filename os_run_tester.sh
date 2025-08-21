@@ -18,6 +18,7 @@
 set -xeo pipefail
 
 # By default this script assumes to be invoked from the root dir.
+KAT_OUTPUT=logs/kat_perf_output.txt
 if [ -z "${KATRAN_BUILD_DIR}" ]
 then
     KATRAN_BUILD_DIR=$(pwd)/_build/build
@@ -28,5 +29,5 @@ then
     DEPS_DIR=$(pwd)/_build/deps
 fi
 
-sudo sh -c "${KATRAN_BUILD_DIR}/katran/lib/testing/katran_tester -balancer_prog ${DEPS_DIR}/bpfprog/bpf/balancer.bpf.o -test_from_fixtures=true $1"
-# sudo sh -c "${KATRAN_BUILD_DIR}/katran/lib/testing/katran_tester -balancer_prog ${DEPS_DIR}/bpfprog/bpf/balancer.bpf.o -perf_testing=true $1"
+# sudo sh -c "${KATRAN_BUILD_DIR}/katran/lib/testing/katran_tester -balancer_prog ${DEPS_DIR}/bpfprog/bpf/balancer.bpf.o -test_from_fixtures=true $1"
+sudo sh -c "${KATRAN_BUILD_DIR}/katran/lib/testing/katran_tester -balancer_prog ${DEPS_DIR}/bpfprog/bpf/balancer.bpf.o -perf_testing=true -perf_output=$KAT_OUTPUT $1"

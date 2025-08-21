@@ -22,6 +22,7 @@
 #include <glog/logging.h>
 #include <linux/if_ether.h>
 #include <iostream>
+#include <fstream>
 
 namespace katran {
 
@@ -404,13 +405,27 @@ void BpfTester::resetTestFixtures(const std::vector<PacketAttributes>& data) {
   config_.testData = data;
 }
 
-void BpfTester::testPerfFromFixture(uint32_t repeat, const int position) {
+void BpfTester::testPerfFromFixture(uint32_t repeat, const int position, const std::string& out) {
   // for inputData format is <pckt_base64, test description>
   int first_index{0}, last_index{0};
   uint32_t duration{0};
   uint64_t pckt_num{1};
   std::string ret_val_str;
   std::string test_result;
+  
+  bool to_file = false;
+  std::ofstream out_file;
+  if (!out.empty()) {
+    std::ofstream(out, std::ios::trunc).close();
+    
+    out_file.open(out, std::ios::app);
+    if (out_file.is_open()) {
+      to_file = true;
+    } else {
+      LOG(ERROR) << "cannot open output file " << out;
+    }
+  }
+  
   if (position < 0 || position >= config_.testData.size()) {
     first_index = 0;
     last_index = config_.testData.size();
@@ -441,13 +456,22 @@ void BpfTester::testPerfFromFixture(uint32_t repeat, const int position) {
       duration = 1;
     }
     auto pps = kNanosecInSec / duration;
-    LOG(INFO) << fmt::format(
-        "Test: {:60} duration: {:10} ns/pckt or {} pps",
-        config_.testData[i].description,
-        duration,
-        pps);
+    if (!to_file) {
+      LOG(INFO) << fmt::format(
+          "Test: {:60} duration: {:10} ns/pckt or {} pps",
+          config_.testData[i].description,
+          duration,
+          pps);
+    } else {
+      out_file << fmt::format(
+	  "{},{},{}\n",
+	  duration,
+	  pps,
+	  config_.testData[i].description);
+    }
     ++pckt_num;
   }
+  LOG(INFO) << "perf testing finished";
 }
 
 uint64_t BpfTester::getGlobalLruRoutedPackets() {

@@ -23,6 +23,7 @@ set -eo pipefail
 
 NCPUS=$(nproc)
 PROG_TYPE=-1
+KAT_OUTPUT=logs/native_kat_perf_output.txt
 
 # By default this script assumes to be invoked from the root dir.
 if [ -z "${KATRAN_BUILD_DIR}" ]
@@ -48,10 +49,10 @@ capture_dmesg_logs() {
 	log "Starting katran tester..."
 
 	# $KATRAN_BUILD_DIR/katran/lib/testing/katran_tester -balancer_prog $DEPS_DIR/bpfprog/bpf/balancer.bpf.o -test_from_fixtures=true -wait-phases=true $1 &
-	$KATRAN_BUILD_DIR/katran/lib/testing/katran_tester -balancer_prog $DEPS_DIR/bpfprog/bpf/balancer.bpf.o -perf_testing=true -wait_phases=true $1 &
+	$KATRAN_BUILD_DIR/katran/lib/testing/katran_tester -balancer_prog $DEPS_DIR/bpfprog/bpf/balancer.bpf.o -perf_testing=true -wait_phases=true $1 -perf-output=$KAT_OUTPUT &
 	KAT_PID=$!
 
-	sleep 1.5
+	sleep 3
 
 	log "Message captured at $DMESG_LOG"
 	kill $DMESG_PID

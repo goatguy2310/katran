@@ -152,7 +152,7 @@ class BpfTester {
    * helper function to run perf test on specified packet from test fixtures
    * if position is negative - run perf tests on every packet in fixtures
    */
-  void testPerfFromFixture(uint32_t repeat, const int position = -1);
+  void testPerfFromFixture(uint32_t repeat, const int position = -1, const std::string& out = "");
 
   /**
    * @param IOBuf with packet data to write.

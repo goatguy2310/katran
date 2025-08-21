@@ -505,13 +505,14 @@ struct __fake_map__ {
 /*
 #define bpf_tail_call(ctx, prog_array_map, index) \
 	do {	\
-		int (*func)(void *);	\
+		int (*func)(struct xdp_md *);	\
 		void *bpf_prog;	\
 		\
 		bpf_prog = (void *) access_ptr_at_u64(prog_array_map, indexed_elem_offset(index, sizeof(__u64)));	\
 		if (bpf_prog) {	\
-			func = (int (*)(void *)) access_ptr_at_u64(bpf_prog, BPF_PROG_FUNC_OFF);	\
-			return func(ctx);	\
+			func = (int (*)(struct xdp_md *)) access_ptr_at_u64(bpf_prog, BPF_PROG_FUNC_OFF);	\
+			asm volatile ("" ::: "memory");	\
+			__attribute__((musttail)) return func(ctx);	\
 		}	\
 	} while (0)
 */
@@ -536,7 +537,8 @@ struct __fake_map__ {
 				:	\
 				: "r"(func)	\
 				: "rbx", "r12", "r13", "r14", "r15", "rbp"	\
-			    );	\
+			);	\
+			__builtin_unreachable();	\
 		}	\
 	} while (0)
 

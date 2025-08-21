@@ -18,6 +18,7 @@
 #include <iostream>
 #include <thread>
 #include <csignal>
+#include <fstream>
 
 #include <folly/Conv.h>
 #include <folly/File.h>
@@ -97,6 +98,14 @@ DEFINE_bool(
     wait_phases,
     false,
     "whether to wait until SIGUSR1 after load, and SIGUSR2 after bench");
+DEFINE_string(
+    perf_output,
+    "",
+    "output file for perf (and different format)");
+DEFINE_string(
+    signal_pipe,
+    "",
+    "pipe to communicate events");
 
 void testKatranMonitor(katran::KatranLb& lb) {
   lb.stopKatranMonitor();
@@ -351,9 +360,9 @@ int main(int argc, char** argv) {
     } else if (FLAGS_perf_testing) {
       // for perf tests to work katran must be compiled w -DINLINE_DECAP
       preparePerfTestingLbData(*lb);
-      tester.testPerfFromFixture(FLAGS_repeat, FLAGS_position);
+      tester.testPerfFromFixture(FLAGS_repeat, FLAGS_position, FLAGS_perf_output);
     }
-  }
+  } 
 
   // perform waiting after bench until SIGUSR2
   if (FLAGS_wait_phases) {
