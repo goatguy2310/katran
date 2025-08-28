@@ -649,6 +649,7 @@ get_folly
 get_clang
 get_gtest
 get_libbpf
+get_bpftool
 if [ "$BUILD_EXAMPLE_THRIFT" -eq 1 ]; then
   get_mstch
   get_fizz

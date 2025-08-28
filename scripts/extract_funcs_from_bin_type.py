@@ -24,7 +24,7 @@ with open(parent_path / "logs/progs_info.json", "r") as f:
 #    all_prog_names.extend([p[0] for p in pgs])
 
 prog_names = [p[0] for p in progs]
-prog_addr = dict(progs)
+prog_addr = dict([p[:2] for p in progs])
 
 # parsing readelf symbols
 symbols = subprocess.run(["readelf", "-s", args.bin_file], capture_output=True, text=True, check=True)
@@ -61,7 +61,7 @@ for pname in prog_names:
 elf_bin = None
 cur_offset = 0
 with open(args.bin_file, "rb") as f:
-    elf_bin = f.read()
+    elf_bin = bytearray(f.read())
 
 # packing numbers into bytestrings
 prog_size_hex = struct.pack("<I", len(elf_bin))
@@ -71,6 +71,10 @@ progs_hex = struct.pack("<I", len(prog_names))
 for pname in prog_names:
     # for each prog, bpf_prog addr, offset, and code_size
     progs_hex += struct.pack("<Q", int(prog_addr[pname], 16)) + struct.pack("<I", func_offset[pname]) + struct.pack("<I", func_size[pname])
+    
+    # modifying the nop insns so that it fits kernel's convention
+    elf_bin[func_offset[pname] + 8] = 0x00
+    print(elf_bin[func_offset[pname]:func_offset[pname] + 20].hex(" "))
 
 output = prog_size_hex + elf_bin + progs_hex
 # print(output.hex(" "))

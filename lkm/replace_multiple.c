@@ -1,4 +1,5 @@
 #include <linux/kernel.h>
+#include <linux/filter.h>
 #include <linux/module.h>
 #include <linux/debugfs.h>
 #include <linux/uaccess.h>
@@ -151,9 +152,17 @@ static ssize_t bpf_replace_write(struct file *fp, const char *buf, size_t count,
 		rprog_infos[rprog_idx].old_jited_len = prog->jited_len;
 		rprog_infos[rprog_idx].targ_prog = prog;
 
+		/* updating kallsyms */
+		bpf_prog_kallsyms_del(prog);
+		INIT_LIST_HEAD_RCU(&prog->aux->ksym.lnode);
+		memset(&prog->aux->ksym.tnode, 0, sizeof(struct latch_tree_node));
+		synchronize_rcu();
+
 		prog->bpf_func = kmem + pheader.offset;
 		prog->jited_len = pheader.code_size;
 		
+		bpf_prog_kallsyms_add(prog);
+
 		pr_info("bpf_replace: success with new func 0x%px, len %u\n", prog->bpf_func, prog->jited_len);
 	}
 	rfile_infos[rfile_idx].end_prog_idx = rprog_idx;
@@ -230,8 +239,17 @@ static void __exit replace_cleanup(void) {
 			struct bpf_prog_replace_info *pinfo = &rprog_infos[idx];
 			pr_info("bpf_replace: (%u) restoring 0x%px and name %s with old func at %px\n", idx, pinfo->targ_prog, pinfo->targ_prog->aux->name, pinfo->old_bpf_func);
 
-			pinfo->targ_prog->bpf_func = pinfo->old_bpf_func;
-			pinfo->targ_prog->jited_len = pinfo->old_jited_len;	
+			struct bpf_prog *prog = pinfo->targ_prog;
+			
+			bpf_prog_kallsyms_del(prog);
+			INIT_LIST_HEAD_RCU(&prog->aux->ksym.lnode);
+			memset(&prog->aux->ksym.tnode, 0, sizeof(struct latch_tree_node));
+			synchronize_rcu();
+
+			prog->bpf_func = pinfo->old_bpf_func;
+			prog->jited_len = pinfo->old_jited_len;	
+		
+			bpf_prog_kallsyms_add(prog);
 		}
 
 		pr_info("bpf_replace: (f=%u) freeing memory at 0x%px\n", rfile_idx, info->kmem);

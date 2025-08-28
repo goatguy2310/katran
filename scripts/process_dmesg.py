@@ -37,6 +37,8 @@ ld_template = script_path / "template.ld"
 extern_var = ""
 glob_addr = ""
 internal_addr = ""
+
+prog_sigs = []
 progs = dict()
 
 # extracting the possible symbol names
@@ -100,12 +102,14 @@ with open(parent_path / args.log_file, "r") as f:
             if nm is None:
                 continue
 
-            prog_type = data["cur_prog_type"]
+            prog_type, prog_id, prog_tag = data["cur_prog_type"], data["prog_id"], data["prog_tag"]
             if prog_type not in progs:
                 progs[prog_type] = []
-            entry = (nm, data["prog_addr"])
+            entry = (nm, data["prog_addr"], prog_id, prog_tag)
             if entry not in progs[prog_type]:
                 progs[prog_type].append(entry)
+            
+            prog_sigs.append(f"{prog_type} {prog_id} {prog_tag}")
 
 script = extern_var + template.replace("GLOB_PLACEHOLDER", glob_addr).replace("INTERNAL_PLACEHOLDER", internal_addr)
 
@@ -115,7 +119,7 @@ with open(args.ld_output, "w") as f:
     f.write(script)
 
 with open(parent_path / "logs/progs_list.txt", "w") as f:
-    f.write("\n".join(progs.keys()))
+    f.write("\n".join(prog_sigs) + "\n")
 
 with open(parent_path / "logs/progs_info.json", "w") as f:
     f.write(json.dumps(progs))

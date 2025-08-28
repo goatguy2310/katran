@@ -16,7 +16,7 @@
  # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 log() {
-	echo "-- native_os_run_tester.sh: $@"
+	echo "-- run_benchmark.sh: $@"
 }
 
 set -eo pipefail
@@ -49,7 +49,7 @@ capture_dmesg_logs() {
 	log "Starting katran tester..."
 
 	# $KATRAN_BUILD_DIR/katran/lib/testing/katran_tester -balancer_prog $DEPS_DIR/bpfprog/bpf/balancer.bpf.o -test_from_fixtures=true -wait-phases=true $1 &
-	$KATRAN_BUILD_DIR/katran/lib/testing/katran_tester -balancer_prog $DEPS_DIR/bpfprog/bpf/balancer.bpf.o -perf_testing=true -wait_phases=true $1  &
+	$KATRAN_BUILD_DIR/katran/lib/testing/katran_tester -balancer_prog $DEPS_DIR/bpfprog/bpf/balancer.bpf.o -perf_testing=true -wait_phases=true $1 -perf-output=$KAT_OUTPUT &
 	KAT_PID=$!
 
 	sleep 3
@@ -67,6 +67,9 @@ process_linker_script_and_progs() {
 	fi
 	
 	log "Linker script saved at .linker_scripts/balancer.bpf.ld"
+
+	bpftool prog dump jited id $PROG_ID > dumps/bpf_jit_xdp.txt
+	log "JITed code dumped to dumps/bpf_jit_xdp.txt"
 }
 
 process_header_override() {
@@ -81,9 +84,11 @@ process_header_override() {
 	mkdir -p $HDR_DIR
 
 	cp scripts/bpf.h $HDR_DIR/bpf.h
+	# cp vmlinux/vmlinux_light.h $HDR_DIR/vmlinux_light.h
+	# appending vmlinux at the end (before #endif) of bpf.h
 	mkdir -p $DEPS_DIR/bpfprog/vmlinux
 	bpftool btf dump file $VMLINUX_SRC format c > $VMLINUX
-
+	
 	mkdir -p $DEPS_DIR/bpfprog/offgen
 	cp scripts/offset_gen.c $OFFGEN_DIR/offset_gen.c
 	clang -Wno-unknown-attributes -I$(dirname "$VMLINUX") $OFFGEN_DIR/offset_gen.c -o $OFFGEN_DIR/offset_gen
@@ -123,14 +128,10 @@ replace_with_kernel_module
 log "Replacing module finished! Press any key to continue to benchmarking"
 read -n 1 -s -r
 
-# ./../linux/tools/perf/perf record -a -e cycles,instructions &
-PERF_PID=$!
 kill -SIGUSR1 $KAT_PID
 
 log "Press any key to end now"
 read -n 1 -s -r
-
-# kill $PERF_PID
 
 log "Stopping..."
 rmmod $MODULE_NAME
