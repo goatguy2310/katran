@@ -123,14 +123,14 @@ replace_with_kernel_module
 log "Replacing module finished! Press any key to continue to benchmarking"
 read -n 1 -s -r
 
-# ./../linux/tools/perf/perf record -a -e cycles,instructions &
+./../linux/tools/perf/perf record -a -e cycles,instructions &
 PERF_PID=$!
 kill -SIGUSR1 $KAT_PID
 
 log "Press any key to end now"
 read -n 1 -s -r
 
-# kill $PERF_PID
+kill $PERF_PID
 
 log "Stopping..."
 rmmod $MODULE_NAME

@@ -29,9 +29,21 @@ then
     DEPS_DIR=$(pwd)/_build/deps
 fi
 
-# ./../linux/tools/perf/perf record -a -e cycles,instructions &
-PERF_PID=$!
 # sudo sh -c "${KATRAN_BUILD_DIR}/katran/lib/testing/katran_tester -balancer_prog ${DEPS_DIR}/bpfprog/bpf/balancer.bpf.o -test_from_fixtures=true $1"
-sudo sh -c "${KATRAN_BUILD_DIR}/katran/lib/testing/katran_tester -balancer_prog ${DEPS_DIR}/bpfprog/bpf/balancer.bpf.o -perf_testing=true $1"
+${KATRAN_BUILD_DIR}/katran/lib/testing/katran_tester -balancer_prog ${DEPS_DIR}/bpfprog/bpf/balancer.bpf.o -perf_testing=true -wait_phases=true $1 &
+KAT_PID=$!
 
-# kill $PERF_PID
+echo "Loading finished! Press any key to start benchmarking"
+read -n 1 -s -r
+
+./../linux/tools/perf/perf record -a -e cycles,instructions &
+PERF_PID=$!
+kill -SIGUSR1 $KAT_PID
+
+echo "Press any key to end now"
+read -n 1 -s -r
+
+kill $PERF_PID
+
+echo "Stopping..."
+kill -SIGUSR2 $KAT_PID

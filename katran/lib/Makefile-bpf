@@ -69,7 +69,7 @@ CFLAGS_BPF := -Wno-unknown-attributes -Wno-unused-variable -Wno-pointer-sign		\
 	      -fno-pic -fno-pie -nostartfiles -fcf-protection=branch			\
 	      -mskip-rax-setup -fno-jump-tables -mno-red-zone				\
 	      -mno-sse -mno-sse2 -mno-avx -mno-mmx -mno-80387 -mno-fp-ret-in-387	\
-	      -fno-delete-null-pointer-checks -Wframe-larger-than=512
+	      -fno-delete-null-pointer-checks -Wframe-larger-than=512 -fpatchable-function-entry=5
 
 LINKER_SCRIPTS := $(obj)/.linker_scripts
 LINKING_COMMAND := -Wl,-T,
